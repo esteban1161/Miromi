@@ -16,10 +16,12 @@
         <link rel="stylesheet" href="{{ asset("assets/$theme/dist/css/adminlte.min.css")}}">
         <!-- Google Font: Source Sans Pro -->
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+        <!--Carga stylos dependiendo de la pagina enlasada-->
+        @yield('styles')    
 
         <link rel="stylesheet" href="{{ asset("assets/css/custom.css")}}">
 
-        @yield('styles')
+        
     </head>
 
     <body class="hold-transition sidebar-mini layout-fixed">
@@ -62,6 +64,8 @@
         <script src="{{asset("assets/js/jquery-validation/localization/messages_es.min.js")}}"></script>
 
         <script src="{{asset("assets/js/funciones.js")}}"></script>        
+
+        @yield('scriptsPlugins')
         
         @yield('scripts')
 
