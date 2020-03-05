@@ -24,7 +24,7 @@ class ValidacionRol extends FormRequest
     public function rules()
     {
         return [
-            'nombre'  => 'required | max:50 | unique: nombre' , $this -> route('id'),
+            'nombre'  => 'required | max:50 | unique: nombre, ' . $this -> route('id'),
         ];
     }
-}
+} 

@@ -16,8 +16,8 @@ class RolController extends Controller
      */
     public function index()
     {
-        $datas = rol::orderBy('id') -> get();
-        return view('admin.rol.index', compact('datas'));
+        $datas = rol::orderBy('id')->get();
+        return view('admin.rol.index');
     }
 
     /**
@@ -39,7 +39,7 @@ class RolController extends Controller
     public function store(ValidacionRol $request)
     {
         rol::create($request -> all());
-        return redirect('rol.index') ->with('mensaje', 'Rol creado con exito');
+        return redirect('admin/rol') ->with('mensaje', 'Rol creado con exito');
     }
 
     /**

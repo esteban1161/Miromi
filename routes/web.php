@@ -28,7 +28,7 @@ Route::post('admin/paciente', 'Admin\PacienteController@store')->name('paciente.
 Route::get('admin/menu', 'Admin\menuController@index')->name('menu.index');
 Route::get('admin/menu/crear', 'Admin\menuController@create')->name('menu.create');
 Route::post('admin/menu', 'Admin\menuController@store')->name('menu.store');
-Route::post('admin/guardar-orden', 'Admin\menuController@guardarOrden')->name('menu.guardarOrden');
+Route::post('admin/menu/guardar-orden', 'Admin\menuController@guardarOrden')->name('menu.guardarOrden');
 
 
 

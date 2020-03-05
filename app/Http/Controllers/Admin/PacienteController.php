@@ -15,7 +15,7 @@ class PacienteController extends Controller
      */
     public function index()
     {
-        $datos = paciente::orderBy('id') ->get();
+        $datos = paciente::orderBy('id')->get();
         return view('admin.paciente.index', compact('datos'));
     }
 

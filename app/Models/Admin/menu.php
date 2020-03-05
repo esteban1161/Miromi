@@ -7,6 +7,7 @@ use Ramsey\Uuid\Codec\TimestampLastCombCodec;
 
 class menu extends Model
 {
+    protected $table = ['menus'];
     protected $fillable = ['nombre', 'url', 'icono'];
     protected $guarded = ['id'];
     public $timestamps = false;
