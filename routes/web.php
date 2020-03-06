@@ -15,6 +15,8 @@ Route::get('/', 'inicioController@index')->name('inicio.index');
 
 Route::get('seguridad/login', 'Seguridad\LoginController@index')->name('login');
 Route::post('seguridad/login', 'Seguridad\LoginController@login')->name('login.login');
+Route::get('seguridad/logout', 'Seguridad\LoginController@logout')->name('login.logout');
+
 
 /*RUTAS DEL ADMINISTRADOR*/
 Route::get('admin', 'Admin\AdminController@index')->name('admin.index') ->middleware('auth');
