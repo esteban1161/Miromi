@@ -1,4 +1,4 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
@@ -62,6 +62,8 @@
         <!-- Jquery-Validation -->
         <script src="{{asset("assets/js/jquery-validation/jquery.validate.min.js")}}"></script>
         <script src="{{asset("assets/js/jquery-validation/localization/messages_es.min.js")}}"></script>
+
+        <script src="{{asset("assets/js/scripts.js")}}"></script>
 
         <script src="{{asset("assets/js/funciones.js")}}"></script>        
 

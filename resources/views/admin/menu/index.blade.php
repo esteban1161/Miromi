@@ -20,10 +20,15 @@
     <div class="row">        
         <div class="col-lg 12">
             @include('includes.mensaje')
-            <div class="box box-success">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Menus</h3>
+            <div class="card card-danger">
+                <div class="card-header with-border">
+                    <h3 class="card-title">Menus</h3>
                 </div >
+                <div class="card-tolls">
+                    <a href="{{route('menu.create')}}" class="btn btn-block btn-info btn-sm">
+                        <i class=""></i> Crear Menu
+                    </a>
+                </div>
                 <div class="box body">
                     @csrf
                     <div class="dd" id="nestable">

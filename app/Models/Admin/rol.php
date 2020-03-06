@@ -4,9 +4,9 @@ namespace App\Models\Admin;
 
 use Illuminate\Database\Eloquent\Model;
 
-class rol extends Model
+class Rol extends Model
 {
-    protected $table = ['rols'];
+    protected $table = "rols";
     protected $fillable = ['nombre'];
     protected $guarded = ['id'];
 }

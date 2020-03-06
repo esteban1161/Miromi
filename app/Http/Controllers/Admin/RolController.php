@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ValidacionRol;
-use App\Models\Admin\rol;
+use App\Models\Admin\Rol;
 use Illuminate\Http\Request;
 
 class RolController extends Controller
@@ -16,8 +16,8 @@ class RolController extends Controller
      */
     public function index()
     {
-        $datas = rol::orderBy('id')->get();
-        return view('admin.rol.index');
+        $datas = Rol::orderBy('id')->get();
+        return view('admin.rol.index', compact('datas'));
     }
 
     /**
@@ -38,7 +38,7 @@ class RolController extends Controller
      */
     public function store(ValidacionRol $request)
     {
-        rol::create($request -> all());
+        Rol::create($request -> all());
         return redirect('admin/rol') ->with('mensaje', 'Rol creado con exito');
     }
 
@@ -56,7 +56,8 @@ class RolController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = Rol::findOrFail ($id);
+        return view('admin.rol.edit', compact('data'));
     }
 
     /**
@@ -68,7 +69,8 @@ class RolController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Rol::findOrFail($id)->update($request->all());
+        return redirect('admin/rol') ->with('mensaje', 'Rol actualizado con exito');
     }
 
     /**
@@ -77,8 +79,16 @@ class RolController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        if ($request->ajax()) {
+            if (Rol::destroy($id)) {
+                return response()->json(['mensaje' => 'ok']);
+            } else {
+                return response()->json(['mensaje' => 'ng']);
+            }
+        } else {
+            abort(404);
+        }
     }
 }

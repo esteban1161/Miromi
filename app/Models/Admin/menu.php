@@ -5,12 +5,17 @@ namespace App\Models\Admin;
 use Illuminate\Database\Eloquent\Model;
 use Ramsey\Uuid\Codec\TimestampLastCombCodec;
 
-class menu extends Model
+class Menu extends Model
 {
-    protected $table = ['menus'];
+    protected $table = "menus";
     protected $fillable = ['nombre', 'url', 'icono'];
     protected $guarded = ['id'];
     public $timestamps = false;
+
+    public function roles()
+    {
+        return $this->belongsToMany(rol::class, 'menu_rols');
+    }
 
     public function getHijos($padres, $line)
     {

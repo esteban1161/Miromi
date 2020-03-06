@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Admin\paciente;
+use App\Models\Admin\Paciente;
 use Illuminate\Http\Request;
 
 class PacienteController extends Controller
@@ -15,7 +15,7 @@ class PacienteController extends Controller
      */
     public function index()
     {
-        $datos = paciente::orderBy('id')->get();
+        $datos = Paciente::orderBy('id')->get();
         return view('admin.paciente.index', compact('datos'));
     }
 
