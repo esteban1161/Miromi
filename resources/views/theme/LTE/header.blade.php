@@ -10,6 +10,12 @@
       <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Contact</a>
       </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="{{route('login.login')}}" class="nav-link">Entrar</a>
+      </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="{{route('login.logout')}}" class="nav-link">Salir</a>
+      </li>
     </ul>
 
     <!-- SEARCH FORM -->

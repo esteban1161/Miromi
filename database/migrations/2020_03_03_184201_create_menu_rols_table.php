@@ -15,10 +15,10 @@ class CreateMenuRolsTable extends Migration
     {
         Schema::create('menu_rols', function (Blueprint $table) {
 
-            $table->unsignedInteger('rols_id');
-            $table->foreign('rols_id', 'fk_menurol_rols')->references('id')->on('rols')->onDelete('restrict')->onUpdate('restrict');
-            $table->unsignedInteger('menus_id');
-            $table->foreign('menus_id', 'fk_menurol_menus')->references('id')->on('menus')->onDelete('restrict')->onUpdate('restrict');
+            $table->unsignedInteger('rol_id');
+            $table->foreign('rol_id', 'fk_menurol_rol')->references('id')->on('rols')->onDelete('restrict')->onUpdate('restrict');
+            $table->unsignedInteger('menu_id');
+            $table->foreign('menu_id', 'fk_menurol_menu')->references('id')->on('menus')->onDelete('restrict')->onUpdate('restrict');
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_spanish_ci';
         });

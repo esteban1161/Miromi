@@ -31,7 +31,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {{-- @foreach ($menus as $key => $menu)
+                                    @foreach ($menus as $key => $menu)
                                         @if ($menu["menu_id"] != 0) 
                                             @break
                                         @endif
@@ -93,7 +93,7 @@
                                                 @endforeach
                                             @endforeach
                                         @endforeach
-                                    @endforeach --}}
+                                    @endforeach 
                                 </tbody>
                             </table>
                         </div>
