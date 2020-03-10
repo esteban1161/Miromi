@@ -42,59 +42,31 @@ class MenuController extends Controller
         return redirect('admin/menu')->with('mensaje', 'Menu creado con exito'); 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
+        $data = Menu::findOrFail($id);
+        return view('admin.menu.edit', compact('data'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(ValidacionMenu $request, $id)
     {
+        Menu::findOrFail($id)->update($request->all());
         return redirect('admin/menu')->with('mensaje', 'Menu actualizado con exito');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        Menu::destroy($id);
+        return redirect('admin/menu')->with('mensaje', 'Menu eliminado con exito');
     }
 
     public function guardarOrden(Request $request)
     {
-        if($request->ajax()){
+        if ($request->ajax()) {
             $menu = new Menu;
-            $menu ->guardarOrden($request->menu);
+            $menu->guardarOrden($request->menu);
             return response()->json(['respuesta' => 'ok']);
-        }
-        else{
+        } else {
             abort(404);
         }
     }

@@ -10,11 +10,10 @@ class Menu extends Model
     protected $table = "menus";
     protected $fillable = ['nombre', 'url', 'icono'];
     protected $guarded = ['id'];
-    public $timestamps = false;
 
     public function roles()
     {
-        return $this->belongsToMany(rol::class, 'menu_rols');
+        return $this->belongsToMany(Rol::class, 'menu_rols');
     }
 
     public function getHijos($padres, $line)
@@ -27,13 +26,13 @@ class Menu extends Model
         }
         return $children;
     }
+
     public function getPadres($front)
     {
         if ($front) {
             return $this->whereHas('roles', function ($query) {
                 $query->where('rol_id', session()->get('rol_id'))->orderby('menu_id');
-            })->where('estado', 1)
-                ->orderby('menu_id')
+            })->orderby('menu_id')
                 ->orderby('orden')
                 ->get()
                 ->toArray();
@@ -44,6 +43,7 @@ class Menu extends Model
                 ->toArray();
         }
     }
+
     public static function getMenu($front = false)
     {
         $menus = new Menu();
@@ -56,7 +56,8 @@ class Menu extends Model
             $menuAll = array_merge($menuAll, $item);
         }
         return $menuAll;
-    } 
+    }
+
     public function guardarOrden($menu)
     {
         $menus = json_decode($menu);
@@ -95,8 +96,5 @@ class Menu extends Model
             }
         }
     }
-
-
-
 }
 

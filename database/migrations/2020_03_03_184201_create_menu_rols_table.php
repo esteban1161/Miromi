@@ -18,7 +18,7 @@ class CreateMenuRolsTable extends Migration
             $table->unsignedInteger('rol_id');
             $table->foreign('rol_id', 'fk_menurol_rol')->references('id')->on('rols')->onDelete('restrict')->onUpdate('restrict');
             $table->unsignedInteger('menu_id');
-            $table->foreign('menu_id', 'fk_menurol_menu')->references('id')->on('menus')->onDelete('restrict')->onUpdate('restrict');
+            $table->foreign('menu_id', 'fk_menurol_menu')->references('id')->on('menus')->onDelete('cascade')->onUpdate('restrict');
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_spanish_ci';
         });

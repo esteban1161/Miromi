@@ -1,6 +1,6 @@
 $('.menu_rol').on('change', function () {
     var data = {
-        menu_id: $(this).data('menuid'),
+        menu_id: $(this).data('menu_id'),
         rol_id: $(this).val(),
         _token: $('input[name=_token]').val()
     };
@@ -18,7 +18,7 @@ function ajaxRequest (url, data) {
         type: 'POST',
         data: data,
         success: function (respuesta) {
-            Biblioteca.notificaciones(respuesta.respuesta, 'Biblioteca', 'success');
+            Biblioteca.notificaciones(respuesta.respuesta, 'Miromi', 'success');
         }
     });
 } 

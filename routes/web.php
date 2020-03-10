@@ -35,10 +35,13 @@ Route::get('admin/paciente/crear', 'Admin\PacienteController@create')->name('pac
 Route::post('admin/paciente', 'Admin\PacienteController@store')->name('paciente.store')->middleware('auth', 'superAdmin');    
 
 /*Rutas del Menu */
-Route::get('admin/menu', 'Admin\menuController@index')->name('menu.index')->middleware('auth', 'superAdmin');
-Route::get('admin/menu/crear', 'Admin\menuController@create')->name('menu.create')->middleware('auth', 'superAdmin');
-Route::post('admin/menu', 'Admin\menuController@store')->name('menu.store')->middleware('auth', 'superAdmin');
-Route::post('admin/menu/guardar-orden', 'Admin\menuController@guardarOrden')->name('menu.guardarOrden')->middleware('auth', 'superAdmin');
+Route::get('admin/menu', 'Admin\MenuController@index')->name('menu.index')->middleware('auth', 'superAdmin');
+Route::get('admin/menu/crear', 'Admin\MenuController@create')->name('menu.create')->middleware('auth', 'superAdmin');
+Route::get('admin/menu/{id}/editar', 'Admin\MenuController@edit')->name('menu.edit')->middleware('auth', 'superAdmin');
+Route::post('admin/menu', 'Admin\MenuController@store')->name('menu.store')->middleware('auth', 'superAdmin');
+Route::put('admin/menu/{id}', 'Admin\MenuController@update')->name('menu.update')->middleware('auth', 'superAdmin');
+Route::get('admin/menu/{id}', 'Admin\MenuController@destroy')->name('menu.destroy')->middleware('auth', 'superAdmin');
+Route::post('admin/menu/guardar-orden', 'Admin\MenuController@guardarOrden')->name('menu.guardarOrden')->middleware('auth', 'superAdmin');
 
 /*Rutas del Menu-Rol */
 Route::get('admin/menu-rol', 'Admin\MenuRolController@index')->name('menuRol.index')->middleware('auth', 'superAdmin');

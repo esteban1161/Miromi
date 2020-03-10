@@ -64,7 +64,7 @@
                                             </tr>
                                             @foreach ($hijo["submenu"] as $key => $hijo2)
                                                 <tr>
-                                                    <td class="pl-30"><i class="fa fa-arrow-right"></i> {{$hijo2["nombre"]}}</td>
+                                                    <td class="pl-30"><i class="fas fa-angle-double-right"></i> {{$hijo2["nombre"]}}</td>
                                                     @foreach($rols as $id => $nombre)
                                                         <td class="text-center">
                                                             <input
@@ -78,7 +78,7 @@
                                                 </tr>
                                                 @foreach ($hijo2["submenu"] as $key => $hijo3)
                                                     <tr>
-                                                        <td class="pl-40"><i class="fa fa-arrow-right"></i> {{$hijo3["nombre"]}}</td>
+                                                        <td class="pl-40"><i class="fas fa-arrow-alt-circle-right"></i> {{$hijo3["nombre"]}}</td>
                                                         @foreach($rols as $id => $nombre)
                                                         <td class="text-center">
                                                             <input
