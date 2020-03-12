@@ -36,7 +36,7 @@
     <label for="rol_id" class="col-lg-3 control-label requerido">Rol</label>
     <div class="col-lg-8">
         <select name="rol_id[]" id="rol_id" class="form-control" multiple required>
-            <option value="">Selecionar Rol</option>
+            <option value="">...Selecionar Rol...</option>
             @foreach($rols as $id => $nombre)
             <option value="{{$id}}" 
                     {{is_array(old('rol_id')) ? (in_array($id, old('rol_id')) ? 'selected' : ' ')  : 
