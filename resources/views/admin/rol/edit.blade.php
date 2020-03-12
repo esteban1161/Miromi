@@ -24,10 +24,10 @@
                 </div>
                 <form action="{{route('rol.update', ['id' => $data->id])}}" class="form-horizontal" id="form-general" method="POST" autocomplete="off">
                     @csrf @method("put")
-                        <div class="card-body">    @include('admin.rol.form')    </div>
+                        <div class="card-body">    @include('includes.formularios.form-rol')    </div>
                         <div class="card-footer">
                             <div class="col-lg-3"></div>
-                            <div class="col-lg-6">    @include('includes.boton-form-crear')    </div>
+                            <div class="col-lg-6">    @include('includes.boton-form-editar')    </div>
                         </div>
                 </form>
             </div>

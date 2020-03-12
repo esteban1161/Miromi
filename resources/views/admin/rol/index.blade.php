@@ -12,7 +12,7 @@
     <div class="row">        
         <div class="col-lg 12">
             @include('includes.mensaje')
-            <div class="card card-danger">
+            <div class="card card-primary">
                 <div class="card-header with-border">
                     <h3 class="card-title">Roles</h3>                            
                 </div>

@@ -7,7 +7,7 @@
 @else
     <li class="nav-item has-treeview menu-open">
         <a href="javascript:;" class="nav-link">
-            <i class="nav-icon far {{$item["icono"]}}"></i> <p>{{$item["nombre"]}}<i class="fas fa-angle-left right">::before</i></p>
+            <i class="nav-icon far {{$item["icono"]}}"></i> <p>{{$item["nombre"]}}<i class="fas fa-angle-left right"></i></p>
         </a>
         <ul class="nav nav-treeview" style="display: block; height: 129.563px; padding-top: 0px; margin-top: 0px; padding-bottom: 0px; margin-bottom: 0px;">
             @foreach ($item["submenu"] as $submenu)

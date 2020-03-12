@@ -25,18 +25,12 @@
       <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">|
-                    @foreach ($menusComposer as $key => $item)
-                        @if ($item["menu_id"] != 0)
-                            @break
-                        @endif
-                        @include("theme.$theme.menu-item", ["item" => $item])                                 
-                    @endforeach      
-                    @foreach ($menusComposer as $key => $item)
+                @foreach ($menusComposer as $key => $item)
                     @if ($item["menu_id"] != 0)
                         @break
                     @endif
                     @include("theme.$theme.menu-item", ["item" => $item])                                 
-                @endforeach          
+                @endforeach            
             </ul>
         </nav>
       <!-- /.sidebar-menu -->

@@ -32,7 +32,7 @@ class MenuRolController extends Controller
     public function store(Request $request)
     {
         if ($request->ajax()) {
-            $menus = new menu();
+            $menus = new Menu();
             if ($request->input('estado') == 1) {
                 $menus->find($request->input('menu_id'))->roles()->attach($request->input('rol_id'));
                 return response()->json(['respuesta' => 'El rol se asigno correctamente']);

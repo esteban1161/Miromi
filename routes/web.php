@@ -21,6 +21,15 @@ Route::get('seguridad/logout', 'Seguridad\LoginController@logout')->name('login.
 /*RUTAS DEL ADMINISTRADOR*/
 Route::get('admin', 'Admin\AdminController@index')->name('admin.index') ->middleware('auth', 'superAdmin');
 
+/*Rutas del Usuario*/
+Route::get('admin/usuario', 'Admin\UsuarioController@index')->name('usuario.index')->middleware('auth', 'superAdmin');
+Route::get('admin/usuario/crear', 'Admin\UsuarioController@create')->name('usuario.create')->middleware('auth', 'superAdmin');
+Route::get('admin/usuario/{id}/editar', 'Admin\UsuarioController@edit')->name('usuario.edit')->middleware('auth', 'superAdmin');   
+Route::post('admin/usuario', 'Admin\UsuarioController@store')->name('usuario.store')->middleware('auth', 'superAdmin');
+Route::put('admin/usuario/{id}', 'Admin\UsuarioController@update')->name('usuario.update')->middleware('auth', 'superAdmin');
+Route::delete('admin/usuario/{id}', 'Admin\UsuarioController@destroy')->name('usuario.destroy')->middleware('auth', 'superAdmin');
+
+
 /*Rutas del Rol*/
 Route::get('admin/rol', 'Admin\RolController@index')->name('rol.index')->middleware('auth', 'superAdmin');
 Route::get('admin/rol/crear', 'Admin\RolController@create')->name('rol.create')->middleware('auth', 'superAdmin');
