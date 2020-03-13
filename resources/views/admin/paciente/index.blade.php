@@ -23,6 +23,7 @@
                                 <th>Nombre</th>
                                 <th>Apellidos</th>
                                 <th>Edad</th>
+                                <th>Descripcion</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -30,7 +31,19 @@
                                 <tr>
                                     <td>{{$dato->nombre}}</td>
                                     <td>{{$dato->apellidos}}</td>
-                                    <td>{{$dato->edad}}</td>        
+                                    <td>{{$dato->edad}}</td>
+                                    <td>{{$dato->descripcion}}</td>     
+                                    <td>
+                                        <a href="{{route('paciente.edit', ['id' => $dato->id])}}" class="btn-accion-tabla tooltipsC" title="Editar este registro">
+                                            <i class="fas fa-pencil-alt"></i>
+                                        </a>
+                                      {{--   <form action="{{route('paciente.destroy', ['id' => $dato->id])}}" class="d-inline form-eliminar" method="POST">
+                                            @csrf @method("delete")
+                                            <button type="submit" class="btn-accion-tabla eliminar tooltipsC" title="Eliminar este registro">
+                                                <i class="fas fa-trash-alt text-danger"></i>
+                                            </button>
+                                        </form> --}}
+                                    </td>   
                                 </tr>                    
                             @endforeach
                         </tbody>             
