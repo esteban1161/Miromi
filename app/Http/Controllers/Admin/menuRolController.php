@@ -10,11 +10,6 @@ use Illuminate\Http\Request;
 
 class MenuRolController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {           
         $rols = Rol::orderBy('id')->pluck('nombre', 'id')->toArray();
@@ -23,12 +18,6 @@ class MenuRolController extends Controller
         return view('admin.menu-rol.index', compact(['rols', 'menus', 'menusRols'])); 
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         if ($request->ajax()) {

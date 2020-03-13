@@ -1,15 +1,48 @@
 <h2>Datos de Afiliación al Sistema de Salud</h2>  <br>
-    {!! Form::select('TipoVinculacion', ['1' => 'Contributivo', '2' => 'Subsidiado', '3' => 'Vinculado', '4' => 'Particular', '5' => 'Otro', '6' => 'Desplazado Contributivo', '7' => 'Desplazado Subsidiado', '8' => 'Dezplazado No asegurado'], null, ['placeholder' => 'Seleccione...']); !!}
-    {!! Form::label('TipoVinculacion', 'Tipo de Vinculación al Sistema'); !!}<br>
-    {!! Form::text('Aseguradora'); !!}
-    {!! Form::label('Aseguradora', 'Aseguradora'); !!}<br>
-    {!! Form::text('ResponsableMedico'); !!}
-    {!! Form::label('ResponsableMedico', 'Nombre de Responsable Médico'); !!}<br>
-    {!! Form::text('ParentescoResponsable'); !!}
-    {!! Form::label('ParentescoResponsable', 'Parentesco de Responsable Medico'); !!}<br>
-    {!! Form::text('TelefonoResponsable'); !!}
-    {!! Form::label('TelefonoResponsable', 'Telefono de Responsable Medico'); !!}<br>
-    {!! Form::file('Foto'); !!}
-    {!! Form::label('Foto', 'Foto'); !!}<br>
-    {!! Form::Button('Agregar!'); !!}<br>
-    {!! Form::Submit('Enviar'); !!}<br>
+
+<div class="form-group row">
+    <label for="tipoVinculacion" class="col-lg-3 col-form-label requerido">Tipo Vinculacion al Sistema</label>
+    <select name="tipoVinculacion" id="tipoVinculacion" class="col-lg-8">
+        <option value="">...Selecionar Tipo Vinculacion...</option>
+        <option value="1">Contrubutivo</option>
+        <option value="2">Subsidiado</option>
+        <option value="3">Vinculado</option>
+        <option value="4">Particular</option>
+        <option value="5">Otro</option>
+        <option value="6">Desplazado Contributivo</option>
+        <option value="7">Desplazado Subsidiado</option>
+        <option value="8">Desplazado No Asegurado</option>
+    </select>
+</div>
+<div class="form-group row">
+    <label for="aseguradora" class="col-lg-3 col-form-label requerido">Aseguradora</label>
+        <div class="col-lg-8">
+            <input type="text" name="aseguradora" class="form-control" id="aseguradora" value="{{old('aseguradora', $data->aseguradora ?? '')}}" required>
+        </div>
+</div>
+<div class="form-group row">
+    <label for="responsableMedico" class="col-lg-3 col-form-label requerido">Nombre de Responsable Medico</label>
+        <div class="col-lg-8">
+            <input type="text" name="responsableMedico" class="form-control" id="responsableMedico" value="{{old('responsableMedico', $data->responsableMedico ?? '')}}" required>
+        </div>
+</div>
+<div class="form-group row">
+    <label for="parentescoResponsable" class="col-lg-3 col-form-label requerido">Parentesco de Responsable Medico</label>
+        <div class="col-lg-8">
+            <input type="text" name="parentescoResponsable" class="form-control" id="parentescoResponsable" value="{{old('parentescoResponsable', $data->parentescoResponsable ?? '')}}" required>
+        </div>
+</div>
+<div class="form-group row">
+    <label for="telefonoResponsable" class="col-lg-3 col-form-label requerido">Telefono de Responsable Medico</label>
+        <div class="col-lg-8">
+            <input type="text" name="telefonoResponsable" class="form-control" id="telefonoResponsable" value="{{old('telefonoResponsable', $data->telefonoResponsable ?? '')}}" required>
+        </div>
+</div>
+<div class="form-group row">
+    <label for="foto" class="col-lg-3 col-form-label requerido">Foto</label>
+    <div class="custom-file col-lg-8">
+        <input type="file" class="custom-file-input" id="foto">
+        <label class="custom-file-label" for="foto">Escojer archivo</label>
+    </div>
+</div>
+{!! Form::Button('Agregar!'); !!}<br>

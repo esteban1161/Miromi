@@ -50,12 +50,6 @@ class UsuarioController extends Controller
         return redirect('admin/usuario')->with('mensaje', 'Usuario actualizado con exito');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Request $request, $id)
     {
          if($request->ajax()){

@@ -46,6 +46,11 @@ Route::get('admin/paciente', 'Admin\PacienteController@index')->name('paciente.i
 Route::get('admin/paciente/crear', 'Admin\PacienteController@create')->name('paciente.create')->middleware('auth', 'superAdmin');
 Route::post('admin/paciente', 'Admin\PacienteController@store')->name('paciente.store')->middleware('auth', 'superAdmin');    
 
+/*Rutas del Paciente */
+Route::get('admin/terapeuta', 'Admin\TerapeutaController@index')->name('terapeuta.index')->middleware('auth', 'superAdmin');
+Route::get('admin/terapeuta/crear', 'Admin\TerapeutaController@create')->name('terapeuta.create')->middleware('auth', 'superAdmin');
+Route::post('admin/terapeuta', 'Admin\TerapeutaController@store')->name('terapeuta.store')->middleware('auth', 'superAdmin');    
+
 /*Rutas del Menu */
 Route::get('admin/menu', 'Admin\MenuController@index')->name('menu.index')->middleware('auth', 'superAdmin');
 Route::get('admin/menu/crear', 'Admin\MenuController@create')->name('menu.create')->middleware('auth', 'superAdmin');
