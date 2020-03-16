@@ -13,9 +13,9 @@
             </div>
             <form action="{{route('paciente.store')}}" class="form-horizontal" id="form-general" method="POST" autocomplete="off">
                 @csrf
-                <div class="card-body"> @include('includes.formularios.form-paciente')
-               {{--  <div class="card-body"> @include('includes.formularios.form-datosIdentificacion')    </div>
-                <div class="card-body"> @include('includes.formularios.form-datosDemograficos')    </div>
+               {{--  <div class="card-body"> @include('includes.formularios.form-paciente') --}}
+               <div class="card-body"> @include('includes.formularios.form-datosIdentificacion')    </div>
+                {{-- <div class="card-body"> @include('includes.formularios.form-datosDemograficos')    </div>
                 <div class="card-body"> @include('includes.formularios.form-datosAfiliacion')    </div> --}}
                 <div class="card-footer">
                     <div class="col-lg-3"></div>

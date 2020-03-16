@@ -15,10 +15,14 @@ class CreatePacientesTable extends Migration
     {
         Schema::create('pacientes', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nombre');
-            $table->string('apellidos');
-            $table->integer('edad');
-            $table->text('descripcion');
+            $table->string('primerNombre', 20)->nullable();
+            $table->string('segundoNombre', 20)->nullable();
+            $table->string('primerApellido', 30)->nullable();
+            $table->string('segundoApellido', 30)->nullable();
+            $table->char('tipoDocumento', 2)->nullable();
+            $table->bigInteger('numeroIdentificacion')->nullable();
+            $table->char('sexo', 1)->nullable();
+            $table->date('fechaNacimiento')->nullable();
             $table->timestamps();
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_spanish_ci';

@@ -25,7 +25,7 @@
 </div>
 <div class="form-group row">
     <label for="tipoDocumento" class="col-lg-3 col-form-label requerido">Tipo de Documento</label>
-    <select name="tipoDocumento" id="tipoDocumento" class="col-lg-8">
+    <select name="tipoDocumento" id="tipoDocumento" class="col-lg-8" value="{{old('tipoDocumento', $data->tipoDocumento ?? '')}}">
         <option value="">...Selecionar Tipo Documento...</option>
         <option value="CE">Cédula de Extranjería</option>
         <option value="PA"> Pasaporte</option>
@@ -52,11 +52,11 @@
 </div>
 
 <div class="form-group row">
-    <label for="sexo" class="col-lg-3 col-form-label requerido">Fecha de Nacimiento</label>
+    <label for="fechaNacimiento" class="col-lg-3 col-form-label requerido">Fecha de Nacimiento</label>
     <div class="input-group col-lg-8">
         <div class="input-group-prepend">
             <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
         </div>
-        <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask="" im-insert="false">
+        <input type="text" name="fechaNacimiento" id="fechaNacimiento" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask="" im-insert="false" value="{{old('fechaNacimiento', $data->fechaNacimiento ?? '')}}">
     </div>
 </div>

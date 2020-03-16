@@ -20,19 +20,21 @@
                     <table class="table table-hover text-nowrap  table-striped">
                         <thead>                  
                             <tr>
-                                <th>Nombre</th>
-                                <th>Apellidos</th>
-                                <th>Edad</th>
-                                <th>Descripcion</th>
+                                <th>Primer Nombre</th>
+                                <th>Primer Apellido</th>
+                                <th>Numero Identificaicon</th>
+                                <th>Fecha Nacimiento</th>
+                                <th>Sexo</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ( $datos as $dato)
                                 <tr>
-                                    <td>{{$dato->nombre}}</td>
-                                    <td>{{$dato->apellidos}}</td>
-                                    <td>{{$dato->edad}}</td>
-                                    <td>{{$dato->descripcion}}</td>     
+                                    <td>{{$dato->primerNombre}}</td>
+                                    <td>{{$dato->primerApellido}}</td>
+                                    <td>{{$dato->numeroIdentificacion}}</td>
+                                    <td>{{$dato->fechaNacimiento}}</td>
+                                    <td>{{$dato->sexo}}</td>     
                                     <td>
                                         <a href="{{route('paciente.edit', ['id' => $dato->id])}}" class="btn-accion-tabla tooltipsC" title="Editar este registro">
                                             <i class="fas fa-pencil-alt"></i>
