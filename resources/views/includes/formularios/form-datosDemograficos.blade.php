@@ -2,13 +2,30 @@
 <div class="form-group row">
     <label for="paisNacimiento" class="col-lg-3 col-form-label requerido">Pais Nacimiento</label>
         <div class="col-lg-8">
-            <input type="text" name="paisNacimiento" class="form-control" id="paisNacimiento" value="Colombia {{old('paisNacimiento', $data->datosDemograficos->paisNacimiento ?? '')}}" required>
+            <input type="text" name="paisNacimiento" class="form-control" id="paisNacimiento" value="{{old('paisNacimiento', $data->datosDemograficos->paisNacimiento ?? '')}}" required>
         </div>
 </div>
+<div class="form-group">
+    <label for="paisNacimiento" class="col-lg-3 col-form-label requerido">Pais Nacimiento</label>
+    <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+        {{-- <option value="">...Selecionar Rol...</option>
+        @foreach($rols as $id => $nombre)
+        <option value="{{$id}}" 
+                {{is_array(old('rol_id')) ? (in_array($id, old('rol_id')) ? 'selected' : ' ')  : 
+                (isset($data) ? ($data->roles->firstWhere('id', $id) ? 'selected' : '') : ' ')}}
+        >
+            {{$nombre}}
+        </option>
+        @endforeach --}}
+
+    </select>
+  </div>
+
+
 <div class="form-group row">
     <label for="ciudadNacimiento" class="col-lg-3 col-form-label requerido">Ciudad Nacimiento</label>
         <div class="col-lg-8">
-            <input type="text" name="ciudadNacimiento" class="form-control" id="ciudadNacimiento" value="Bogota {{old('ciudadNacimiento', $data->datosDemograficos->ciudadNacimiento ?? '')}}" required>
+            <input type="text" name="ciudadNacimiento" class="form-control" id="ciudadNacimiento" value="{{old('ciudadNacimiento', $data->datosDemograficos->ciudadNacimiento ?? '')}}" required>
         </div>
 </div>
 <div class="form-group row">
@@ -37,43 +54,43 @@
 <div class="form-group row">
     <label for="ocupacion" class="col-lg-3 col-form-label requerido">Ocupacion</label>
         <div class="col-lg-8">
-            <input type="text" name="ocupacion" class="form-control" id="ocupacion" value="estudiante {{old('ocupacion', $data->datosDemograficos->ocupacion ?? '')}}" required>
+            <input type="text" name="ocupacion" class="form-control" id="ocupacion" value="{{old('ocupacion', $data->datosDemograficos->ocupacion ?? '')}}" required>
         </div>
 </div>
 <div class="form-group row">
     <label for="credoReligioso" class="col-lg-3 col-form-label requerido">Credo Religioso</label>
         <div class="col-lg-8">
-            <input type="text" name="credoReligioso" class="form-control" id="credoReligioso" value="Nostico {{old('credoReligioso', $data->datosDemograficos->credoReligioso ?? '')}}" required>
+            <input type="text" name="credoReligioso" class="form-control" id="credoReligioso" value="{{old('credoReligioso', $data->datosDemograficos->credoReligioso ?? '')}}" required>
         </div>
 </div>
 <div class="form-group row">
     <label for="paisResidencia" class="col-lg-3 col-form-label requerido">Pais Residencia</label>
         <div class="col-lg-8">
-            <input type="text" name="paisResidencia" class="form-control" id="paisResidencia" value="Colombia {{old('paisResidencia', $data->datosDemograficos->paisResidencia ?? '')}}" required>
+            <input type="text" name="paisResidencia" class="form-control" id="paisResidencia" value="{{old('paisResidencia', $data->datosDemograficos->paisResidencia ?? '')}}" required>
         </div>
 </div>
 <div class="form-group row">
     <label for="departamentoResidencia" class="col-lg-3 col-form-label requerido">Departamento Residencia</label>
         <div class="col-lg-8">
-            <input type="text" name="departamentoResidencia" class="form-control" id="departamentoResidencia" value="Cundinamarca{{old('departamentoResidencia', $data->datosDemograficos->departamentoResidencia ?? '')}}" required>
+            <input type="text" name="departamentoResidencia" class="form-control" id="departamentoResidencia" value="{{old('departamentoResidencia', $data->datosDemograficos->departamentoResidencia ?? '')}}" required>
         </div>
 </div>
 <div class="form-group row">
     <label for="ciudadResidencia" class="col-lg-3 col-form-label requerido">Ciudad Residencia</label>
         <div class="col-lg-8">
-            <input type="text" name="ciudadResidencia" class="form-control" id="ciudadResidencia" value="Bogota{{old('ciudadResidencia', $data->datosDemograficos->ciudadResidencia ?? '')}}" required>
+            <input type="text" name="ciudadResidencia" class="form-control" id="ciudadResidencia" value="{{old('ciudadResidencia', $data->datosDemograficos->ciudadResidencia ?? '')}}" required>
         </div>
 </div>
 <div class="form-group row">
     <label for="localidadResidencia" class="col-lg-3 col-form-label requerido">Localidad Residencia</label>
         <div class="col-lg-8">
-            <input type="text" name="localidadResidencia" class="form-control" id="localidadResidencia" value="Engativsa {{old('localidadResidencia', $data->datosDemograficos->localidadResidencia ?? '')}}" required>
+            <input type="text" name="localidadResidencia" class="form-control" id="localidadResidencia" value="{{old('localidadResidencia', $data->datosDemograficos->localidadResidencia ?? '')}}" required>
         </div>
 </div>
 <div class="form-group row">
     <label for="direccionResidencia" class="col-lg-3 col-form-label requerido">Direccion Residencia</label>
         <div class="col-lg-8">
-            <input type="text" name="direccionResidencia" class="form-control" id="direccionResidencia" value="Calle 80 {{old('direccionResidencia', $data->datosDemograficos->direccionResidencia ?? '')}}" required>
+            <input type="text" name="direccionResidencia" class="form-control" id="direccionResidencia" value="{{old('direccionResidencia', $data->datosDemograficos->direccionResidencia ?? '')}}" required>
         </div>
 </div>
 <div class="form-group row">

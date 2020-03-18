@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ValidacionInfoPaciente;
 use App\Models\Admin\Paciente;
+use App\Models\Admin\Rol;
 use App\Models\DatosDemograficos;
 use App\Models\DatosIdentificacion;
 use Illuminate\Http\Request;
@@ -14,12 +15,13 @@ class InformacionPacienteController extends Controller
     public function index()
     {
         $identificacion = DatosIdentificacion::orderBy('id')->get();
-        return view('admin.paciente.index', compact('identificacion', 'demograficos'));
+        return view('admin.paciente.index', compact('identificacion'));
     }
 
     public function create()
     {
-        return view('admin.paciente.create');         
+        $rols = Rol::orderBy('id')->pluck('nombre', 'id')->toArray();
+        return view('admin.paciente.create', compact('rols'));         
     }
 
     public function store()
@@ -28,6 +30,7 @@ class InformacionPacienteController extends Controller
         /*$identificacion->datosDemograficos()->create($request->all()); */
         /* DatosDemograficos::create([$request -> all(),  'identificacion_id' => $identificacion->id]); */
        /*  $request->createDatos(); */
+       
         $identificacion = DatosIdentificacion::create([
             'primerNombre' => request('primerNombre'),
             'segundoNombre' => request('segundoNombre'),
@@ -53,8 +56,15 @@ class InformacionPacienteController extends Controller
             'ocupacion' => request('ocupacion'),
             'credoReligioso' => request('credoReligioso')
         ]);
+        $identificacion->datosAfiliacion()->create([
+            'tipoVinculacion'=>request('tipoVinculacion'),
+            'aseguradora'=>request('aseguradora'), 
+            'responsableMedico'=>request('responsableMedico'),
+            'parentescoResponsable'=>request('parentescoResponsable'),
+            'telefonoResponsable'=>request('telefonoResponsable'),
+        ]);
 
-        return redirect('admin/paciente') ->with('mensaje', 'Paciente creado con exito');
+        return redirect('admin/paciente') ->with('mensaje', 'Paciente creado con exito'); 
     }
 
     public function show($id)
@@ -65,13 +75,14 @@ class InformacionPacienteController extends Controller
 
     public function edit($id)
     {
+        $rols = Rol::orderBy('id')->pluck('nombre', 'id')->toArray();
         $data = DatosIdentificacion::findOrFail ($id);
-        return view('admin.paciente.edit', compact('data'));
+        return view('admin.paciente.edit', compact('data', 'rols'));
     }
 
     public function update(Request $request, $id)
     {
-        Paciente::findOrFail($id)->update($request->all());
+        DatosIdentificacion::findOrFail($id)->update($request->all());
         return redirect('admin/paciente') ->with('mensaje', 'Rol actualizado con exito');
     }
 }

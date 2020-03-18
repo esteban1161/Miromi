@@ -17,24 +17,24 @@
 <div class="form-group row">
     <label for="aseguradora" class="col-lg-3 col-form-label requerido">Aseguradora</label>
         <div class="col-lg-8">
-            <input type="text" name="aseguradora" class="form-control" id="aseguradora" value="{{old('aseguradora', $data->aseguradora ?? '')}}" required>
+            <input type="text" name="aseguradora" class="form-control" id="aseguradora" value="{{old('aseguradora', $data->datosAfiliacion->aseguradora ?? '')}}" required>
         </div>
 </div>
 <div class="form-group row">
     <label for="responsableMedico" class="col-lg-3 col-form-label requerido">Nombre de Responsable Medico</label>
         <div class="col-lg-8">
-            <input type="text" name="responsableMedico" class="form-control" id="responsableMedico" value="{{old('responsableMedico', $data->responsableMedico ?? '')}}" required>
+            <input type="text" name="responsableMedico" class="form-control" id="responsableMedico" value="{{old('responsableMedico', $data->datosAfiliacion->responsableMedico ?? '')}}" required>
         </div>
 </div>
 <div class="form-group row">
-    <label for="parentescoResponsable" class="col-lg-3 col-form-label requerido">Parentesco de Responsable Medico</label>
+    <label for="parentescoResponsable" class="col-lg-3 col-form-label requerido">Parentesco de Responsable</label>
         <div class="col-lg-8">
-            <input type="text" name="parentescoResponsable" class="form-control" id="parentescoResponsable" value="{{old('parentescoResponsable', $data->parentescoResponsable ?? '')}}" required>
+            <input type="text" name="parentescoResponsable" class="form-control" id="parentescoResponsable" value="{{old('parentescoResponsable', $data->datosAfiliacion->parentescoResponsable ?? '')}}" required>
         </div>
 </div>
 <div class="form-group row">
-    <label for="telefonoResponsable" class="col-lg-3 col-form-label requerido">Telefono de Responsable Medico</label>
+    <label for="telefonoResponsable" class="col-lg-3 col-form-label requerido">Telefono de Responsable</label>
         <div class="col-lg-8">
-            <input type="text" name="telefonoResponsable" class="form-control" id="telefonoResponsable" value="{{old('telefonoResponsable', $data->telefonoResponsable ?? '')}}" required>
+            <input type="text" name="telefonoResponsable" class="form-control" id="telefonoResponsable" value="{{old('telefonoResponsable', $data->datosAfiliacion->telefonoResponsable ?? '')}}" required>
         </div>
 </div>

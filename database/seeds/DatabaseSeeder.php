@@ -17,9 +17,11 @@ class DatabaseSeeder extends Seeder
             'rols',
             'usuarios',
             'usuario_rols',
+            'paises',
         ]);
         $this->call(TablaRolSeeder::class);
         $this->call(UsuarioAdministradorSeeder::class);
+        $this->call(PaisesSeeder::class);
     }
 
     protected function truncateTablas(array $tablas){

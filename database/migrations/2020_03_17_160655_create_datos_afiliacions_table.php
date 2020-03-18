@@ -17,12 +17,14 @@ class CreateDatosAfiliacionsTable extends Migration
             $table->bigIncrements('id');
             $table->integer('datos_identificacion_id')->nullable()->unsigned();
             $table->foreign('datos_identificacion_id')->references('id')->on('datos_identificacions');
-            $table->string('TipoVinculacion');
-            $table->string('Aseguradora');
-            $table->string('ResponsableMedico');
-            $table->string('ParentescoResponsable');
-            $table->string('TelefonoResponsable');
+            $table->string('tipoVinculacion');
+            $table->string('aseguradora');
+            $table->string('responsableMedico');
+            $table->string('parentescoResponsable');
+            $table->string('telefonoResponsable');
             $table->timestamps();
+            $table->charset = 'utf8mb4';
+            $table->collation = 'utf8mb4_spanish_ci';
         });
     }
 

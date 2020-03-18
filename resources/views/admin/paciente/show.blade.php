@@ -25,7 +25,7 @@
                     <h3 class="card-title">Informacion del Paciente</h3>
                 </div >
                 <div class="card-body">
-            
+                    <h2>Datos de Identificacion</h2> 
                     <p>{{$identificacion->primerNombre}}</p>
                     <p>{{$identificacion->segundoNombre}}</p>
                     <p>{{$identificacion->primerApellido}}</p>
@@ -34,7 +34,7 @@
                     <p>{{$identificacion->numeroIdentificacion}}</p>
                     <p>{{$identificacion->sexo}}</p>
                     <p>{{$identificacion->fechaNacimiento}}</p>
-
+                    <h2>Datos Demográficos</h2> 
                     <p>{{$identificacion->datosDemograficos->paisNacimiento}}</p>
                     <p>{{$identificacion->datosDemograficos->ciudadNacimiento}}</p>
                     <p>{{$identificacion->datosDemograficos->estadoCivil}}</p>
@@ -48,6 +48,12 @@
                     <p>{{$identificacion->datosDemograficos->localidadResidencia}}</p>
                     <p>{{$identificacion->datosDemograficos->direccionResidencia}}</p>
                     <p>{{$identificacion->datosDemograficos->zonaResidencia}}</p>       
+                    <h2>Datos Afiliacion</h2> 
+                    <p>{{$identificacion->datosAfiliacion->tipoVinculacion}}</p>
+                    <p>{{$identificacion->datosAfiliacion->aseguradora}}</p> 
+                    <p>{{$identificacion->datosAfiliacion->responsableMedico}}</p>
+                    <p>{{$identificacion->datosAfiliacion->parentescoResponsable}}</p>
+                    <p>{{$identificacion->datosAfiliacion->telefonoResponsable}}</p>
                 </div>
             </div>
         </div>
