@@ -44,6 +44,7 @@ Route::delete('admin/rol/{id}', 'Admin\RolController@destroy')->name('rol.destro
 /*Rutas del Paciente */
 Route::get('admin/paciente', 'Admin\InformacionPacienteController@index')->name('paciente.index')->middleware('auth');
 Route::get('admin/paciente/crear', 'Admin\InformacionPacienteController@create')->name('paciente.create')->middleware('auth');
+Route::get('admin/paciente/{id}', 'Admin\InformacionPacienteController@show')->name('paciente.show')->middleware('auth');
 Route::get('admin/paciente/{id}/editar', 'Admin\InformacionPacienteController@edit')->name('paciente.edit')->middleware('auth');   
 Route::post('admin/paciente', 'Admin\InformacionPacienteController@store')->name('paciente.store')->middleware('auth');    
 Route::put('admin/paciente/{id}', 'Admin\InformacionPacienteController@update')->name('paciente.update')->middleware('auth');

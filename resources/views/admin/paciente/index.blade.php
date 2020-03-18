@@ -28,15 +28,18 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ( $datos as $dato)
+                            @foreach ( $identificacion as $identidad)
                                 <tr>
-                                    <td>{{$dato->primerNombre}}</td>
-                                    <td>{{$dato->primerApellido}}</td>
-                                    <td>{{$dato->numeroIdentificacion}}</td>
-                                    <td>{{$dato->fechaNacimiento}}</td>
-                                    <td>{{$dato->sexo}}</td>     
+                                    <td>{{$identidad->primerNombre}}</td>
+                                    <td>{{$identidad->primerApellido}}</td>
+                                    <td>{{$identidad->numeroIdentificacion}}</td>
+                                    <td>{{$identidad->fechaNacimiento}}</td>
+                                    <td>{{$identidad->sexo}}</td>     
                                     <td>
-                                        <a href="{{route('paciente.edit', ['id' => $dato->id])}}" class="btn-accion-tabla tooltipsC" title="Editar este registro">
+                                        <a href="{{route('paciente.show', ['id'=>$identidad->id])}}" class="btn-accion-tabla tooltipsC" title="Mostrar este Resgistro">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        <a href="{{route('paciente.edit', ['id' => $identidad->id])}}" class="btn-accion-tabla tooltipsC" title="Editar este Registro">
                                             <i class="fas fa-pencil-alt"></i>
                                         </a>
                                       {{--   <form action="{{route('paciente.destroy', ['id' => $dato->id])}}" class="d-inline form-eliminar" method="POST">
