@@ -19,12 +19,16 @@ class DatosIdentificacion extends Model
     protected $guarded = ['id'];
 
     public function datosDemograficos(){
-
         return $this->hasOne(DatosDemograficos::class);
     }
     public function datosAfiliacion(){
-
         return $this->hasOne(DatosAfiliacion::class);
+    }
+    public function datosAcademicos(){
+        return $this->hasOne(DatosAcademicos::class);
+    }
+    public function datosConsultorios(){
+        return $this->hasOne(DatosConsultorios::class);
     }
 
 }

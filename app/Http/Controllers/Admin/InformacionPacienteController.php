@@ -24,12 +24,8 @@ class InformacionPacienteController extends Controller
         return view('admin.paciente.create', compact('rols'));         
     }
 
-    public function store()
+    public function store( )
     {
-       /*  $identificacion = DatosIdentificacion::create($request -> all()); */
-        /*$identificacion->datosDemograficos()->create($request->all()); */
-        /* DatosDemograficos::create([$request -> all(),  'identificacion_id' => $identificacion->id]); */
-       /*  $request->createDatos(); */
        
         $identificacion = DatosIdentificacion::create([
             'primerNombre' => request('primerNombre'),
@@ -62,6 +58,20 @@ class InformacionPacienteController extends Controller
             'responsableMedico'=>request('responsableMedico'),
             'parentescoResponsable'=>request('parentescoResponsable'),
             'telefonoResponsable'=>request('telefonoResponsable'),
+        ]);
+        $identificacion->datosAcademicos()->create([
+            'tipoProfesional'=>request('tipoProfesional'),
+            'numeroRegistroProfesional'=>request('numeroRegistroProfesional'),
+            'tituloAcademico'=>request('tituloAcademico'),
+            'institucion'=>request('institucion'),                                        
+        ]);
+        $identificacion->datosConsultorios()->create([
+            'nombreConsultorio'=>request('nombreConsultorio'),
+            'telefonoConsultorio'=>request('telefonoConsultorio'),
+            'direccionConsultorio'=>request('direccionConsultorio'),
+            'correoElectronicoConsultorio'=>request('correoElectronicoConsultorio'),
+            'paginasWebConsultorio'=>request('paginasWebConsultorio'), 
+            'codigoSecretaria'=>request('codigoSecretaria'),
         ]);
 
         return redirect('admin/paciente') ->with('mensaje', 'Paciente creado con exito'); 

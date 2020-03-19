@@ -1,0 +1,3 @@
+  $(function () {
+    $("#tPacientes").DataTable();
+  });
