@@ -20,6 +20,16 @@
         <!-- Google Font: Source Sans Pro -->
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
         <!--Carga stylos dependiendo de la pagina enlasada-->
+
+        
+        <link rel="stylesheet" href="{{ asset("assets/$theme/plugins/bootstrap-datePicker/css/bootstrap-datepicker3.css")}}">
+        <link rel="stylesheet" href="{{ asset("assets/$theme/plugins/bootstrap-datePicker/css/bootstrap-datepicker.standalone.css")}}">
+        <script src="{{asset('datePicker/js/bootstrap-datepicker.js')}}"></script>
+        <!-- Languaje -->
+        <script src="{{asset('datePicker/locales/bootstrap-datepicker.es.min.js')}}"></script>
+
+
+
         @yield('styles')    
 
         <link rel="stylesheet" href="{{ asset("assets/css/custom.css")}}">
@@ -82,8 +92,6 @@
         <script src="{{ asset("assets/$theme/plugins/jquery/jquery.min.js")}}"></script>
         <!-- Bootstrap 4 -->
         <script src="{{ asset("assets/$theme/plugins/bootstrap/js/bootstrap.bundle.min.js")}}"></script>
-        <!--Datatables-->
-
 
         <script src="{{ asset("assets/$theme/plugins/select2/js/select2.full.min.js")}}"></script>
         <!-- overlayScrollbars -->

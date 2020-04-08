@@ -14,15 +14,17 @@ class CreateDatosIdentificacionsTable extends Migration
     public function up()
     {
         Schema::create('datos_identificacions', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('primerNombre');
-            $table->string('segundoNombre'); 
-            $table->string('primerApellido'); 
-            $table->string('segundoApellido');
-            $table->string('tipoDocumento');
-            $table->string('numeroIdentificacion');
-            $table->string('sexo');
-            $table->string('fechaNacimiento');
+            $table->bigIncrements('id');
+            $table->bigInteger('evento_id')->unsigned()->nullable();
+            $table->foreign('evento_id')->references('id')->on('eventos')->onUpdate('cascade')->nullable();
+            $table->string('primerNombre')->nullable();
+            $table->string('segundoNombre')->nullable(); 
+            $table->string('primerApellido')->nullable(); 
+            $table->string('segundoApellido')->nullable();
+            $table->string('tipoDocumento')->nullable();
+            $table->string('numeroIdentificacion')->nullable();
+            $table->string('sexo')->nullable();
+            $table->date('fechaNacimiento')->nullable();
             $table->timestamps();
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_spanish_ci';

@@ -15,20 +15,20 @@ class CreateDatosDemograficosTable extends Migration
     {
         Schema::create('datos_demograficos', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('datos_identificacion_id')->nullable()->unsigned();
-            $table->foreign('datos_identificacion_id' )->references('id')->on('datos_identificacions');
-            $table->string('paisNacimiento');
-            $table->string('ciudadNacimiento');
-            $table->string('estadoCivil');
-            $table->string('escolaridad');
-            $table->string('ocupacion');
-            $table->string('credoReligioso');
-            $table->string('paisResidencia');
-            $table->string('departamentoResidencia');
-            $table->string('ciudadResidencia');
-            $table->string('localidadResidencia');
-            $table->string('direccionResidencia');
-            $table->char('zonaResidencia');
+            $table->bigInteger('evento_id')->unsigned()->nullable();
+            $table->foreign('evento_id')->references('id')->on('eventos')->onUpdate('cascade')->nullable();
+            $table->string('paisNacimiento')->nullable();
+            $table->string('ciudadNacimiento')->nullable();
+            $table->string('estadoCivil')->nullable();
+            $table->string('escolaridad')->nullable();
+            $table->string('ocupacion')->nullable();
+            $table->string('credoReligioso')->nullable();
+            $table->string('paisResidencia')->nullable();
+            $table->string('departamentoResidencia')->nullable();
+            $table->string('ciudadResidencia')->nullable();
+            $table->string('localidadResidencia')->nullable();
+            $table->string('direccionResidencia')->nullable();
+            $table->char('zonaResidencia')->nullable();
             $table->timestamps();
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_spanish_ci';

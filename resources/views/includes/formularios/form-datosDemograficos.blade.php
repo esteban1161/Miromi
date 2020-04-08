@@ -5,28 +5,43 @@
             <input type="text" name="paisNacimiento" class="form-control" id="paisNacimiento" value="{{old('paisNacimiento', $data->datosDemograficos->paisNacimiento ?? '')}}" required>
         </div>
 </div>
-<div class="form-group">
-    <label for="paisNacimiento" class="col-lg-3 col-form-label requerido">Pais Nacimiento</label>
-    <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
-        {{-- <option value="">...Selecionar Rol...</option>
-        @foreach($rols as $id => $nombre)
-        <option value="{{$id}}" 
-                {{is_array(old('rol_id')) ? (in_array($id, old('rol_id')) ? 'selected' : ' ')  : 
-                (isset($data) ? ($data->roles->firstWhere('id', $id) ? 'selected' : '') : ' ')}}
-        >
-            {{$nombre}}
-        </option>
-        @endforeach --}}
-
-    </select>
-  </div>
-
-
 <div class="form-group row">
-    <label for="ciudadNacimiento" class="col-lg-3 col-form-label requerido">Ciudad Nacimiento</label>
-        <div class="col-lg-8">
-            <input type="text" name="ciudadNacimiento" class="form-control" id="ciudadNacimiento" value="{{old('ciudadNacimiento', $data->datosDemograficos->ciudadNacimiento ?? '')}}" required>
-        </div>
+    <label for="paisNacimiento" class="col-lg-3 col-form-label requerido">Pais Nacimiento</label>
+    <div class="col-lg-8">
+        <select id="paisNacimiento" name="paisNacimiento" class="form-control select2 " style="width: 100%;">
+            <option value="">Alabama</option>
+            <option value="">...Selecionar Pais...</option>
+            
+            <option value="">...Selecionar Pais...</option>
+            
+            <option value="">...Selecionar Pais...</option>
+            
+            <option value="">...Selecionar Pais...</option>
+                        
+        </select>
+    </div>
+</div>
+<div class="form-group row">
+    <label for="ciudadNacimiento" class="col-lg-3 col-form-label requerido">Pais Nacimiento</label>
+    <div class="col-lg-8">
+        <select id="ciudadNacimiento" name="ciudadNacimiento" class="form-control select2 " style="width: 100%;">
+            <option value="">Alabama</option>
+            <option value="">...Selecionar ciudad...</option>
+            
+            <option value="">...Selecionar ciudad...</option>
+            
+            <option value="">...Selecionar ciudad...</option>
+            
+            <option value="">...Selecionar ciudad...</option>
+                {{-- @foreach($rols as $id => $nombre)
+                <option value="{{$id}}" 
+                        {{is_array(old('rol_id')) ? (in_array($id, old('rol_id')) ? 'selected' : ' ')  : 
+                        (isset($data) ? ($data->roles->firstWhere('id', $id) ? 'selected' : '') : ' ')}}>
+                    {{$nombre}}
+                </option>
+                @endforeach  --}}
+        </select>
+    </div>
 </div>
 <div class="form-group row">
     <label for="estadoCivil" class="col-lg-3 col-form-label requerido">Estado Civil</label>

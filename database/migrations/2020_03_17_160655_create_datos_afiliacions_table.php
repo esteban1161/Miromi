@@ -15,13 +15,13 @@ class CreateDatosAfiliacionsTable extends Migration
     {
         Schema::create('datos_afiliacions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('datos_identificacion_id')->nullable()->unsigned();
-            $table->foreign('datos_identificacion_id')->references('id')->on('datos_identificacions');
-            $table->string('tipoVinculacion');
-            $table->string('aseguradora');
-            $table->string('responsableMedico');
-            $table->string('parentescoResponsable');
-            $table->string('telefonoResponsable');
+            $table->bigInteger('evento_id')->unsigned()->nullable();
+            $table->foreign('evento_id')->references('id')->on('eventos')->onUpdate('cascade')->nullable();
+            $table->string('tipoVinculacion')->nullable();
+            $table->string('aseguradora')->nullable();
+            $table->string('responsableMedico')->nullable();
+            $table->string('parentescoResponsable')->nullable();
+            $table->string('telefonoResponsable')->nullable();
             $table->timestamps();
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_spanish_ci';

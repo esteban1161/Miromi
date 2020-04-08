@@ -60,3 +60,13 @@
         <input type="text" name="fechaNacimiento" id="fechaNacimiento" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask="" im-insert="false" value="{{old('fechaNacimiento', $data->fechaNacimiento ?? '')}}">
     </div>
 </div>
+
+<div class="form-group">
+    <label for="fechaNacimiento" class="col-lg-3 col-form-label requerido">Fecha de Nacimiento</label>
+    <div class="input-group col-lg-8">
+        <div class="input-group-prepend">
+            <span class="input-group-text">            <i class="far fa-calendar-alt"></i>            </span>
+        </div>
+        <input type="date" class="form-control" id="reservation">
+    </div>
+</div>

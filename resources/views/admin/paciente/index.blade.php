@@ -17,7 +17,6 @@
     <script src="{{asset("assets/pages/scripts/admin/paciente/index.js")}}" type="text/javascript"></script>
 @endsection
 
-
 @section('contenido')
 
     <div class="row">

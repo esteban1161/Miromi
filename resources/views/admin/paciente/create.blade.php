@@ -4,6 +4,19 @@
     Crear Pacientes
 @endsection   
 
+@section('styles')
+    <link rel="stylesheet" href="{{ asset("assets/$theme/plugins/select2/css/select2.min.css")}}">
+    <link rel="stylesheet" href="{{ asset("assets/$theme/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css")}}">
+@endsection
+
+@section('scriptsPlugins')
+    <script src="{{ asset("assets/$theme/plugins/select2/js/select2.full.min.js")}}"></script>
+@endsection
+
+@section('scripts')
+    <script src="{{asset("assets/pages/scripts/admin/paciente/index.js")}}" type="text/javascript"></script>
+@endsection
+
 @section('contenido')    
 <div class="row">
     <div class="col-lg-12">
