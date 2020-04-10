@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class DatosAcademicos extends Model
 {
     protected $table = "datos_academicos";
-    protected $fillable = ['datos_identificacion_id',
+    protected $fillable = [ 'evento_id',
                                         'tipoProfesional',
                                         'numeroRegistroProfesional',
                                         'tituloAcademico',

@@ -14,10 +14,11 @@ class TablaRolSeeder extends Seeder
     public function run()
     {
         $rols = [
-            'administrador',
-            'editor',
-            'supervisor',
-            'terapeuta',
+            'Administrador',
+            'Terapeuta',
+            'Auxiliar Administrativo',
+            'Auxiliar Enfermeria',
+            'Paciente',
         ];
         foreach($rols as $key => $value){
             DB::table('rols')->insert([

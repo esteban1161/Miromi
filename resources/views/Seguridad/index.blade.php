@@ -23,7 +23,7 @@
 <body class="hold-transition login-page">
     <div class="login-box">
         <div class="login-logo">
-            <a href="{{route('inicio.index')}}">Medicos</a>
+            <a href="{{route('inicio.index')}}">Miromi</a>
         </div>
         <!-- /.login-logo -->
         <div class="card">
@@ -45,7 +45,7 @@
                         <input type="text" name="usuario" class="form-control" value="{{old('usuario')}}" placeholder="Usuario">
                         <div class="input-group-append">
                             <div class="input-group-text">
-                                <span class="fas fa-envelope"></span>
+                                <span class="fas fa-child"></span>
                             </div>
                         </div>
                     </div>

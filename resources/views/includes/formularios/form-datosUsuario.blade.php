@@ -42,7 +42,7 @@
                     {{is_array(old('rol_id')) ? (in_array($id, old('rol_id')) ? 'selected' : ' ')  : 
                     (isset($data) ? ($data->roles->firstWhere('id', $id) ? 'selected' : '') : ' ')}}
             >
-                {{$nombre}}
+                {{$nombre}} 
             </option>
             @endforeach
         </select>

@@ -12,16 +12,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        factory(App\Models\Pais::class, 10)->create();
 
         $this->truncateTablas([
             'rols',
             'usuarios',
             'usuario_rols',
-            'paises',
+            'pais',
         ]);
         $this->call(TablaRolSeeder::class);
         $this->call(UsuarioAdministradorSeeder::class);
-        $this->call(PaisesSeeder::class);
+        factory(App\Models\Pais::class, 10)->create();
+        factory(App\Models\Ciudad::class, 10)->create();
     }
 
     protected function truncateTablas(array $tablas){

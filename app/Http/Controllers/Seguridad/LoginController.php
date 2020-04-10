@@ -10,7 +10,7 @@ class LoginController extends Controller
 {
     use AuthenticatesUsers;
 
-    protected $redirectTo = '/ ';
+    protected $redirectTo = '/paciente';  //cuando es un terapeuta redicereccionar a los pacientes, si es administrador redireccionar a otra vista
 
     public function __construct()
     {
@@ -40,4 +40,14 @@ class LoginController extends Controller
         return 'usuario';
     }
 
+    public function logout(Request $request)
+    {
+        $this->guard()->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return $this->loggedOut($request) ?: redirect('seguridad/login');
+    }
 }

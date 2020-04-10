@@ -39,23 +39,26 @@
                                 <th>Numero Identificaicon</th>
                                 <th>Fecha Nacimiento</th>
                                 <th>Sexo</th>
-                                <th></th>
+                                <th>Informacion</th>
                             </tr>
                         </thead>
                         <tbody>                            
-                            @foreach ( $identificacion as $identidad)
+                            @foreach ( $eventos as $evento)
                                 <tr>
-                                    <td>{{$identidad->primerNombre}}</td>
-                                    <td>{{$identidad->primerApellido}}</td>
-                                    <td>{{$identidad->numeroIdentificacion}}</td>
-                                    <td>{{$identidad->fechaNacimiento}}</td>
-                                    <td>{{$identidad->sexo}}</td>     
+                                    <td>{{$evento->identificacion->primerNombre}}</td>
+                                    <td>{{$evento->identificacion->primerApellido}}</td>
+                                    <td>{{$evento->identificacion->numeroIdentificacion}}</td>
+                                    <td>{{$evento->identificacion->fechaNacimiento}}</td>
+                                    <td>{{$evento->identificacion->sexo}}</td>     
                                     <td>
-                                        <a href="{{route('paciente.show', ['id'=>$identidad->id])}}" class="btn-accion-tabla tooltipsC" title="Mostrar este Resgistro">
+                                        <a href="{{route('paciente.show', ['id'=>$evento->id])}}" class="btn-accion-tabla tooltipsC" title="Mostrar este Resgistro">
                                             <i class="fas fa-eye"></i>
                                         </a>
-                                        <a href="{{route('paciente.edit', ['id' => $identidad->id])}}" class="btn-accion-tabla tooltipsC" title="Editar este Registro">
+                                        <a href="{{route('paciente.edit', ['id' => $evento->id])}}" class="btn-accion-tabla tooltipsC" title="Editar este Registro">
                                             <i class="fas fa-pencil-alt"></i>
+                                        </a>
+                                        <a href="{{route('historiaC.index', ['id' => $evento->id])}}" class="btn-accion-tabla tooltipsC" title="Ver Historias Clinicas">
+                                            <i class="fas fa-address-book"></i>
                                         </a>
                                     </td>   
                                 </tr>                    

@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class DatosIdentificacion extends Model
 {
     protected $table = "datos_identificacions";
-    protected $fillable = ['primerNombre', 
+    protected $fillable = [ 'evento_id',
+                                        'primerNombre', 
                                         'segundoNombre', 
                                         'primerApellido', 
                                         'segundoApellido',
@@ -18,17 +19,8 @@ class DatosIdentificacion extends Model
                                         'fechaNacimiento'];
     protected $guarded = ['id'];
 
-    public function datosDemograficos(){
-        return $this->hasOne(DatosDemograficos::class);
-    }
-    public function datosAfiliacion(){
-        return $this->hasOne(DatosAfiliacion::class);
-    }
-    public function datosAcademicos(){
-        return $this->hasOne(DatosAcademicos::class);
-    }
-    public function datosConsultorios(){
-        return $this->hasOne(DatosConsultorios::class);
+    public function historiaClinicaB(){
+        return $this->hasMany(HistoriaClinicaBasica::class);
     }
 
 }

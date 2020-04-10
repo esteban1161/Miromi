@@ -32,7 +32,6 @@ Route::post('admin/usuario', 'Admin\UsuarioController@store')->name('usuario.sto
 Route::put('admin/usuario/{id}', 'Admin\UsuarioController@update')->name('usuario.update')->middleware('auth', 'superAdmin');
 Route::delete('admin/usuario/{id}', 'Admin\UsuarioController@destroy')->name('usuario.destroy')->middleware('auth', 'superAdmin');
 
-
 /*Rutas del Rol*/
 Route::get('admin/rol', 'Admin\RolController@index')->name('rol.index')->middleware('auth', 'superAdmin');
 Route::get('admin/rol/crear', 'Admin\RolController@create')->name('rol.create')->middleware('auth', 'superAdmin');
@@ -41,18 +40,25 @@ Route::post('admin/rol', 'Admin\RolController@store')->name('rol.store')->middle
 Route::put('admin/rol/{id}', 'Admin\RolController@update')->name('rol.update')->middleware('auth', 'superAdmin');
 Route::delete('admin/rol/{id}', 'Admin\RolController@destroy')->name('rol.destroy')->middleware('auth', 'superAdmin');
 
-/*Rutas del Paciente */
-Route::get('admin/paciente', 'Admin\InformacionPacienteController@index')->name('paciente.index')->middleware('auth');
-Route::get('admin/paciente/crear', 'Admin\InformacionPacienteController@create')->name('paciente.create')->middleware('auth');
-Route::get('admin/paciente/{id}', 'Admin\InformacionPacienteController@show')->name('paciente.show')->middleware('auth');
-Route::get('admin/paciente/{id}/editar', 'Admin\InformacionPacienteController@edit')->name('paciente.edit')->middleware('auth');   
-Route::post('admin/paciente', 'Admin\InformacionPacienteController@store')->name('paciente.store')->middleware('auth');    
-Route::put('admin/paciente/{id}', 'Admin\InformacionPacienteController@update')->name('paciente.update')->middleware('auth');
+/*Rutas del Terapeuta */
+Route::get('admin/terapeuta', 'PerfilTerapeutaController@index')->name('terapeuta.index')->middleware('auth');
+Route::get('admin/terapeuta/crear', 'PerfilTerapeutaController@create')->name('terapeuta.create')->middleware('auth');
+Route::post('admin/terapeuta', 'PerfilTerapeutaController@store')->name('terapeuta.store')->middleware('auth');    
 
 /*Rutas del Paciente */
-Route::get('admin/terapeuta', 'Admin\TerapeutaController@index')->name('terapeuta.index')->middleware('auth', 'superAdmin');
-Route::get('admin/terapeuta/crear', 'Admin\TerapeutaController@create')->name('terapeuta.create')->middleware('auth', 'superAdmin');
-Route::post('admin/terapeuta', 'Admin\TerapeutaController@store')->name('terapeuta.store')->middleware('auth', 'superAdmin');    
+Route::get('/paciente', 'PerfilPacienteController@index')->name('paciente.index')->middleware('auth'); 
+Route::get('/paciente/crear', 'PerfilPacienteController@create')->name('paciente.create')->middleware('auth');
+Route::get('/paciente/{id}', 'PerfilPacienteController@show')->name('paciente.show')->middleware('auth');
+Route::get('/paciente/{id}/editar', 'PerfilPacienteController@edit')->name('paciente.edit')->middleware('auth');   
+Route::post('/paciente', 'PerfilPacienteController@store')->name('paciente.store')->middleware('auth');    
+Route::put('/paciente/{id}', 'PerfilPacienteController@update')->name('paciente.update')->middleware('auth');
+
+/*Rutas de Historias Clinicas */
+Route::get('/paciente/{id}/historiaClinica', 'HistoriaClinicaBController@index')->name('historiaC.index');
+Route::get('/paciente/{id}/historiaClinica/crear', 'HistoriaClinicaBController@create')->name('historiaC.create');
+Route::post('/paciente/{id}/historiaClinica', 'HistoriaClinicaBController@store')->name('historiaC.store');
+
+
 
 /*Rutas del Menu */
 Route::get('admin/menu', 'Admin\MenuController@index')->name('menu.index')->middleware('auth', 'superAdmin');

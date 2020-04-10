@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class DatosAfiliacion extends Model
 {
     protected $table = "datos_afiliacions";
-    protected $fillable = ['datos_identificacion_id',
+    protected $fillable = [ 'evento_id',
                                         'tipoVinculacion',
-                                        'aseguradora', 
+                                        'aseguradora',
                                         'responsableMedico',
                                         'parentescoResponsable',
                                         'telefonoResponsable',];
