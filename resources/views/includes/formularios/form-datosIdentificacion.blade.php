@@ -25,15 +25,15 @@
 </div>
 <div class="form-group row">
     <label for="tipoDocumento" class="col-lg-3 col-form-label requerido">Tipo de Documento</label>
-    <select name="tipoDocumento" id="tipoDocumento" class="col-lg-8" value="{{old('tipoDocumento', $data->identificacion->tipoDocumento ?? '')}}">
-        <option value="CC">...Selecionar Tipo Documento...</option>
-        <option value="CE">Cédula de Extranjería</option>
-        <option value="PA"> Pasaporte</option>
-        <option value="CC">Cedula de Ciudadanía'</option>
-        <option value="RC">Registro Civil</option>
-        <option value="TI">Tarjeta de Identidad</option>
-        <option value="AS">Adulto sin Identificación</option>
-        <option value="MS">Menor sin Identificación</option>
+    <select name="tipoDocumento" id="tipoDocumento" class="col-lg-8" >
+        <option value="">...Selecionar Tipo Documento...</option>
+        <option value="CC" {{ old('tipoDocumento',  $data->identificacion->tipoDocumento ?? '') == 'CC' ? 'selected' : ' ' }}>Cedula de Ciudadanía</option>
+        <option value="CE" {{ old('tipoDocumento',  $data->identificacion->tipoDocumento ?? '') == 'CE' ? 'selected' : ' ' }}>Cédula de Extranjería</option>
+        <option value="PA" {{ old('tipoDocumento',  $data->identificacion->tipoDocumento ?? '') == 'PA' ? 'selected' : ' ' }}> Pasaporte</option>
+        <option value="RC" {{ old('tipoDocumento',  $data->identificacion->tipoDocumento ?? '') == 'RC' ? 'selected' : ' ' }}>Registro Civil</option>
+        <option value="TI" {{ old('tipoDocumento',  $data->identificacion->tipoDocumento ?? '') == 'TI' ? 'selected' : ' ' }}>Tarjeta de Identidad</option>
+        <option value="AS" {{ old('tipoDocumento',  $data->identificacion->tipoDocumento ?? '') == 'AS' ? 'selected' : ' ' }}>Adulto sin Identificación</option>
+        <option value="MS" {{ old('tipoDocumento',  $data->identificacion->tipoDocumento ?? '') == 'MS' ? 'selected' : ' ' }}>Menor sin Identificación</option>
     </select>
 </div>
 <div class="form-group row">
@@ -46,8 +46,8 @@
     <label for="sexo" class="col-lg-3 col-form-label requerido">Sexo</label>
     <select name="sexo" id="sexo" class="col-lg-8">
         <option value="">...Selecionar Sexo...</option>
-        <option value="M">Masculino</option>
-        <option value="F"> Femenino</option>
+        <option value="M" {{ old('sexo',  $data->identificacion->sexo ?? '') == 'M' ? 'selected' : ' ' }}>Masculino</option>
+        <option value="F" {{ old('sexo',  $data->identificacion->sexo ?? '') == 'F' ? 'selected' : ' ' }}> Femenino</option>
     </select>
 </div>
 

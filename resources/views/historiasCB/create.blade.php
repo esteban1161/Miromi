@@ -24,9 +24,14 @@
             <div class="card-header">
                 <h3 class="card-title">Crear un paciente</h3>
             </div>
-            <form action="{{route('historiaC.store', ['id'=>$id1])}}" class="form-horizontal" id="form-general" method="POST" autocomplete="off">
+            <form action="{{route('historiaC.store', ['id'=>$identificacion->id])}}" class="form-horizontal" id="form-general" method="POST" autocomplete="off">
                 @csrf
-                <div class="card-body"> @include('includes.formularios.form-HistoriaClinicaBasica')    </div>
+                <div class="card-body"> @include('includes.formularios.forms-HistoriasClinicas.form-datosHistoriaClinicaBasica')    </div>
+                <div class="card-body"> @include('includes.formularios.forms-HistoriasClinicas.form-datosAntecedentes')    </div>
+                <div class="card-body"> @include('includes.formularios.forms-HistoriasClinicas.form-datosRevisionSistema')    </div>
+                <div class="card-body"> @include('includes.formularios.forms-HistoriasClinicas.form-datosExamenFisico')    </div>
+                <div class="card-body"> @include('includes.formularios.forms-HistoriasClinicas.form-datosConsultas')    </div>
+                
 
                 
                 <div class="card-footer">

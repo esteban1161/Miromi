@@ -4,10 +4,9 @@
     <label for="paisNacimiento" class="col-lg-3 col-form-label requerido">Pais Nacimiento</label>
     <div class="col-lg-8">
         <select id="paisNacimiento" name="paisNacimiento" class="form-control select2 " style="width: 100%;">
+                <option value="">...Selecionar Pais...</option>
                 @foreach($paises as $id => $nombrePais)
-                <option value="{{$id}}" 
-                        {{-- {{is_array(old('rol_id')) ? (in_array($id, old('rol_id')) ? 'selected' : ' ')  : 
-                        (isset($data) ? ($data->roles->firstWhere('id', $id) ? 'selected' : '') : ' ')}} --}}>
+                <option value="{{$id}} "{{ old('paisNacimiento',  $data->demografico->paisNacimiento ?? '') == $id ? 'selected' : ' ' }}>
                     {{$nombrePais}}
                 </option>
                 @endforeach  
@@ -20,9 +19,8 @@
     <div class="col-lg-8">
         <select id="ciudadNacimiento" name="ciudadNacimiento" class="form-control select2 " style="width: 100%;">
                 @foreach($ciudades as $id => $nombreCiudad)
-                <option value="{{$id}}" 
-                        {{-- {{is_array(old('rol_id')) ? (in_array($id, old('rol_id')) ? 'selected' : ' ')  : 
-                        (isset($data) ? ($data->roles->firstWhere('id', $id) ? 'selected' : '') : ' ')}} --}}>
+                <option value="">...Selecionar Ciudad...</option>
+                <option value="{{$id}}"{{ old('ciudadNacimiento',  $data->demografico->ciudadNacimiento ?? '') == $id ? 'selected' : ' ' }}>
                     {{$nombreCiudad}}
                 </option>
                 @endforeach  
@@ -34,23 +32,23 @@
     <label for="estadoCivil" class="col-lg-3 col-form-label requerido">Estado Civil</label>
     <select name="estadoCivil" id="estadoCivil" class="col-lg-8">
         <option value="">...Selecionar Estado Civil...</option>
-        <option value="S">Soltero(a)</option>
-        <option value="C">Casado(a)</option>
-        <option value="UL">Union Libre</option>
-        <option value="V">Viudo(a)</option>
-        <option value="SE">Separado(a)</option>
+        <option value="S" {{ old('paisNacimiento',  $data->demografico->estadoCivil ?? '') == 'S' ? 'selected' : ' ' }}>Soltero(a)</option>
+        <option value="C" {{ old('paisNacimiento',  $data->demografico->estadoCivil ?? '') == 'C' ? 'selected' : ' ' }}>Casado(a)</option>
+        <option value="UL" {{ old('paisNacimiento',  $data->demografico->estadoCivil ?? '') == 'UL' ? 'selected' : ' ' }}>Union Libre</option>
+        <option value="V" {{ old('paisNacimiento',  $data->demografico->estadoCivil ?? '') == 'V' ? 'selected' : ' ' }}>Viudo(a)</option>
+        <option value="SE" {{ old('paisNacimiento',  $data->demografico->estadoCivil ?? '') == 'SE' ? 'selected' : ' ' }}>Separado(a)</option>
     </select>
 </div>
 <div class="form-group row">
     <label for="escolaridad" class="col-lg-3 col-form-label requerido">Escolaridad</label>
     <select name="escolaridad" id="escolaridad" class="col-lg-8">
         <option value="">...Selecionar Escolaridad...</option>
-        <option value="P">Primaria</option>
-        <option value="S">Secundaria</option>
-        <option value="T">Tecnica</option>
-        <option value="PR">Profesional</option>
-        <option value="PO">Postgrado</option>
-        <option value="O">Otro</option>
+        <option value="P" {{ old('paisNacimiento',  $data->demografico->escolaridad ?? '') == 'P' ? 'selected' : ' ' }}>Primaria</option>
+        <option value="S" {{ old('paisNacimiento',  $data->demografico->escolaridad ?? '') == 'S' ? 'selected' : ' ' }}>Secundaria</option>
+        <option value="T" {{ old('paisNacimiento',  $data->demografico->escolaridad ?? '') == 'T' ? 'selected' : ' ' }}>Tecnica</option>
+        <option value="PR" {{ old('paisNacimiento',  $data->demografico->escolaridad ?? '') == 'PR' ? 'selected' : ' ' }}>Profesional</option>
+        <option value="PO" {{ old('paisNacimiento',  $data->demografico->escolaridad ?? '') == 'PO' ? 'selected' : ' ' }}>Postgrado</option>
+        <option value="O" {{ old('paisNacimiento',  $data->demografico->escolaridad ?? '') == 'O' ? 'selected' : ' ' }}>Otro</option>
     </select>
 </div>
 <div class="form-group row">
@@ -88,29 +86,24 @@
     <div class="col-lg-8">
         <select id="localidadResidencia" name="localidadResidencia" class="form-control select2 " style="width: 100%;">
                 @foreach($localidades as $id => $localidadResidencia)
-                <option value="{{$id}}" 
-                        {{-- {{is_array(old('rol_id')) ? (in_array($id, old('rol_id')) ? 'selected' : ' ')  : 
-                        (isset($data) ? ($data->roles->firstWhere('id', $id) ? 'selected' : '') : ' ')}} --}}>
+                <option value="{{$id}}" {{ old('localidadResidencia',  $data->demografico->localidadResidencia ?? '') == $id ? 'selected' : ' ' }}>
                     {{$localidadResidencia}} - {{$id}}
                 </option>
                 @endforeach  
         </select>
     </div>
 </div>
-
-
-
 <div class="form-group row">
     <label for="direccionResidencia" class="col-lg-3 col-form-label requerido">Direccion Residencia</label>
         <div class="col-lg-8">
-            <input type="text" name="direccionResidencia" class="form-control" id="direccionResidencia" value="{{old('direccionResidencia', $data->demografico->direccionResidencia ?? '')}}" required>
+            <input type="search" name="direccionResidencia" class="form-control" id="direccionResidencia" value="{{old('direccionResidencia', $data->demografico->direccionResidencia ?? '')}}" required>
         </div>
 </div>
 <div class="form-group row">
     <label for="zonaResidencia" class="col-lg-3 col-form-label requerido">Zona de residencia</label>
     <select name="zonaResidencia" id="zonaResidencia" class="col-lg-8" value="{{old('zonaResidencia', $data->demografico->zonaResidencia ?? '')}}">
         <option value="">...Selecionar Zona de Residencia...</option>
-        <option value="U">Urbana</option>
-        <option value="R"> Rural</option>
+        <option value="U" {{ old('zonaResidencia',  $data->demografico->zonaResidencia ?? '') == 'U' ? 'selected' : ' ' }}>Urbana</option>
+        <option value="R" {{ old('zonaResidencia',  $data->demografico->zonaResidencia ?? '') == 'R' ? 'selected' : ' ' }}> Rural</option>
     </select>
 </div>

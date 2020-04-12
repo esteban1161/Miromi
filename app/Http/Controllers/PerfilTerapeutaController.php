@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\DatosIdentificacion;
-use App\Models\Eventos;
+use App\Models\Evento;
 use App\Models\Seguridad\Usuario;
 use Illuminate\Http\Request;
 
@@ -28,7 +28,7 @@ class PerfilTerapeutaController extends Controller
         $id = auth()->id();
         $rol = Usuario::find($id)->rol_id;
 
-        $evento = Eventos::create([
+        $evento = Evento::create([
             'user_id' => $id,
             'rol_id'=>$rol,
             'formulario_id'=>1,            

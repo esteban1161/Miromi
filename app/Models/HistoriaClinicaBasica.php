@@ -15,6 +15,7 @@ class HistoriaClinicaBasica extends Model
                                        'fechaConsulta',
                                        'horaConsulta',
                                        'edadActual',
+                                       'motivoConsulta',
                                        'enfermedadActual',
                                       ];
     protected $guarded = ['id'];

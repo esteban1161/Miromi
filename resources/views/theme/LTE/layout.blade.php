@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>@yield('title', 'Mirome') | Mediclic</title>
+        <title>@yield('titulo') | Miromi</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Font Awesome -->
@@ -104,7 +104,13 @@
 
         <script src="{{asset("assets/js/scripts.js")}}"></script>
 
-        <script src="{{asset("assets/js/funciones.js")}}"></script>        
+        <script src="{{asset("assets/js/funciones.js")}}"></script>       
+        
+        <script>
+            function funcionBoton(){
+                history.go(-1);
+            }
+        </script>
 
         
         @yield('scriptsPlugins')

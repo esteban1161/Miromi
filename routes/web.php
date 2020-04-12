@@ -54,9 +54,10 @@ Route::post('/paciente', 'PerfilPacienteController@store')->name('paciente.store
 Route::put('/paciente/{id}', 'PerfilPacienteController@update')->name('paciente.update')->middleware('auth');
 
 /*Rutas de Historias Clinicas */
-Route::get('/paciente/{id}/historiaClinica', 'HistoriaClinicaBController@index')->name('historiaC.index');
-Route::get('/paciente/{id}/historiaClinica/crear', 'HistoriaClinicaBController@create')->name('historiaC.create');
-Route::post('/paciente/{id}/historiaClinica', 'HistoriaClinicaBController@store')->name('historiaC.store');
+Route::get('/paciente/{id}/historiaClinica', 'HistoriaClinicaBController@index')->name('historiaC.index')->middleware('auth');
+Route::get('/paciente/{id}/historiaClinica/crear', 'HistoriaClinicaBController@create')->name('historiaC.create')->middleware('auth');
+Route::get('/paciente/{id}/historiaClinica/{idh}', 'HistoriaClinicaBController@show')->name('historiaC.show')->middleware('auth');
+Route::post('/paciente/{id}/historiaClinica', 'HistoriaClinicaBController@store')->name('historiaC.store')->middleware('auth');
 
 
 

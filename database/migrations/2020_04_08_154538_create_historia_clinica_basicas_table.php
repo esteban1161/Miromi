@@ -22,6 +22,7 @@ class CreateHistoriaClinicaBasicasTable extends Migration
             $table->date('fechaConsulta')->nullable();            
             $table->time('horaConsulta')->nullable();            
             $table->string('edadActual')->nullable();
+            $table->string('motivoConsulta')->nullable();            
             $table->string('enfermedadActual')->nullable();
             $table->timestamps();
             $table->charset = 'utf8mb4';

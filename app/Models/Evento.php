@@ -42,6 +42,26 @@ class Evento extends Model
         return $this->hasOne(Telefono::class);
     }
 
+    public function antecedente(){
+        return $this->hasOne(Antecedente::class);
+    }
+
+    
+    public function consulta(){
+        return $this->hasOne(Consulta::class);
+    }
+
+    
+    public function examenFisico(){
+        return $this->hasOne(ExamenFisico::class);
+    }
+
+    
+    public function revisionSistema(){
+        return $this->hasOne(RevisionSistema::class);
+    }
+
+    
     public function correosElectronicos(){
         return $this->hasOne(CorreoElectronico::class);
     }

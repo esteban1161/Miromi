@@ -33,8 +33,7 @@ class PerfilPacienteController extends Controller
     }
 
     public function store( )
-    {
-       
+    {       
         $id = auth()->id();
         $rol = 2;   //Hacer la consulta para encontrar el rol
 
@@ -96,8 +95,11 @@ class PerfilPacienteController extends Controller
 
     public function show($id)
     {
-        $identificacion = DatosIdentificacion::findOrFail($id);
-        return view('paciente.show', compact('identificacion'));
+        $paises = Pais::orderBy('id')->pluck('nombrePais', 'id')->toArray();
+        $ciudades = Ciudad::orderBy('id')->pluck('nombreCiudad', 'id')->toArray();
+        $localidades = Localidad::orderBy('id')->pluck('localidadResidencia', 'id')->toArray();
+        $data = Evento::findOrFail ($id);
+        return view('paciente.show', compact('paises', 'ciudades', 'localidades', 'data'));
     }
 
     public function edit($id)
@@ -111,7 +113,51 @@ class PerfilPacienteController extends Controller
 
     public function update(Request $request, $id)
     {
-        DatosIdentificacion::findOrFail($id)->update($request->all());
+        $evento = Evento::findOrFail($id);        
+        $identificacion = $evento->identificacion()->update([
+            'primerNombre' => request('primerNombre'),  
+            'segundoNombre' => request('segundoNombre'),
+            'primerApellido' => request('primerApellido'),
+            'segundoApellido' => request('segundoApellido'),
+            'tipoDocumento' => request('tipoDocumento'),
+            'numeroIdentificacion' => request('numeroIdentificacion'),
+            'sexo' => request('sexo'),
+            'fechaNacimiento' => request('fechaNacimiento'),          
+        ]);
+
+        $demograficos = $evento->demografico()->update([
+            'paisNacimiento'=>request('paisNacimiento'),
+            'ciudadNacimiento'=>request('ciudadNacimiento'),
+            'estadoCivil'=>request('estadoCivil'),
+            'escolaridad'=>request('escolaridad'),
+            'ocupacion'=>request('ocupacion'),
+            'credoReligioso'=>request('credoReligioso'),
+            'paisResidencia'=>request('paisResidencia'),
+            'departamentoResidencia'=>request('departamentoResidencia'),
+            'ciudadResidencia'=>request('ciudadResidencia'),
+            'localidadResidencia'=>request('localidadResidencia'),
+            'direccionResidencia'=>request('direccionResidencia'),
+            'zonaResidencia'=>request('zonaResidencia'),
+        ]);
+
+        $afiliacion = $evento->afiliacion()->update([
+            'tipoVinculacion'=>request('tipoVinculacion'),
+            'aseguradora'=>request('aseguradora'),
+            'responsableMedico'=>request('responsableMedico'),
+            'parentescoResponsable'=>request('parentescoResponsable'),
+            'telefonoResponsable'=>request('telefonoResponsable'),
+        ]);
+
+        $telefono1 = $evento->telefonos()->update([
+            'numeroTelefono'=>request('numeroTelefono'),
+            'tipoTelefono'=>request('tipoTelefono'),
+        ]);
+
+        $correo = $evento->correosElectronicos()->update([
+            'correoElectronico'=>request('correoElectronico'),
+            'tipoCorreo'=>request('tipoCorreo'),
+        ]);
+
         return redirect('/paciente') ->with('mensaje', 'Rol actualizado con exito');
     }
 }

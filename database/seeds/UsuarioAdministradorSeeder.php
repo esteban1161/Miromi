@@ -68,10 +68,5 @@ class UsuarioAdministradorSeeder extends Seeder
         DB::table('formularios')->insert([
             'nombre' => 'HistoriaClinicaBasica ',
         ]);
-        db::table('eventos')->insert([
-            'usuario_id'=>1,
-            'rol_id'=>2,
-            'formulario_id'=>1,
-        ]);
     }
 }

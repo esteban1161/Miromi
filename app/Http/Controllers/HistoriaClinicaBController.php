@@ -2,40 +2,30 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cie10;
+use App\Models\DatosIdentificacion;
 use App\Models\Evento;
 use App\Models\Seguridad\Usuario;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class HistoriaClinicaBController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index($id)
     {
-        $eventos = Evento::ConsultaHistoriasClinicas($id)->get();                
-        return view('historiasCB.index', compact('eventos', 'id'));
+        $eventos = Evento::ConsultaHistoriasClinicas($id)->get();      
+        $identificacion = DatosIdentificacion::findOrFail($id);         
+        return view('historiasCB.index', compact('eventos', 'identificacion'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create($id)
-    {
-        $id1 = $id;        
-        return view('historiasCB.create', compact('id1'));
+    {      
+        $cie10 = Cie10::orderBy('id')->pluck('codigo', 'descripcion')->toArray();        
+        $identificacion = DatosIdentificacion::findOrFail($id);    
+        $edad = Carbon::parse($identificacion->fechaNacimiento)->age;
+        return view('historiasCB.create', compact('identificacion', 'edad', 'cie10'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request, $id)
     {
         $idUser = auth()->id();
@@ -47,59 +37,81 @@ class HistoriaClinicaBController extends Controller
             'formulario_id'=>3,           
             'identificacion_id'=> $id,
         ]);
-            $historiaClinica = $evento->historiaClinicaB()->create([
+        $historiaClinica = $evento->historiaClinicaB()->create([
             'nombreAcompañante'=>request('nombreAcompañante'),
             'parentescoAcompañante'=>request('parentescoAcompañante'),
             'fechaConsulta'=>request('fechaConsulta'),
             'horaConsulta'=>request('horaConsulta'),
             'edadActual'=>request('edadActual'),
+            'motivoConsulta'=>request('motivoConsulta'),
             'enfermedadActual'=>request('enfermedadActual'),
         ]);
-
+        $antesedente = $evento->antecedente()->create([
+            'patológicos'=>request('patológicos'),
+            'quirúrgicos'=>request('quirúrgicos'),
+            'farmacológicos'=>request('farmacológicos'),
+            'toxicológicos'=>request('toxicológicos'),
+            'familiares'=>request('familiares'),
+            'traumáticos'=>request('traumáticos'),
+            'hospitalarios'=>request('hospitalarios'),
+            'inmunológicosVacunas'=>request('inmunológicosVacunas'),
+            'alérgicos'=>request('alérgicos'),
+            'tratamientoOdontológico'=>request('tratamientoOdontológico'),
+            'formulaObstétrica'=>request('formulaObstétrica'),
+            'fechaUltimaMenstruacion'=>request('fechaUltimaMenstruacion'),
+            'menarquia'=>request('menarquia'),
+            'menopausia'=>request('menopausia'),
+            'planificación'=>request('planificación'), 
+        ]);
+        $revisionSistema = $evento->revisionSistema()->create([
+            'cabeza'=>request('cabeza'),
+            'organosSentidos'=>request('organosSentidos'),
+            'cardioPulmonar'=>request('cardioPulmonar'),
+            'digestivo'=>request('digestivo'),
+            'urinario'=>request('urinario'),
+            'genital'=>request('genital'),
+            'miembros'=>request('miembros'),
+            'pielAnexosRS'=>request('pielAnexosRS'),
+            'psiquismo'=>request('psiquismo'),
+            'endocrinologico'=>request('endocrinologico'),
+        ]);
+        $examenFisico = $evento->examenFisico()->create([
+            'peso'=>request('peso'),
+            'talla'=>request('talla'),
+            'temperatura'=>request('temperatura'),
+            'presionArterial'=>request('presionArterial'),
+            'frecuenciaCardiaca'=>request('frecuenciaCardiaca'),
+            'frecuenciaRespiratoria'=>request('frecuenciaRespiratoria'),
+            'saturaciónO2'=>request('saturaciónO2'),
+            'aspectoGeneral'=>request('aspectoGeneral'),
+            'otorrinolaringologico'=>request('otorrinolaringologico'),
+            'cuello'=>request('cuello'),
+            'cardioPulmonar'=>request('cardioPulmonar'),
+            'abdomen'=>request('abdomen'),
+            'genitales'=>request('genitales'),
+            'miembros'=>request('miembros'),
+            'pielAnexosEF'=>request('pielAnexosEF'),
+            'neurológico'=>request('neurológico'),
+            'otros'=>request('otros'),
+        ]);
+        $consulta = $evento->consulta()->create([
+            'dxPrincipal'=>request('dxPrincipal'),
+            'tipoDiagnostico'=>request('tipoDiagnostico'),
+            'dxRelacionado1'=>request('dxRelacionado1'),
+            'dxRelacionado2'=>request('dxRelacionado2'),
+            'dxRelacionado3'=>request('dxRelacionado3'),
+            'tipoConsulta'=>request('tipoConsulta'),
+            'finalidadConsulta'=>request('finalidadConsulta'),
+            'causaExterna'=>request('causaExterna'),
+            'valorConsulta'=>request('valorConsulta'),
+            'tipoUsuario'=>request('tipoUsuario'),
+            'observacionAnálisis'=>request('observacionAnálisis'),
+            'plan'=>request('plan'),
+        ]);
         return redirect()->route('historiaC.index',  ['id'=>$id]);        
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
     {
         //
     }

@@ -23,10 +23,10 @@
     <div class="col-lg-12">
         <div class="card card-primary">
             <div class="card-header">
-                <h3 class="card-title">Lista de Historias Clinicas</h3>
+                 <h3 class="card-title">Lista de Historias Clinicas de {{$identificacion->primerNombre}}</h3>
             </div>
             <div class="card-tolls">
-                <a href="{{route('historiaC.create', ['id'=>$id])}}" class="btn btn-block btn-info btn-sm">
+                <a href="{{route('historiaC.create', ['id'=>$identificacion->id])}}" class="btn btn-block btn-info btn-sm">
                     Crear Historia Clinica
                 </a>         
                 <a href="{{route('paciente.index')}}" class="btn btn-block btn-warning btn-sm">
@@ -37,23 +37,23 @@
                 <table id="tPacientes" class="table table-bordered table-striped">
                     <thead>
                         <tr>                            
-                            <th>Nombre Acompañante</th>
-                            <th>Parentesco Acompañante</th>
                             <th>Fecha Consulta</th>
-                            <th>Hora Consulta</th>
-                            <th>Edad Actual</th>
-                            <th>Enfermedad Actual</th>
+                            <th>Motivo Consulta</th>
+                            <th>Plan Tratamiento</th>
+                            <th>Informacion</th>
                         </tr>
                     </thead>
                     <tbody>                            
                         @foreach ( $eventos as $evento)
                             <tr>  
-                                <td>{{$evento->historiaClinicaB->nombreAcompañante}}</td>
-                                <td>{{$evento->historiaClinicaB->parentescoAcompañante}}</td>
                                 <td>{{$evento->historiaClinicaB->fechaConsulta}}</td>
-                                <td>{{$evento->historiaClinicaB->horaConsulta}}</td>
-                                <td>{{$evento->historiaClinicaB->edadActual}}</td>                                     
-                                <td>{{$evento->historiaClinicaB->enfermedadActual}}</td>
+                                <td>{{$evento->historiaClinicaB->motivoConsulta}}</td>
+                                <td>{{$evento->consulta->plan}}</td>                                     
+                                <td>
+                                    <a href="{{route('historiaC.show', ['id'=>$evento->id])}}" class="btn-accion-tabla tooltipsC" title="Mostrar este Resgistro">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                </td>
                             </tr>                  
                         @endforeach
                     </tbody>

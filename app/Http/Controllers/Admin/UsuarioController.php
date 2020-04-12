@@ -21,7 +21,7 @@ class UsuarioController extends Controller
         $rols = Rol::orderBy('id')->pluck('nombre', 'id')->toArray();
         return view('admin.usuario.create', compact('rols'));
     }
-
+ 
     public function store(ValidacionUsuario $request)
     {
         $usuario = Usuario::create($request->all());
@@ -33,7 +33,7 @@ class UsuarioController extends Controller
     public function show($id)
     {
         //
-    }
+    } 
 
     public function edit($id)
     {
