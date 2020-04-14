@@ -5,6 +5,8 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use App\Models\Admin\Menu;
+use App\Models\Evento;
+use App\Models\Seguridad\Usuario;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -28,6 +30,11 @@ class AppServiceProvider extends ServiceProvider
         View::composer("theme.lte.aside", function($view){
             $menus = Menu::getMenu(true);
             $view->with('menusComposer', $menus);
+        });
+
+        View::composer("theme.lte.aside", function($view){
+            $usuario = Evento::ConsultaTerapeuta();
+            $view->with('eventoComposer', $usuario); 
         });
         View::share('theme', 'lte');
     }

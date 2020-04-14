@@ -5,7 +5,7 @@
             <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="{{ asset("assets/$theme/index3.html")}}" class="nav-link">Home</a>
+            <a href="{{route('paciente.index')}}" class="nav-link">Pacientes</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
         <a href="{{route('paciente.index')}}" class="nav-link">Contact</a>
@@ -16,24 +16,10 @@
         <li class="nav-item d-none d-sm-inline-block">
             <a href="{{route('login.logout')}}" class="nav-link">Salir</a>
         </li>
-        <li class="nav-item d-none d-sm-inline-block">
-            <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Formularios
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    @if (auth()->id()==1)
-                        <a class="dropdown-item" href="">Action</a>
-                    @endif
-                        <a class="dropdown-item" href="">Another action</a>
-                        <a class="dropdown-item" href="">Something else here</a>
-                </div>
-            </div>
-        </li>
-        </ul>
+    </ul>
 
     <!-- SEARCH FORM -->
-    <form class="form-inline ml-3">
+    {{-- <form class="form-inline ml-3">
       <div class="input-group input-group-sm">
         <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
         <div class="input-group-append">
@@ -42,7 +28,7 @@
           </button>
         </div>
       </div>
-    </form>
+    </form> --}}
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
@@ -60,14 +46,7 @@
                     </a>
                 @endif
             </div>
-            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                @if(session()->get("roles") && count(session()->get("roles")) > 1)
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item cambiar-rol">
-                        <i class="fas fa-envelope mr-2"></i> Cambiar Rol
-                    </a>
-                @endif
-            </div>
+
         </li>
     </ul>
   </nav>

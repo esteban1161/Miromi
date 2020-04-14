@@ -16,6 +16,9 @@
                 <div class="card-body"> @include('includes.formularios.form-datosIdentificacion')    </div>
                 <div class="card-body"> @include('includes.formularios.form-datosAcademicos')    </div>
                 <div class="card-body"> @include('includes.formularios.form-datosConsultorios')    </div>
+                <div class="card-body"> @include('includes.formularios.form-datosTelefonicos')    </div>
+                <div class="card-body"> @include('includes.formularios.form-datosCorreo')    </div>
+
                 <div class="card-footer">
                     <div class="col-lg-3"></div>
                     <div class="col-lg-6">    @include('includes.boton-form-crear')    </div>            

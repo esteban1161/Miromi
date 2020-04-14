@@ -66,6 +66,12 @@ class Evento extends Model
         return $this->hasOne(CorreoElectronico::class);
     }
 
+    public function scopeConsultaTerapeuta($query){
+        return $query   ->where('usuario_id', $id = auth()->id())
+                                ->where('rol_id', 2)
+                                ->where('formulario_id', 1);
+    }
+
     public function scopeConsultaPacientes($query){
         return $query   ->where('usuario_id', $id = auth()->id())
                                 ->where('rol_id', 2)
@@ -78,4 +84,5 @@ class Evento extends Model
                                 ->where('formulario_id', 3)
                                 ->where('identificacion_id', $identificacion);
     }
+    
 }

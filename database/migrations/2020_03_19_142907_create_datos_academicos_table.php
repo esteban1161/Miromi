@@ -17,7 +17,6 @@ class CreateDatosAcademicosTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('evento_id')->unsigned()->nullable();
             $table->foreign('evento_id')->references('id')->on('eventos')->onUpdate('cascade')->nullable();
-            $table->string('tipoProfesional')->nullable();
             $table->string('numeroRegistroProfesional')->nullable();
             $table->string('tituloAcademico')->nullable();
             $table->string('institucion')->nullable();

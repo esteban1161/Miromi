@@ -15,6 +15,14 @@
 </div>
 
 <div class="form-group row">
+    <label for="ocupacion" class="col-lg-3 col-form-label requerido">Pais</label>
+        <div class="form-group">
+            <input type="text" name="country_name" id="country_name" class="form-control input-lg" placeholder="Enter Country Name" />
+            <div id="countryList"></div>
+        </div>
+</div>
+
+<div class="form-group row">
     <label for="ciudadNacimiento" class="col-lg-3 col-form-label requerido">Ciudad Nacimiento</label>
     <div class="col-lg-8">
         <select id="ciudadNacimiento" name="ciudadNacimiento" class="form-control select2 " style="width: 100%;">

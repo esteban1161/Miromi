@@ -8,7 +8,6 @@ class DatosAcademicos extends Model
 {
     protected $table = "datos_academicos";
     protected $fillable = [ 'evento_id',
-                                        'tipoProfesional',
                                         'numeroRegistroProfesional',
                                         'tituloAcademico',
                                         'institucion',];

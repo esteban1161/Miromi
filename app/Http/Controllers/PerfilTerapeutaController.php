@@ -26,20 +26,20 @@ class PerfilTerapeutaController extends Controller
         $paises = Pais::orderBy('id')->pluck('nombrePais', 'id')->toArray();
         $ciudades = Ciudad::orderBy('id')->pluck('nombreCiudad', 'id')->toArray();
         $localidades = Localidad::orderBy('id')->pluck('localidadResidencia', 'id')->toArray();
-        return view('terapeuta.create'); //cambiar el return
+        return view('terapeuta.create'); 
     }
 
     public function store(Request $request)
     {
         $id = auth()->id();
-        $rol = Usuario::find($id)->rol_id;
+        $rol = 2;
 
         $evento = Evento::create([
-            'user_id' => $id,
+            'usuario_id' => $id,
             'rol_id'=>$rol,
             'formulario_id'=>1,            
         ]);
-        $identificacion = $evento->identificacion()->create([
+        $identificacion = $evento->identificacion()([
             'primerNombre' => request('primerNombre'),
             'segundoNombre' => request('segundoNombre'),
             'primerApellido' => request('primerApellido'),
@@ -59,18 +59,22 @@ class PerfilTerapeutaController extends Controller
             'codigoSecretaria'=>request('codigoSecretaria'),
         ]);
         $academicos = $evento->academico()->create([
-            'tipoProfesional'=>request('tipoProfesional'),
             'numeroRegistroProfesional'=>request('numeroRegistroProfesional'),
             'tituloAcademico'=>request('tituloAcademico'),
             'institucion'=>request('institucion'),
         ]);
 
-        $personales = $evento->personales()->create([
+        $telefono1 = $evento->telefonos()->create([
             'numeroTelefono'=>request('numeroTelefono'),
-            'correoElectronicoPersonal'=>request('correoElectronicoPersonal'),
+            'tipoTelefono'=>request('tipoTelefono'),
         ]);
 
-        return redirect('paciente');
+        $correo = $evento->correosElectronicos()->create([
+            'correoElectronico'=>request('correoElectronico'),
+            'tipoCorreo'=>request('tipoCorreo'),
+        ]);
+
+        return redirect('/paciente');
     }
 
     public function show($id)
@@ -81,13 +85,49 @@ class PerfilTerapeutaController extends Controller
 
     public function edit($id)
     {
-        $data = DatosIdentificacion::findOrFail ($id);
-        return view('paciente.edit', compact('data', 'rols'));
+        $paises = Pais::orderBy('id')->pluck('nombrePais', 'id')->toArray();
+        $data = Evento::findOrFail($id);
+        return view('terapeuta.edit', compact('data', 'paises'));
     }
     
     public function update(Request $request, $id)
     {
-        DatosIdentificacion::findOrFail($id)->update($request->all());
-        return redirect('paciente') ->with('mensaje', 'Rol actualizado con exito');
+        $evento = Evento::findOrFail($id); 
+        $identificacion = $evento->identificacion()->update([
+            'primerNombre' => request('primerNombre'),
+            'segundoNombre' => request('segundoNombre'),
+            'primerApellido' => request('primerApellido'),
+            'segundoApellido' => request('segundoApellido'),
+            'tipoDocumento' => request('tipoDocumento'),
+            'numeroIdentificacion' => request('numeroIdentificacion'),
+            'sexo' => request('sexo'),
+            'fechaNacimiento' => request('fechaNacimiento'),
+        ]);        
+
+        $consultorios = $evento->consultorio()->update([            
+            'nombreConsultorio'=>request('nombreConsultorio'),
+            'telefonoConsultorio'=>request('telefonoConsultorio'),
+            'direccionConsultorio'=>request('direccionConsultorio'),
+            'correoElectronicoConsultorio'=>request('correoElectronicoConsultorio'),
+            'paginaWebConsultorio'=>request('paginaWebConsultorio'),
+            'codigoSecretaria'=>request('codigoSecretaria'),
+        ]);
+        $academicos = $evento->academico()->update([
+            'numeroRegistroProfesional'=>request('numeroRegistroProfesional'),
+            'tituloAcademico'=>request('tituloAcademico'),
+            'institucion'=>request('institucion'),
+        ]);
+
+        $telefono1 = $evento->telefonos()->update([
+            'numeroTelefono'=>request('numeroTelefono'),
+            'tipoTelefono'=>request('tipoTelefono'),
+        ]);
+
+        $correo = $evento->correosElectronicos()->update([
+            'correoElectronico'=>request('correoElectronico'),
+            'tipoCorreo'=>request('tipoCorreo'),
+        ]);
+
+        return redirect('/paciente') ->with('mensaje', 'Rol actualizado con exito');
     }
 }

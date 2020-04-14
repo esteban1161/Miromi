@@ -7,6 +7,7 @@ use App\Models\DatosAcademicos;
 use App\Models\DatosConsultorios;
 use App\Models\DatosIdentificacion;
 use App\Models\DatosPersonales;
+use App\Models\Evento;
 use App\Models\Eventos;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Hash;
@@ -23,6 +24,10 @@ class Usuario extends Authenticatable
 
     public function roles(){
         return $this->belongsToMany(Rol::class, 'usuario_rols');
+    }
+
+    public function evento(){
+        return $this->hasOne(Evento::class);
     }
 
     public function setSession($roles){
@@ -47,18 +52,18 @@ class Usuario extends Authenticatable
     }
 
     public function identificacion(){
-        return $this->hasOneThrough(Eventos::class, DatosIdentificacion::class);
+        return $this->hasOneThrough(Evento::class, DatosIdentificacion::class);
     }
 
     public function consultorios(){
-        return $this->hasOneThrough(Eventos::class, DatosConsultorios::class);
+        return $this->hasOneThrough(Evento::class, DatosConsultorios::class);
     }
 
     public function academicos(){
-        return $this->hasOneThrough(Eventos::class, DatosAcademicos::class);
+        return $this->hasOneThrough(Evento::class, DatosAcademicos::class);
     }
 
      public function personales(){
-        return $this->hasOneThrough(Eventos::class, DatosPersonales::class);
+        return $this->hasOneThrough(Evento::class, DatosPersonales::class);
     }
 }

@@ -6,9 +6,9 @@
         </div>
 </div>
 <div class="form-group row">
-    <label for="segundoNombre" class="col-lg-3 col-form-label requerido">Segundo Nombre</label>
+    <label for="segundoNombre" class="col-lg-3 col-form-label">Segundo Nombre</label>
         <div class="col-lg-8">
-            <input type="text" name="segundoNombre" class="form-control" id="segundoNombre" value="{{old('segundoNombre', $data->identificacion->segundoNombre ?? '')}}" required>
+            <input type="text" name="segundoNombre" class="form-control" id="segundoNombre" value="{{old('segundoNombre', $data->identificacion->segundoNombre ?? '')}}">
         </div>
 </div>
 <div class="form-group row">
@@ -18,9 +18,9 @@
         </div>
 </div>
 <div class="form-group row">
-    <label for="segundoApellido" class="col-lg-3 col-form-label requerido">Segundo Apellido</label>
+    <label for="segundoApellido" class="col-lg-3 col-form-label">Segundo Apellido</label>
         <div class="col-lg-8">
-            <input type="text" name="segundoApellido" class="form-control" id="segundoApellido" value="{{old('segundoApellido', $data->identificacion->segundoApellido ?? '')}}" required>
+            <input type="text" name="segundoApellido" class="form-control" id="segundoApellido" value="{{old('segundoApellido', $data->identificacion->segundoApellido ?? '')}}">
         </div>
 </div>
 <div class="form-group row">
@@ -51,7 +51,7 @@
     </select>
 </div>
 
-<div class="form-group">
+<div class="form-group row">
     <label for="fechaNacimiento" class="col-lg-3 col-form-label requerido">Fecha de Nacimiento</label>
     <div class="input-group col-lg-8">
         <div class="input-group-prepend">

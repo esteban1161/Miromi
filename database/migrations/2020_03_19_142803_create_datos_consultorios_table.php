@@ -18,6 +18,8 @@ class CreateDatosConsultoriosTable extends Migration
             $table->bigInteger('evento_id')->unsigned()->nullable();
             $table->foreign('evento_id')->references('id')->on('eventos')->onUpdate('cascade')->nullable();
             $table->string('nombreConsultorio')->nullable();
+            $table->string('telefonoConsultorio')->nullable();
+            $table->string('correoElectronicoConsultorio')->nullable();
             $table->string('direccionConsultorio')->nullable();
             $table->string('paginaWebConsultorio')->nullable();
             $table->string('codigoSecretaria')->nullable();
