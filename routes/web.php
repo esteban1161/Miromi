@@ -74,6 +74,15 @@ Route::post('admin/menu/guardar-orden', 'Admin\MenuController@guardarOrden')->na
 Route::get('admin/menu-rol', 'Admin\MenuRolController@index')->name('menuRol.index')->middleware('auth', 'superAdmin');
 Route::post('admin/menu-rol', 'Admin\MenuRolController@store')->name('menuRol.store')->middleware('auth', 'superAdmin');
 
+Route::get('/blanco', function () {
+    return view('historiaClinicaBlanco.index');
+});
+
+
+Route::get('/ejemplos', function () {
+    return view('ejemplos.example_categories');
+});
+
 
 
 

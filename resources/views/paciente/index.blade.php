@@ -14,7 +14,7 @@
 @endsection
 
 @section('scripts')
-    <script src="{{asset("assets/pages/scripts/admin/paciente/index.js")}}" type="text/javascript"></script>
+    <script src="{{asset("assets/pages/scripts/admin/tablas/index.js")}}" type="text/javascript"></script>
 @endsection
 
 @section('contenido')

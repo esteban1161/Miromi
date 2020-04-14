@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Ciudad;
 use App\Models\DatosIdentificacion;
 use App\Models\Evento;
+use App\Models\Localidad;
+use App\Models\Pais;
 use App\Models\Seguridad\Usuario;
 use Illuminate\Http\Request;
 
@@ -15,12 +18,15 @@ class PerfilTerapeutaController extends Controller
         $identificacion = DatosIdentificacion::orderBy('id')->get();
         //Forma anterior
 
-        return view('admin.terapeuta.index', compact('identificacion'));
+        return view('terapeuta.index', compact('identificacion'));
     }
 
     public function create()
     {
-        return view('admin.paciente.create'); //cambiar el return
+        $paises = Pais::orderBy('id')->pluck('nombrePais', 'id')->toArray();
+        $ciudades = Ciudad::orderBy('id')->pluck('nombreCiudad', 'id')->toArray();
+        $localidades = Localidad::orderBy('id')->pluck('localidadResidencia', 'id')->toArray();
+        return view('terapeuta.create'); //cambiar el return
     }
 
     public function store(Request $request)
@@ -70,18 +76,18 @@ class PerfilTerapeutaController extends Controller
     public function show($id)
     {
         $identificacion = DatosIdentificacion::findOrFail($id);
-        return view('admin.paciente.show', compact('identificacion'));
+        return view('paciente.show', compact('identificacion'));
     }
 
     public function edit($id)
     {
         $data = DatosIdentificacion::findOrFail ($id);
-        return view('admin.paciente.edit', compact('data', 'rols'));
+        return view('paciente.edit', compact('data', 'rols'));
     }
     
     public function update(Request $request, $id)
     {
         DatosIdentificacion::findOrFail($id)->update($request->all());
-        return redirect('admin/paciente') ->with('mensaje', 'Rol actualizado con exito');
+        return redirect('paciente') ->with('mensaje', 'Rol actualizado con exito');
     }
 }

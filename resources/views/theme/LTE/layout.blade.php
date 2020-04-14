@@ -10,6 +10,7 @@
         <link rel="stylesheet" href="{{ asset("assets/$theme/plugins/fontawesome-free/css/all.min.css")}}">
         <!-- Ionicons -->
         <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+        <link rel="stylesheet" href="{{ asset("assets/$theme/plugins/Ionicons/css/ionicons.min.css")}}">
 
         <link rel="stylesheet" href="{{ asset("assets/$theme/plugins/daterangepicker/daterangepicker.css")}}">
 

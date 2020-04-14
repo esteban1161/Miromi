@@ -19,6 +19,7 @@ class CreateEventosTable extends Migration
             $table->foreign('usuario_id')->references('id')->on('usuarios')->onUpdate('cascade');
             $table->Integer('rol_id')->unsigned();
             $table->integer('usuario_r_id')->nullable();
+            $table->integer('consultorio_id')->nullable();
             $table->bigInteger('identificacion_id')->nullable();
             $table->bigInteger('formulario_id')->unsigned();
             $table->foreign('formulario_id')->references('id')->on('formularios')->onUpdate('cascade');                      

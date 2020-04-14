@@ -14,7 +14,7 @@
 @endsection
 
 @section('scripts')
-    <script src="{{asset("assets/pages/scripts/admin/paciente/index.js")}}" type="text/javascript"></script>
+    <script src="{{asset("assets/pages/scripts/admin/tablas/index.js")}}" type="text/javascript"></script>
 @endsection
 
 @section('contenido')
@@ -26,9 +26,21 @@
                  <h3 class="card-title">Lista de Historias Clinicas de {{$identificacion->primerNombre}}</h3>
             </div>
             <div class="card-tolls">
-                <a href="{{route('historiaC.create', ['id'=>$identificacion->id])}}" class="btn btn-block btn-info btn-sm">
+                {{-- <a href="{{route('historiaC.create', ['id'=>$identificacion->id])}}" class="btn btn-block btn-info btn-sm">
                     Crear Historia Clinica
-                </a>         
+                </a>   --}}       
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Formularios
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        @if (auth()->id()==1)
+                            <a class="dropdown-item" href="{{route('historiaC.create', ['id'=>$identificacion->id])}}">Action</a>
+                        @endif
+                            <a class="dropdown-item" href="{{route('historiaC.create', ['id'=>$identificacion->id])}}">Another action</a>
+                            <a class="dropdown-item" href="">Something else here</a>
+                    </div>
+                </div>
                 <a href="{{route('paciente.index')}}" class="btn btn-block btn-warning btn-sm">
                     Lista de pacientes
             </a>      
@@ -64,3 +76,4 @@
 </div>
 
 @endsection
+

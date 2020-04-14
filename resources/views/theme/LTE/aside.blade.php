@@ -18,7 +18,8 @@
             <img src="{{ asset("assets/$theme/dist/img/user2-160x160.jpg")}}" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-            <a href="#" class="d-block">Hola, {{session()->get('nombre_usuario') ?? 'invitado'}} </a>
+            
+                <a href="{{route('paciente.create')}}" class="d-block">Hola, {{session()->get('nombre_usuario') ?? 'invitado'}} </a>
             </div>
         </div>
 
