@@ -5,12 +5,19 @@
 @endsection   
 
 @section('styles')
+    <link rel="stylesheet" href="{{ asset("assets/$theme/plugins/select2/css/select2.min.css")}}">
+    <link rel="stylesheet" href="{{ asset("assets/$theme/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css")}}">
 @endsection
 
 @section('scriptsPlugins')
+    <script src="{{ asset("assets/$theme/plugins/select2/js/select2.full.min.js")}}"></script>   
+    <script src="{{ asset("assets/$theme/plugins/bs-custom-file-input/bs-custom-file-input.min.js")}}"></script>
+
 @endsection
 
 @section('scripts')
+    <script src="{{asset("assets/pages/scripts/admin/file/index.js")}}" type="text/javascript"></script>       
+    <script src="{{asset("assets/pages/scripts/admin/select2/index.js")}}" type="text/javascript"></script>
 @endsection
 
 @section('contenido')    
@@ -20,7 +27,7 @@
             <div class="card-header">
                 <h3 class="card-title">Crear un paciente</h3>
             </div>
-            <form action="{{route('historiaC.store', ['id'=>$identificacion->id])}}" class="form-horizontal" id="form-general" method="POST" autocomplete="off">
+            <form action="{{route('historiaC.store', ['id'=>$identificacion->id])}}" id="form-general" method="POST" autocomplete="off" enctype="multipart/form-data">
                 @csrf
                 <div class="card-body"> @include('includes.formularios.forms-HistoriasClinicas.form-datosHistoriaClinicaBasica')    </div>
                 <div class="card-body"> @include('includes.formularios.forms-HistoriasClinicas.form-datosAntecedentes')    </div>

@@ -32,59 +32,9 @@ class PerfilPacienteController extends Controller
         return view('paciente.create', compact('paises', 'ciudades', 'localidades'));         
     }
 
-    public function store( )
+    public function store(ValidacionInfoPaciente $request)
     {       
-        $id = auth()->id();
-        $rol = 2;   //Hacer la consulta para encontrar el rol
-
-        $evento = Evento::create([
-            'usuario_id' => $id,
-            'rol_id'=>$rol,
-            'formulario_id'=>2,
-        ]);           
-        $identificacion = $evento->identificacion()->create([
-            'primerNombre' => request('primerNombre'),
-            'segundoNombre' => request('segundoNombre'),
-            'primerApellido' => request('primerApellido'),
-            'segundoApellido' => request('segundoApellido'),
-            'tipoDocumento' => request('tipoDocumento'),
-            'numeroIdentificacion' => request('numeroIdentificacion'),
-            'sexo' => request('sexo'),
-            'fechaNacimiento' => request('fechaNacimiento'),           
-        ]);
-        $demograficos = $evento->demografico()->create([
-            'paisNacimiento'=>request('paisNacimiento'),
-            'ciudadNacimiento'=>request('ciudadNacimiento'),
-            'estadoCivil'=>request('estadoCivil'),
-            'escolaridad'=>request('escolaridad'),
-            'ocupacion'=>request('ocupacion'),
-            'credoReligioso'=>request('credoReligioso'),
-            'paisResidencia'=>request('paisResidencia'),
-            'departamentoResidencia'=>request('departamentoResidencia'),
-            'ciudadResidencia'=>request('ciudadResidencia'),
-            'localidadResidencia'=>request('localidadResidencia'),
-            'direccionResidencia'=>request('direccionResidencia'),
-            'zonaResidencia'=>request('zonaResidencia'),
-        ]);
-
-        $afiliacion = $evento->afiliacion()->create([
-            'tipoVinculacion'=>request('tipoVinculacion'),
-            'aseguradora'=>request('aseguradora'),
-            'responsableMedico'=>request('responsableMedico'),
-            'parentescoResponsable'=>request('parentescoResponsable'),
-            'telefonoResponsable'=>request('telefonoResponsable'),
-        ]);
-
-        $telefono1 = $evento->telefonos()->create([
-            'numeroTelefono'=>request('numeroTelefono'),
-            'tipoTelefono'=>request('tipoTelefono'),
-        ]);
-
-        $correo = $evento->correosElectronicos()->create([
-            'correoElectronico'=>request('correoElectronico'),
-            'tipoCorreo'=>request('tipoCorreo'),
-        ]);
-
+        $request->crearPaciente();
         return redirect('/paciente') ->with('mensaje', 'Paciente creado con exito'); 
     }
 
@@ -106,71 +56,15 @@ class PerfilPacienteController extends Controller
         return view('paciente.edit', compact('data', 'paises', 'ciudades', 'localidades'));
     }
 
-    public function update(Request $request, $id)
+    public function update(ValidacionInfoPaciente $request, $id)
     {
-        $evento = Evento::findOrFail($id);        
-        $identificacion = $evento->identificacion()->update([
-            'primerNombre' => request('primerNombre'),  
-            'segundoNombre' => request('segundoNombre'),
-            'primerApellido' => request('primerApellido'),
-            'segundoApellido' => request('segundoApellido'),
-            'tipoDocumento' => request('tipoDocumento'),
-            'numeroIdentificacion' => request('numeroIdentificacion'),
-            'sexo' => request('sexo'),
-            'fechaNacimiento' => request('fechaNacimiento'),          
-        ]);
-
-        $demograficos = $evento->demografico()->update([
-            'paisNacimiento'=>request('paisNacimiento'),
-            'ciudadNacimiento'=>request('ciudadNacimiento'),
-            'estadoCivil'=>request('estadoCivil'),
-            'escolaridad'=>request('escolaridad'),
-            'ocupacion'=>request('ocupacion'),
-            'credoReligioso'=>request('credoReligioso'),
-            'paisResidencia'=>request('paisResidencia'),
-            'departamentoResidencia'=>request('departamentoResidencia'),
-            'ciudadResidencia'=>request('ciudadResidencia'),
-            'localidadResidencia'=>request('localidadResidencia'),
-            'direccionResidencia'=>request('direccionResidencia'),
-            'zonaResidencia'=>request('zonaResidencia'),
-        ]);
-
-        $afiliacion = $evento->afiliacion()->update([
-            'tipoVinculacion'=>request('tipoVinculacion'),
-            'aseguradora'=>request('aseguradora'),
-            'responsableMedico'=>request('responsableMedico'),
-            'parentescoResponsable'=>request('parentescoResponsable'),
-            'telefonoResponsable'=>request('telefonoResponsable'),
-        ]);
-
-        $telefono1 = $evento->telefonos()->update([
-            'numeroTelefono'=>request('numeroTelefono'),
-            'tipoTelefono'=>request('tipoTelefono'),
-        ]);
-
-        $correo = $evento->correosElectronicos()->update([
-            'correoElectronico'=>request('correoElectronico'),
-            'tipoCorreo'=>request('tipoCorreo'),
-        ]);
-
+        $request->actualizarPaciente($id);
+        $evento = Evento::findOrFail($id);
+        if($request->hasFile('foto')){           
+            $foto = $evento->identificacion()->update(['foto' => $request->file('foto')->store('public/FotosPacientes')]);
+        }
         return redirect('/paciente') ->with('mensaje', 'Rol actualizado con exito');
     }   
-    public function fetch(Request $request)
-    {
-        if($request->get('query'))
-        {
-            $query = $request->get('query');
-            $data = Pais::orderBy('id')
-                ->where('nombrePais', 'LIKE', "%{$query}%")
-                ->get();
-            $output = '<ul class="dropdown-menu" style="display:block; position:relative">';
-            foreach($data as $row)
-            {
-            $output .= '
-                <li><a href="#">'.$row->nombrePais.'</a></li>';
-            }
-            $output .= '</ul>';
-            echo $output;
-        }
-    }    
+    
+    
 }

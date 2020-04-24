@@ -23,13 +23,20 @@
         <div class="col-lg-12">
             <div class="card card-primary">
                 <div class="card-header">
-                    <h3 class="card-title">Lista Pacientes</h3>
+                    <div class="row">
+                        <div class="col-lg-9">
+                            <h2 class="card-title">Lista Pacientes</h2>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="card-tolls">
+                                <a href="{{route('paciente.create')}}" class="btn btn-block btn-danger btn-xs">
+                                    <i class="fas fa-user-plus"></i> Crear Paciente
+                                </a>
+                            </div>
+                        </div>                    
+                    </div>
                 </div>
-                <div class="card-tolls">
-                    <a href="{{route('paciente.create')}}" class="btn btn-block btn-info btn-sm">
-                        <i class=""></i> Crear Paciente
-                    </a>
-                </div>
+               
                 <div class="card-body">
                     <table id="tPacientes" class="table table-bordered table-striped">
                         <thead>
@@ -60,7 +67,7 @@
                                             <i class="fas fa-pencil-alt"></i>
                                         </a>
                                         <a href="{{route('historiaC.index', ['id' => $evento->identificacion->id])}}" class="btn-accion-tabla tooltipsC" title="Ver Historias Clinicas">
-                                            <i class="fas fa-address-book"></i>
+                                            <i class="fas fa-book-medical"></i>
                                         </a>
                                     </td>   
                                 </tr>                    

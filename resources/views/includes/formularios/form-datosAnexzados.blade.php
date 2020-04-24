@@ -1,8 +1,9 @@
-<div class="form-group row">
-    <label for="foto" class="col-lg-3 col-form-label requerido">Foto</label>
-    <div class="custom-file col-lg-8">
-        <input type="file" class="custom-file-input" id="foto">
-        <label class="custom-file-label" for="foto">Escojer archivo</label>
+<h2>Adjuntar Archivos</h2>  
+
+<div class="form-group">
+    <label for="url">Archivo Adjunto</label>
+    <div class="custom-file col-lg-12">
+        <input type="file" class="custom-file-input" id="url">
+        <label class="custom-file-label" for="url">Escojer archivo</label>
     </div>
 </div>
-{!! Form::Button('Agregar!'); !!}<br>

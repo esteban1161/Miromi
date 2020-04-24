@@ -32,8 +32,6 @@
                             
                         </textarea>
 
-                        <input id="plate"/>
-
                     </form>
                 </div>
             </div>

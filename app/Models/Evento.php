@@ -60,10 +60,13 @@ class Evento extends Model
     public function revisionSistema(){
         return $this->hasOne(RevisionSistema::class);
     }
-
     
     public function correosElectronicos(){
         return $this->hasOne(CorreoElectronico::class);
+    }
+
+    public function archivoAdjunto(){
+        return $this->hasOne(ArchivosAdjuntos::class);
     }
 
     public function scopeConsultaTerapeuta($query){

@@ -9,6 +9,7 @@ class DatosIdentificacion extends Model
 {
     protected $table = "datos_identificacions";
     protected $fillable = [ 'evento_id',
+                                        'foto',
                                         'primerNombre', 
                                         'segundoNombre', 
                                         'primerApellido', 

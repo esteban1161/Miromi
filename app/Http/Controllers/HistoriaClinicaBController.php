@@ -6,6 +6,7 @@ use App\Models\Cie10;
 use App\Models\DatosIdentificacion;
 use App\Models\Evento;
 use App\Models\Seguridad\Usuario;
+use Barryvdh\DomPDF\PDF;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -108,11 +109,24 @@ class HistoriaClinicaBController extends Controller
             'observacionAnálisis'=>request('observacionAnálisis'),
             'plan'=>request('plan'),
         ]);
+        $archivo = $evento->archivoAdjunto()->create([
+            'url' => $request->file('url')->store('public/ArchivosAnexos')
+        ]);
         return redirect()->route('historiaC.index',  ['id'=>$id]);        
     }
 
-    public function show($id)
+    public function show($id, $idh)
     {
-        //
+        $identificacion = DatosIdentificacion::findOrFail($id);    
+        $edad = Carbon::parse($identificacion->fechaNacimiento)->age;
+        $eventos = Evento::ConsultaHistoriasClinicas($id)->get();
+        return view('historiasCB.show', compact('edad'));
     }
+    public function crearPDF(){
+
+        $pdf = PDF::loadView('seguridad.index');
+        return $pdf->stream();
+    }
+
+
 }

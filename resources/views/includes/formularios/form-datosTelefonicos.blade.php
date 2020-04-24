@@ -1,29 +1,31 @@
 <h2>Telefono(s) Personal(es)</h2>  
-                        
-<div class="form-group row">
-    <label for="numeroTelefono" class="col-lg-3 col-form-label">Numero Telefono</label>
-        <div class="col-lg-8">
-            <input type="text" name="numeroTelefono" class="form-control" id="numeroTelefono" value="{{old('numeroTelefono', $data->telefonos->numeroTelefono ?? '')}}">
+<div class="row">
+    <div class="col-md-11 row">
+        <div class="col-md-6">
+            <div class="from-group">
+                <label for="tipoTelefono">Tipo de Telefono</label>
+                <input list="tipoTelefono" name="tipoTelefono" type="text" class="form-control" placeholder="Escribe Tipo de Telefono" value="{{old('tipoTelefono', $data->telefonos->tipoTelefono ?? '')}}" tabindex="9">
+                <datalist id="tipoTelefono">
+                    <option value="Hogar"></option>
+                    <option value="Celular"></option>
+                    <option value="Oficina"></option>
+                    <option value="Consultorio"></option>
+                </datalist>
+            </div>
         </div>
-</div>    
-
-<div class="wrap">
-    <label for="tipoTelefono" class="col-lg-3 col-form-label">Tipo de Telefono</label>
-    <input list="tipoTelefono" name="tipoTelefono" type="text" placeholder="Escribe Tipo de Telefono" value="{{old('tipoTelefono', $data->telefonos->tipoTelefono ?? '')}}">
-    <datalist id="tipoTelefono">
-        <option value="Hogar"></option>
-        <option value=""></option>
-        <option value="Burdeos"></option>
-        <option value="Caoba"></option>
-        <option value="Marrón"></option>
-        <option value="Naranja"></option>
-        <option value="Verde"></option> {{--Hacer pruevas con la base de datos--}}
-        @foreach($paises as $id => $nombrePais)
-                <option value="{{$id}} "{{ old('paisNacimiento',  $data->demografico->paisNacimiento ?? '') == $id ? 'selected' : ' ' }}>
-                    {{$nombrePais}}
-                </option>
-                @endforeach  
-    </datalist>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="numeroTelefono">Numero Telefono</label>
+                <input type="text" name="numeroTelefono" class="form-control" id="numeroTelefono" value="{{old('numeroTelefono', $data->telefonos->numeroTelefono ?? '')}}" tabindex="10">
+            </div>    
+        </div>
     </div>
+    <div class="col-md-1">
+        <a href="#" class="btn-accion-tabla tooltipsC" title="Añadir Telefono">
+            <i class="fas fa-plus-circle"></i>
+        </a>
+    </div>
+</div>
 
-<button type="" class="btn btn-info">Agregar Telefono</button>
+
+

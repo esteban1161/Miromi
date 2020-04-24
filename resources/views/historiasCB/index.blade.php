@@ -26,9 +26,9 @@
                  <h3 class="card-title">Lista de Historias Clinicas de {{$identificacion->primerNombre}}</h3>
             </div>
             <div class="card-tolls">
-                {{-- <a href="{{route('historiaC.create', ['id'=>$identificacion->id])}}" class="btn btn-block btn-info btn-sm">
+                <a href="{{route('historiaC.create', ['id'=>$identificacion->id])}}" class="btn btn-block btn-info btn-sm">
                     Crear Historia Clinica
-                </a>   --}}       
+                </a>  
                 <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Formularios
@@ -62,7 +62,7 @@
                                 <td>{{$evento->historiaClinicaB->motivoConsulta}}</td>
                                 <td>{{$evento->consulta->plan}}</td>                                     
                                 <td>
-                                    <a href="{{route('historiaC.show', ['id'=>$evento->id])}}" class="btn-accion-tabla tooltipsC" title="Mostrar este Resgistro">
+                                    <a href="{{route('historiaC.show', ['id'=>$identificacion->id, 'idh'=>$evento->id] )}}" class="btn-accion-tabla tooltipsC" title="Mostrar este Resgistro">
                                         <i class="fas fa-eye"></i>
                                     </a>
                                 </td>

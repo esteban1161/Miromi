@@ -61,6 +61,8 @@ Route::get('/paciente/{id}/historiaClinica', 'HistoriaClinicaBController@index')
 Route::get('/paciente/{id}/historiaClinica/crear', 'HistoriaClinicaBController@create')->name('historiaC.create')->middleware('auth');
 Route::get('/paciente/{id}/historiaClinica/{idh}', 'HistoriaClinicaBController@show')->name('historiaC.show')->middleware('auth');
 Route::post('/paciente/{id}/historiaClinica', 'HistoriaClinicaBController@store')->name('historiaC.store')->middleware('auth');
+Route::get('/ejemplos2', 'HistoriaClinicaBController@crearPDF')->name('historiaC.crearPDF');
+
 
 
 
@@ -86,8 +88,12 @@ Route::get('/ejemplos', function () {
     return view('ejemplos.example_categories');
 });
 
+Route::get('/ejemplos2', function () {
+    $pdf = PDF::loadView('historiasCB.create');
+    return $pdf->stream();
+});
 
 
 
 
- 
+

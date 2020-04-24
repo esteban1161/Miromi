@@ -28,6 +28,8 @@ class CreateRevisionSistemasTable extends Migration
             $table->string('psiquismo')->nullable();
             $table->string('endocrinologico')->nullable();
             $table->timestamps();
+            $table->charset = 'utf8mb4';
+            $table->collation = 'utf8mb4_spanish_ci';
         });
     }
 

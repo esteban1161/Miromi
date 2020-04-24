@@ -3,7 +3,10 @@
 namespace App\Http\Requests;
 
 use App\Models\DatosIdentificacion;
+use App\Models\Evento;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class ValidacionInfoPaciente extends FormRequest
 {
@@ -24,46 +27,122 @@ class ValidacionInfoPaciente extends FormRequest
      */
     public function rules()
     {
-        return [
-            'primerNombre' => 'required',
-            'segundoNombre' => 'required',
-            'primerApellido' => 'required',
-            'segundoApellido' => 'required',
-            'tipoDocumento' => 'required',
-            'numeroIdentificacion' => 'required',
-            'sexo' => 'required',    
-            'fechaNacimiento' => 'required',
-            'paisNacimiento' => 'required',
-            'ciudadNacimiento' => 'required',
-            'estadoCivil' => 'required',
-            'escolaridad' => 'required',
-            'ocupacion' => 'required',
-            'credoReligioso' => 'required',
-            'identificacion_id' => 'required', 
-            'paisResidencia' => 'required',
-            'departamentoResidencia' => 'required',
-            'ciudadResidencia' => 'required',
-            'localidadResidencia' => 'required',
-            'direccionResidencia' => 'required',
-            'zonaResidencia' => 'required'            
+        return [   
+            'primerNombre' => 'nullable',
+            'segundoNombre' => 'nullable',
+            'primerApellido' => 'nullable',
+            'segundoApellido' => 'nullable',
+            'tipoDocumento' => 'nullable',
+            'numeroIdentificacion' => 'nullable',
+            'sexo' => 'nullable',
+            'fechaNacimiento' => 'nullable',       
+            
+            'paisNacimiento' => 'nullable',
+            'ciudadNacimiento' => 'nullable',
+            'estadoCivil' => 'nullable',
+            'escolaridad' => 'nullable',
+            'ocupacion' => 'nullable',
+            'credoReligioso' => 'nullable',
+            'paisResidencia' => 'nullable',
+            'departamentoResidencia' => 'nullable',
+            'ciudadResidencia' => 'nullable',
+            'localidadResidencia' => 'nullable',
+            'direccionResidencia' => 'nullable',
+            'zonaResidencia' => 'nullable',
+
+            'tipoVinculacion' => 'nullable',
+            'aseguradora' => 'nullable',
+            'responsableMedico' => 'nullable',
+            'parentescoResponsable' => 'nullable',
+            'telefonoResponsable' => 'nullable',
+
+            'numeroTelefono' => 'nullable',
+            'tipoTelefono' => 'nullable',
+
+            'correoElectronico' => 'nullable',
+            'tipoCorreo' => 'nullable',
         ];
     }
-    /* public function createDatos(){
+    public function crearPaciente(){
 
-        $data = $this->validate();
-        $identificacion = DatosIdentificacion::create([
-            'primerNombre' => $data['primerNombre'],
+        DB::transaction(function () 
+        {
+            $data = $this->validated();
+            $id = auth()->id();
+            $rol = 2;   //Hacer la consulta para encontrar el rol
+
+            $evento = Evento::create([
+                'usuario_id' => $id,
+                'rol_id'=>$rol,
+                'formulario_id'=>2,
+            ]);           
+            $identificacion = $evento->identificacion()->create([
+                'primerNombre' => $data['primerNombre'],
+                'segundoNombre' => $data['segundoNombre'],
+                'primerApellido' => $data['primerApellido'],
+                'segundoApellido' => $data['segundoApellido'],
+                'tipoDocumento' => $data['tipoDocumento'],
+                'numeroIdentificacion' => $data['numeroIdentificacion'],
+                'sexo' => $data['sexo'],
+                'fechaNacimiento' => $data['fechaNacimiento'],           
+            ]);
+        
+            $evento->demografico()->create([
+                'paisNacimiento'=>$data['paisNacimiento'],
+                'ciudadNacimiento'=>$data['ciudadNacimiento'],
+                'estadoCivil'=>$data['estadoCivil'],
+                'escolaridad'=>$data['escolaridad'],
+                'ocupacion'=>$data['ocupacion'],
+                'credoReligioso'=>$data['credoReligioso'],
+                'paisResidencia'=>$data['paisResidencia'],
+                'departamentoResidencia'=>$data['departamentoResidencia'],
+                'ciudadResidencia'=>$data['ciudadResidencia'],
+                'localidadResidencia'=>$data['localidadResidencia'],
+                'direccionResidencia'=>$data['direccionResidencia'],
+                'zonaResidencia'=>$data['zonaResidencia'],
+            ]);
+
+            $evento->afiliacion()->create([
+                'tipoVinculacion'=>$data['tipoVinculacion'],
+                'aseguradora'=>$data['aseguradora'],
+                'responsableMedico'=>$data['responsableMedico'],
+                'parentescoResponsable'=>$data['parentescoResponsable'],
+                'telefonoResponsable'=>$data['telefonoResponsable'],
+            ]);
+
+            $evento->telefonos()->create([
+                'numeroTelefono'=>$data['numeroTelefono'],
+                'tipoTelefono'=>$data['tipoTelefono'],
+            ]);
+
+            $evento->correosElectronicos()->create([
+                'correoElectronico'=>$data['correoElectronico'],
+                'tipoCorreo'=>$data['tipoCorreo'],
+            ]);
+
+           /*  if($data->file('foto')){
+                $path = Storage::disk('public')->put('FotosPacientes', $data->file('foto'));
+                $identificacion = fill(['foto' => asset($path)])->save();
+            } */
+        });
+    }
+
+    public function actualizarPaciente($identificacion)
+    {
+        $data = $this ->validated();
+        $evento = Evento::findOrFail($identificacion);        
+        $evento->identificacion()->update([
+            'primerNombre' => $data['primerNombre'],  
             'segundoNombre' => $data['segundoNombre'],
             'primerApellido' => $data['primerApellido'],
             'segundoApellido' => $data['segundoApellido'],
             'tipoDocumento' => $data['tipoDocumento'],
             'numeroIdentificacion' => $data['numeroIdentificacion'],
             'sexo' => $data['sexo'],
-            'fechaNacimiento' => $data['fechaNacimiento'],
-           
-            ]);
+            'fechaNacimiento' => $data['fechaNacimiento'],          
+        ]);        
 
-        $identificacion->datosDemograficos()->create([
+        $evento->demografico()->update([
             'paisNacimiento' => $data['paisNacimiento'],
             'ciudadNacimiento' => $data['ciudadNacimiento'],
             'estadoCivil' => $data['estadoCivil'],
@@ -76,7 +155,24 @@ class ValidacionInfoPaciente extends FormRequest
             'localidadResidencia' => $data['localidadResidencia'],
             'direccionResidencia' => $data['direccionResidencia'],
             'zonaResidencia' => $data['zonaResidencia'],
-            
-        ]); */
+        ]);
+
+        $evento->afiliacion()->update([
+            'tipoVinculacion' => $data['tipoVinculacion'],
+            'aseguradora' => $data['aseguradora'],
+            'responsableMedico' => $data['responsableMedico'],
+            'parentescoResponsable' => $data['parentescoResponsable'],
+            'telefonoResponsable' => $data['telefonoResponsable'],
+        ]);
+
+        $evento->telefonos()->update([
+            'numeroTelefono' => $data['numeroTelefono'],
+            'tipoTelefono' => $data['tipoTelefono'],
+        ]);
+
+        $evento->correosElectronicos()->update([
+            'correoElectronico' => $data['correoElectronico'],
+            'tipoCorreo' => $data['tipoCorreo'],
+        ]);
     }
 }

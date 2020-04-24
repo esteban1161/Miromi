@@ -8,11 +8,10 @@ class DatosConsultorios extends Model
 {
     protected $table = "datos_consultorios";
     protected $fillable = [ 'evento_id',
-                                        'nombreConsultorio',
-                                        'telefonoConsultorio',
+                                        'nombreConsultorio',                                        
                                         'direccionConsultorio',
-                                        'correoElectronicoConsultorio',
                                         'paginaWebConsultorio',
-                                        'codigoSecretaria',];
+                                        'codigoSecretaria',
+                                        'nitConsultorio',];
     protected $guarded = ['id'];
 }
