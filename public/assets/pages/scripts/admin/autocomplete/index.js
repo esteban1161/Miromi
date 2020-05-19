@@ -1,17 +1,14 @@
 var options = {
-	url: "public/json/countries.json",
-
-	getValue: "name",
-
+	url: 'http://miromi.test/cie10',
+	
+	data: ["De apariencia normal", "Esta enfermo", "Tiene mocos", "Dolores", "No Informa sintomas", "etc"],
 	list: {
-		match: {
+		sort: {
 			enabled: true
 		},
-		maxNumberOfElements: 8
-	},
-
-	theme: "plate-dark"
-
+		match: {
+			enabled: true
+		}
+	}
 };
-
-$("#plate").easyAutocomplete(options);
+$ (".autocomplete"). easyAutocomplete (options);

@@ -26,12 +26,12 @@ class Evento extends Model
         return $this->hasOne(DatosDemograficos::class);
     }
 
-    public function consultorio(){
-        return $this->hasOne(DatosConsultorios::class);
+    public function consultorios(){
+        return $this->hasMany(DatosConsultorios::class);
     }
 
-    public function academico(){
-        return $this->hasOne(DatosAcademicos::class);
+    public function academicos(){
+        return $this->hasMany(DatosAcademicos::class);
     }
     
     public function afiliacion(){
@@ -39,18 +39,20 @@ class Evento extends Model
     }
 
     public function telefonos(){
-        return $this->hasOne(Telefono::class);
+        return $this->hasMany(Telefono::class);
     }
 
-    public function antecedente(){
+    public function correosElectronicos(){
+        return $this->hasMany(CorreoElectronico::class);
+    }
+
+    public function antecedentes(){
         return $this->hasOne(Antecedente::class);
     }
-
     
     public function consulta(){
         return $this->hasOne(Consulta::class);
     }
-
     
     public function examenFisico(){
         return $this->hasOne(ExamenFisico::class);
@@ -61,12 +63,12 @@ class Evento extends Model
         return $this->hasOne(RevisionSistema::class);
     }
     
-    public function correosElectronicos(){
-        return $this->hasOne(CorreoElectronico::class);
+    public function archivosAdjuntos(){
+        return $this->hasOne(ArchivosAdjuntos::class);
     }
 
-    public function archivoAdjunto(){
-        return $this->hasOne(ArchivosAdjuntos::class);
+    public function diagnosticos(){
+        return $this->hasMany(Diagnostico::class);
     }
 
     public function scopeConsultaTerapeuta($query){
@@ -87,5 +89,8 @@ class Evento extends Model
                                 ->where('formulario_id', 3)
                                 ->where('identificacion_id', $identificacion);
     }
+
+    
+    
     
 }

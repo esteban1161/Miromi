@@ -13,4 +13,5 @@ class Cie10 extends Model
                                         'capitulo',
                                         'nombreCapitulo',];
     protected $guarded = ['id'];
+
 }

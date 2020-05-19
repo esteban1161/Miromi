@@ -9,29 +9,37 @@
 @endsection
 
 @section('contenido')    
-<div class="row">
-    <div class="col-lg-12">
+
+<section class="content-header">
+    <div class="container-fluid">
         @include('includes.form-error')
         @include('includes.mensaje')
-        <div class="card card-warning">
-            <div class="card-header">
-                <h3 class="card-title">Editar Usuario</h3>
+        <div class="row mb-2">
+            <div class="col-sm-12">
+                <h1>Editar Usuario</h1>
             </div>
-            <div class="card-tolls">
-                <a href="{{route('usuario.index')}}" class="btn btn-block btn-info btn-sm">
-                    <i class=""></i>Volver al Listado de usuarios
-                </a>
-            </div>
-            <form action="{{route('usuario.update', ['id' => $data->id])}}" class="form-horizontal" id="form-general" method="POST" autocomplete="off">
-                @csrf @method("put")
-                <div class="card-body">    @include('includes.formularios.form-datosUsuario')    </div>
-                <div class="card-footer">
-                    <div class="col-lg-3"></div>
-                    <div class="col-lg-6">    @include('includes.boton-form-editar')    </div>
-                    
-                </div>
-            </form>
         </div>
     </div>
-</div>
+</section>
+<section class="content">
+    <div class="container-fluid">
+        <form action="{{route('usuario.update', ['id' => $data->id])}}" class="form-horizontal" id="form-general" method="POST" autocomplete="off">
+            @csrf @method("put")
+            <div class="card card-success">
+                <div class="card-header">
+                    <h3 class="card-title">Editar Informacion del Usuario</h3>                
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+                    </div>
+                </div>
+                <div class="card-body">    @include('includes.formularios.form-datosUsuario')    </div>
+            </div>
+            <div class="card">
+                <div class="card-footer">    
+                    <div class="col-lg-6">    @include('includes.boton-form-editar')    </div>              
+                </div>
+            </div>
+        </form>
+    </div>   
+</section>
 @endsection

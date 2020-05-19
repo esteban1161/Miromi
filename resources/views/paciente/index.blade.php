@@ -19,63 +19,78 @@
 
 @section('contenido')
 
+<section class="content-header">
+    <div class="container-fluid">
+        @include('includes.mensaje')      
+        <div class="row mb-2">
+            <div class="col-sm-9">
+                <h1>Lista Pacientes</h1>
+            </div>
+            <div class="row col-sm-3 card-tolls">           
+                <a href="{{route('paciente.create')}}" class="btn btn-block btn-danger btn-sm">
+                    <i class="fas fa-user-plus"></i> Crear Paciente
+                </a>
+            </div>                
+        </div><!-- /.container-fluid -->
+    </div>
+</section>
+<section class="content">
+    <div class="container-fluid">
+        <div class="card card-info ">
+            <div class="card-header">
+                
+            </div>
+           
+            <div class="card-body">
+                <table id="tPacientes" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Primer Nombre</th>
+                            <th>Segundo Nombre</th>
+                            <th>Primer Apellido</th>
+                            <th>Segundo Apellido</th>
+                            <th>Numero Identificaicon</th>
+                            <th>Fecha Nacimiento</th>
+                            <th>Informacion</th>
+                        </tr>
+                    </thead>
+                    <tbody>                            
+                        @foreach ( $eventos as $evento)
+                            <tr>
+                                <td>{{$evento->identificacion->primerNombre}}</td>
+                                <td>{{$evento->identificacion->segundoNombre}}</td>
+                                <td>{{$evento->identificacion->primerApellido}}</td>                                    
+                                <td>{{$evento->identificacion->segundoApellido}}</td>
+                                <td>{{$evento->identificacion->numeroIdentificacion}}</td>
+                                <td>{{$evento->identificacion->fechaNacimiento}}</td>     
+                                <td>
+                                    <a href="{{route('paciente.show', ['id'=>$evento->id])}}" class="btn-accion-tabla tooltipsC" title="Mostrar este Resgistro">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                    <a href="{{route('paciente.edit', ['id' => $evento->id])}}" class="btn-accion-tabla tooltipsC" title="Editar este Registro">
+                                        <i class="fas fa-pencil-alt"></i>
+                                    </a>
+                                    <a href="{{route('listaAtenciones.index', ['id' => $evento->identificacion->id])}}" class="btn-accion-tabla tooltipsC" title="Ver Registros">
+                                        <i class="fas fa-book-medical"></i>
+                                    </a>
+                                </td>   
+                            </tr>                    
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
     <div class="row">
         <div class="col-lg-12">
-            <div class="card card-primary">
-                <div class="card-header">
-                    <div class="row">
-                        <div class="col-lg-9">
-                            <h2 class="card-title">Lista Pacientes</h2>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="card-tolls">
-                                <a href="{{route('paciente.create')}}" class="btn btn-block btn-danger btn-xs">
-                                    <i class="fas fa-user-plus"></i> Crear Paciente
-                                </a>
-                            </div>
-                        </div>                    
-                    </div>
-                </div>
-               
-                <div class="card-body">
-                    <table id="tPacientes" class="table table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th>Primer Nombre</th>
-                                <th>Segundo Nombre</th>
-                                <th>Primer Apellido</th>
-                                <th>Segundo Apellido</th>
-                                <th>Numero Identificaicon</th>
-                                <th>Fecha Nacimiento</th>
-                                <th>Informacion</th>
-                            </tr>
-                        </thead>
-                        <tbody>                            
-                            @foreach ( $eventos as $evento)
-                                <tr>
-                                    <td>{{$evento->identificacion->primerNombre}}</td>
-                                    <td>{{$evento->identificacion->segundoNombre}}</td>
-                                    <td>{{$evento->identificacion->primerApellido}}</td>                                    
-                                    <td>{{$evento->identificacion->segundoApellido}}</td>
-                                    <td>{{$evento->identificacion->numeroIdentificacion}}</td>
-                                    <td>{{$evento->identificacion->fechaNacimiento}}</td>     
-                                    <td>
-                                        <a href="{{route('paciente.show', ['id'=>$evento->id])}}" class="btn-accion-tabla tooltipsC" title="Mostrar este Resgistro">
-                                            <i class="fas fa-eye"></i>
-                                        </a>
-                                        <a href="{{route('paciente.edit', ['id' => $evento->id])}}" class="btn-accion-tabla tooltipsC" title="Editar este Registro">
-                                            <i class="fas fa-pencil-alt"></i>
-                                        </a>
-                                        <a href="{{route('historiaC.index', ['id' => $evento->identificacion->id])}}" class="btn-accion-tabla tooltipsC" title="Ver Historias Clinicas">
-                                            <i class="fas fa-book-medical"></i>
-                                        </a>
-                                    </td>   
-                                </tr>                    
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+            
+            
         </div>
     </div>
 @endsection

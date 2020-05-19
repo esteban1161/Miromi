@@ -25,22 +25,22 @@ class ValidacionUsuario extends FormRequest
     {
         if($this->route('id')){
             return [
-                'usuario' => 'required|max:50|unique:usuarios,usuario' . $this->route('id'),
-                'nombre' => 'required|max:50',
-                'email' => 'required|email|max:100|unique:usuarios,email' . $this->route('id'),
-                'password' => 'nullable|min:5',
-                're_password' => '  nullable|required_with:password|min:5|same:password', 
-                'rol_id' => 'required|array',
+                'usuario' => 'required | max:50 | unique:usuarios,usuario' . $this->route('id'),
+                'nombre' => 'required | max:50',
+                'email' => 'required | email | max:100 | unique:usuarios,email' . $this->route('id'),
+                'password' => 'nullable | min:5',
+                're_password' => '  nullable | required_with:password | min:5 | same:password', 
+                'rol_id' => 'required | array',
             ];
         }
         else{
             return [
-                'usuario' => 'required|max:50|unique:usuarios,usuario' . $this->route('id'),
-                'nombre' => 'required|max:50',
-                'email' => 'required|email|max:100|unique:usuarios,email' . $this->route('id'),
-                'password' => 'required|min:5|min:5',
-                're_password' => 'required|same:password', 
-                'rol_id' => 'required|array',
+                'usuario' => 'required | max:50 | unique:usuarios,usuario' . $this->route('id'),
+                'nombre' => 'required | max:50',
+                'email' => 'required | email | max:100 | unique:usuarios,email' . $this->route('id'),
+                'password' => 'required | min:5 | min:5',
+                're_password' => 'required | same:password', 
+                'rol_id' => 'required | array',
             ]; 
         }        
     }

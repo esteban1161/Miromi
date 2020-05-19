@@ -1,24 +1,59 @@
 <h2>Correo(s) Electronico(s) Personal(es)</h2>  
 <div class="row">
-    <div class="col-md-11 row">
-        <div class="col-md-6">
-            <div class="form-group">
-                <label for="tipoCorreo">Tipo de Correo</label>
-                <input type="text" name="tipoCorreo" class="form-control" id="tipoCorreo" value="{{old('tipoCorreo', $data->correosElectronicos->tipoCorreo ?? '')}}" tabindex="11">
-            </div> 
-        </div>
-        <div class="col-md-6">
-            <div class="form-group">
-                <label for="correoElectronico">Correo Electronico Personal</label>
-                <input type="text" name="correoElectronico" class="form-control" id="correoElectronico" value="{{old('correoElectronico', $data->correosElectronicos->correoElectronico ?? '')}}" tabindex="12">
-            </div>   
-        </div>
-    </div>
-    <div class="col-md-1">
-        <a href="#" class="btn-accion-tabla tooltipsC" title="Añadir Correo">
-            <i class="fas fa-plus-circle"></i>
-        </a>
-    </div>
+    <div class="col-md-12">
+        <table id="tablaCorreos" class="table table-condensed table-striped">
+			<thead>
+				<tr>
+					<th>Tipo de Correo</th>
+                    <th>Correo Electronico Personal</th>
+                    <th><button id="addCorreos" name="adicional" type="button" class="btn btn-primary"> <i class="fas fa-plus-circle"></i></button></th>
+				</tr>
+			</thead>
+			<tbody>
+                @if ($data == [0])
+                <tr>
+					<td>
+                        <input list="tipoCorreo" type="text" name="tipoCorreo[]" class="form-control" placeholder="Tipo de Correo" value="{{old('tipoCorreo', $correo->tipoCorreo ??'')}}" tabindex="11">
+                        <datalist id="tipoCorreo">
+                            <option value="Personal"></option>
+                            <option value="Del trabajo"></option>
+                            <option value="Universitario"></option>
+                        </datalist>
+                    </td>
+					<td>             
+                        <input type="text" name="correoElectronico[]" class="form-control" id="correoElectronico" value="{{old('correoElectronico', $correo->correoElectronico ??'')}}" tabindex="12">
+                    </td>
+					<td>
+                        <button type="button" class="btn btn-danger delCorreos"><i class="fas fa-times-circle"></i></button>                        
+                    </td>
+				</tr>   
+            @else
+                @foreach ($data->correosElectronicos as $correo)                 
+                <tr>
+					<td>
+                        <input list="tipoCorreo" type="text" name="tipoCorreo[]" class="form-control" placeholder="Tipo de Correo" value="{{old('tipoCorreo', $correo->tipoCorreo ??'')}}" tabindex="11">
+                        <datalist id="tipoCorreo">
+                            <option value="Personal"></option>
+                            <option value="Del trabajo"></option>
+                            <option value="Universitario"></option>
+                        </datalist>
+                    </td>
+					<td>             
+                        <input type="text" name="correoElectronico[]" class="form-control" id="correoElectronico" value="{{old('correoElectronico', $correo->correoElectronico ??'')}}" tabindex="12">
+                    </td>
+					<td>
+                        <button type="button" class="btn btn-danger delCorreos"><i class="fas fa-times-circle"></i></button>                        
+                    </td>
+				</tr>
+                @endforeach
+            @endif        
+
+
+				
+			</tbody>
+        </table>      
+        
+    </div>    
 </div>
 
 

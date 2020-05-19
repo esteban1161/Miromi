@@ -1,7 +1,5 @@
-<h2>Datos de Afiliación al Sistema de Salud</h2>  <br>
-
 <div class="row">
-    <div class="col-md-11 row">
+    <div class="col-md-12 row">
         <div class="col-md-6">
             <div class="form-group">
                 <label for="tipoVinculacion">Tipo Vinculacion al Sistema</label>
@@ -11,10 +9,11 @@
                     <option value="2" {{ old('tipoVinculacion',  $data->afiliacion->tipoVinculacion ?? '') == '2' ? 'selected' : ' ' }}>Subsidiado</option>
                     <option value="3" {{ old('tipoVinculacion',  $data->afiliacion->tipoVinculacion ?? '') == '3' ? 'selected' : ' ' }}>Vinculado</option>
                     <option value="4" {{ old('tipoVinculacion',  $data->afiliacion->tipoVinculacion ?? '') == '4' ? 'selected' : ' ' }}>Particular</option>
-                    <option value="5" {{ old('tipoVinculacion',  $data->afiliacion->tipoVinculacion ?? '') == '5' ? 'selected' : ' ' }}>Otro</option>
-                    <option value="6" {{ old('tipoVinculacion',  $data->afiliacion->tipoVinculacion ?? '') == '6' ? 'selected' : ' ' }}>Desplazado Contributivo</option>
-                    <option value="7" {{ old('tipoVinculacion',  $data->afiliacion->tipoVinculacion ?? '') == '7' ? 'selected' : ' ' }}>Desplazado Subsidiado</option>
-                    <option value="8" {{ old('tipoVinculacion',  $data->afiliacion->tipoVinculacion ?? '') == '8' ? 'selected' : ' ' }}>Desplazado No Asegurado</option>
+                    <option value="5" {{ old('tipoVinculacion',  $data->afiliacion->tipoVinculacion ?? '') == '6' ? 'selected' : ' ' }}>Desplazado Contributivo</option>
+                    <option value="6" {{ old('tipoVinculacion',  $data->afiliacion->tipoVinculacion ?? '') == '7' ? 'selected' : ' ' }}>Desplazado Subsidiado</option>
+                    <option value="7" {{ old('tipoVinculacion',  $data->afiliacion->tipoVinculacion ?? '') == '8' ? 'selected' : ' ' }}>Desplazado No Asegurado</option>
+                    <option value="8" {{ old('tipoVinculacion',  $data->afiliacion->tipoVinculacion ?? '') == '5' ? 'selected' : ' ' }}>Otro</option>
+
                 </select>
             </div>
             <div class="form-group">

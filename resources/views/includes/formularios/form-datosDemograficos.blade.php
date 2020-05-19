@@ -1,11 +1,9 @@
-<h2>Datos Demográficos</h2> 
-
 <div class="row">
-    <div class="col-md-11 row">        
+    <div class="col-md-12 row">        
         <div class="col-md-6">
             <div class="form-group">
                 <label for="paisNacimiento">Pais Nacimiento</label>
-                <select id="paisNacimiento" name="paisNacimiento" class="form-control select2" style="heigh: 100%;" tabindex="13">
+                <select id="paisNacimiento" name="paisNacimiento" class="form-control select2" style="width: 100%;" tabindex="13">
                     <option value="">...Selecionar Pais...</option>
                     @foreach($paises as $id => $nombrePais)
                     <option value="{{$id}} "{{ old('paisNacimiento',  $data->demografico->paisNacimiento ?? '') == $id ? 'selected' : ' ' }}>

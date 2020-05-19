@@ -9,22 +9,24 @@ class ExamenFisico extends Model
     protected $table = "examen_fisicos";
 
     protected $fillable = [ 'evento_id',
-                                        'peso',
-                                        'talla',
-                                        'temperatura',
-                                        'presionArterial',
+                                        'presionArterialSistolica',
+                                        'presionArterialDiastolica',
                                         'frecuenciaCardiaca',
                                         'frecuenciaRespiratoria',
+                                        'temperatura',
                                         'saturaciónO2',
+                                        'peso',
+                                        'talla',
+                                        'masaCorporal',
                                         'aspectoGeneral',
-                                        'otorrinolaringologico',
                                         'cuello',
-                                        'cardioPulmonar',
                                         'abdomen',
-                                        'genitales',
-                                        'miembros',
                                         'pielAnexosEF',
                                         'neurológico',
+                                        'otorrinolaringologico',
+                                        'cardioPulmonarEF',
+                                        'extremidadesEF',
+                                        'genitales',
                                         'otros',];
     
     protected $guarded = ['id'];

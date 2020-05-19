@@ -9,14 +9,14 @@ class RevisionSistema extends Model
     protected $table = "revision_sistemas";
     protected $fillable = [ 'evento_id',
                                         'cabeza',
-                                        'organosSentidos',
-                                        'cardioPulmonar',
-                                        'digestivo',
+                                        'cardioPulmonarRS',
                                         'urinario',
-                                        'genital',
-                                        'miembros',
-                                        'pielAnexosRS',
+                                        'extremidadesRS',
                                         'psiquismo',
+                                        'organosSentidos',
+                                        'digestivo',
+                                        'genital', 
+                                        'pielAnexosRS',
                                         'endocrinologico',];
     protected $guarded = ['id'];
 }

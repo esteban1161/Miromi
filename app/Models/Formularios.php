@@ -8,7 +8,8 @@ class Formularios extends Model
 {
     protected $table = "formularios";
 
-    protected $fillable = ['nombre',];
+    protected $fillable = ['nombre', 'route'];
     
     protected $guarded = ['id'];
+    
 }

@@ -13,4 +13,8 @@ class Telefono extends Model
                                        'numeroTelefono'];
                                        
     protected $guarded = ['id'];
+
+    public function evento(){
+        return $this->belongsTo(Evento::class) ;
+    }
 }

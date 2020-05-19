@@ -58,6 +58,10 @@ class UsuarioAdministradorSeeder extends Seeder
             'rol_id' => 1,
             'usuario_id' => 4,
         ]);
+        DB::table('usuario_rols')->insert([
+            'rol_id' => 1,
+            'usuario_id' => 1,
+        ]);
 
         DB::table('formularios')->insert([
             'nombre' => 'PerfilTerapeuta ',

@@ -9,6 +9,7 @@ use App\Models\DatosIdentificacion;
 use App\Models\DatosPersonales;
 use App\Models\Evento;
 use App\Models\Eventos;
+use App\Models\Formularios;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
@@ -24,6 +25,10 @@ class Usuario extends Authenticatable
 
     public function roles(){
         return $this->belongsToMany(Rol::class, 'usuario_rols');
+    }
+
+    public function formularios(){
+        return $this->belongsToMany(Formularios::class, 'usuarios_formularios');
     }
 
     public function evento(){

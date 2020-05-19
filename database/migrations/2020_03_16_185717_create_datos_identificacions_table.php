@@ -17,7 +17,7 @@ class CreateDatosIdentificacionsTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('evento_id')->unsigned()->nullable();
             $table->foreign('evento_id')->references('id')->on('eventos')->onUpdate('cascade')->nullable();
-            $table->string('foto')->after('evento_id')->default('user.png'); //para el proximo refresh
+            $table->string('foto')->default('user.png'); 
             $table->string('primerNombre')->nullable();
             $table->string('segundoNombre')->nullable(); 
             $table->string('primerApellido')->nullable(); 

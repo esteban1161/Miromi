@@ -8,8 +8,7 @@ class HistoriaClinicaBasica extends Model
 {
     protected $table = "historia_Clinica_Basicas";
  
-    protected $fillable = ['evento_id',                                       
-                                       'identificacion_id',
+    protected $fillable = ['evento_id',                    
                                        'nombreAcompañante',
                                        'parentescoAcompañante',
                                        'fechaConsulta',

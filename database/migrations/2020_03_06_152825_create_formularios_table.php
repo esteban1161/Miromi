@@ -16,6 +16,7 @@ class CreateFormulariosTable extends Migration
         Schema::create('formularios', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nombre')->nullable();
+            $table->string('route')->nullable();//proximo fresh; 
             $table->timestamps();
         });
     }

@@ -63,7 +63,7 @@ class ValidacionInfoPaciente extends FormRequest
             'tipoCorreo' => 'nullable',
         ];
     }
-    public function crearPaciente(){
+   /*  public function crearPaciente(){
 
         DB::transaction(function () 
         {
@@ -110,26 +110,21 @@ class ValidacionInfoPaciente extends FormRequest
                 'telefonoResponsable'=>$data['telefonoResponsable'],
             ]);
 
-            $evento->telefonos()->create([
-                'numeroTelefono'=>$data['numeroTelefono'],
-                'tipoTelefono'=>$data['tipoTelefono'],
-            ]);
-
             $evento->correosElectronicos()->create([
                 'correoElectronico'=>$data['correoElectronico'],
                 'tipoCorreo'=>$data['tipoCorreo'],
             ]);
 
-           /*  if($data->file('foto')){
+            if($data->file('foto')){
                 $path = Storage::disk('public')->put('FotosPacientes', $data->file('foto'));
                 $identificacion = fill(['foto' => asset($path)])->save();
-            } */
+            }
         });
-    }
+    } */
 
     public function actualizarPaciente($identificacion)
     {
-        $data = $this ->validated();
+        /* $data = $this ->validated();
         $evento = Evento::findOrFail($identificacion);        
         $evento->identificacion()->update([
             'primerNombre' => $data['primerNombre'],  
@@ -165,14 +160,22 @@ class ValidacionInfoPaciente extends FormRequest
             'telefonoResponsable' => $data['telefonoResponsable'],
         ]);
 
-        $evento->telefonos()->update([
-            'numeroTelefono' => $data['numeroTelefono'],
-            'tipoTelefono' => $data['tipoTelefono'],
-        ]);
-
-        $evento->correosElectronicos()->update([
-            'correoElectronico' => $data['correoElectronico'],
-            'tipoCorreo' => $data['tipoCorreo'],
-        ]);
+        $telefonos = $data->input('tipoTelefono');
+        $telefonos2 = $data->input('numeroTelefono');
+        for($i = 0; $i < count($telefonos); $i ++) {
+            $evento->telefonos()->create([
+                'tipoTelefono' => $telefonos[$i],
+                'numeroTelefono' => $telefonos2[$i],                
+            ]);  
+        }         
+        $correos = $data->input('tipoCorreo');
+        $correos2 = $data->input('correoElectronico');
+        for($i = 0; $i < count($telefonos); $i ++) {            
+            $evento->correosElectronicos()->create([
+                'tipoCorreo'=>$correos[$i],
+                'correoElectronico'=>$correos2[$i],
+            ]);
+        }
+        dd($telefonos); */
     }
 }

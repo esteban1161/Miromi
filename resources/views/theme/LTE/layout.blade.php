@@ -12,8 +12,6 @@
         <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
         <link rel="stylesheet" href="{{ asset("assets/$theme/plugins/Ionicons/css/ionicons.min.css")}}">
 
-        <link rel="stylesheet" href="{{ asset("assets/$theme/plugins/daterangepicker/daterangepicker.css")}}">
-
         <!-- overlayScrollbars -->
         <link rel="stylesheet" href="{{ asset("assets/$theme/plugins/overlayScrollbars/css/OverlayScrollbars.min.css")}}">
         <!-- Theme style -->
@@ -21,13 +19,6 @@
         <!-- Google Font: Source Sans Pro -->
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
         <!--Carga stylos dependiendo de la pagina enlasada-->
-
-        
-        <link rel="stylesheet" href="{{ asset("assets/$theme/plugins/bootstrap-datePicker/css/bootstrap-datepicker3.css")}}">
-        <link rel="stylesheet" href="{{ asset("assets/$theme/plugins/bootstrap-datePicker/css/bootstrap-datepicker.standalone.css")}}">
-        <script src="{{asset('datePicker/js/bootstrap-datepicker.js')}}"></script>
-        <!-- Languaje -->
-        <script src="{{asset('datePicker/locales/bootstrap-datepicker.es.min.js')}}"></script>
 
 
 
@@ -41,26 +32,20 @@
     <body class="hold-transition sidebar-mini layout-fixed">
         <!-- Site wrapper -->
         <div class="wrapper">
-
         <!--Inicio Header-->
-
             @include("theme/$theme/header")
-
-        <!--FIn Header-->
+        <!--Fin Header-->
         <!--Inicio Aside-->
-
             @include("theme/$theme/aside")
-
-        <!--FIn Aside-->|
-            <div class="content-wrapper">
-                <section class="content">
+        <!--Fin Aside-->
+        <!--Inicio Contenido-->
+            <div class="content-wrapper">                
                     @yield('contenido')
-                </section>
             </div>  
-            
-            <!--InicioFooter-->            
+        <!--Fin Contenido-->
+        <!--InicioFooter-->            
             @include("theme/$theme/footer")
-            <!--Fin Footer-->
+        <!--Fin Footer-->
             {{-- Inicio Ventana Modal --}}
             @if(session()->get("roles") && count(session()->get("roles")) > 1)
             @csrf
@@ -93,8 +78,6 @@
         <script src="{{ asset("assets/$theme/plugins/jquery/jquery.min.js")}}"></script>
         <!-- Bootstrap 4 -->
         <script src="{{ asset("assets/$theme/plugins/bootstrap/js/bootstrap.bundle.min.js")}}"></script>
-
-        <script src="{{ asset("assets/$theme/plugins/select2/js/select2.full.min.js")}}"></script>
         <!-- overlayScrollbars -->
         <script src="{{ asset("assets/$theme/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js")}}"></script>
         <!-- AdminLTE App -->
@@ -112,8 +95,7 @@
                 history.go(-1);
             }
         </script>
-
-        
+                
         @yield('scriptsPlugins')
         
         @yield('scripts')

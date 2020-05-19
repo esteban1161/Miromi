@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ValidacionUsuario;
 use App\Models\Admin\Rol;
+use App\Models\Formularios;
 use App\Models\Seguridad\Usuario;
 use Illuminate\Http\Request;
 
@@ -19,27 +20,24 @@ class UsuarioController extends Controller
     public function create()
     {
         $rols = Rol::orderBy('id')->pluck('nombre', 'id')->toArray();
-        return view('admin.usuario.create', compact('rols'));
+        $formularios = Formularios::orderBy('id')->pluck('nombre', 'id')->toArray();
+        return view('admin.usuario.create', compact('rols', 'formularios'));
     }
  
     public function store(ValidacionUsuario $request)
     {
         $usuario = Usuario::create($request->all());
         $usuario->roles()->sync($request->rol_id); 
-        return redirect('admin/usuario')->with('mensaje', 'Usuario creado con exito');
-         
+        $usuario->formularios()->sync($request->formulario_id);
+        return redirect('admin/usuario')->with('mensaje', 'Usuario creado con exito');         
     }
-
-    public function show($id)
-    {
-        //
-    } 
 
     public function edit($id)
     {
         $rols = Rol::orderBy('id')->pluck('nombre', 'id')->toArray();
-        $data = Usuario::with('roles')->findOrFail($id);
-        return view('admin.usuario.edit', compact('data', 'rols'));
+        $formularios = Formularios::orderBy('id')->pluck('nombre', 'id')->toArray();
+        $data = Usuario::with('roles', 'formularios')->findOrFail($id);
+        return view('admin.usuario.edit', compact('data', 'rols', 'formularios'));
     }
 
     public function update(Request $request, $id)
@@ -47,6 +45,7 @@ class UsuarioController extends Controller
         $usuario = Usuario::findOrFail($id);
         $usuario->update(array_filter($request->all()));
         $usuario->roles()->sync($request->rol_id);
+        $usuario->formularios()->sync($request->formulario_id);
         return redirect('admin/usuario')->with('mensaje', 'Usuario actualizado con exito');
     }
 

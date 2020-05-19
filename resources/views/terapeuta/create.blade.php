@@ -15,29 +15,66 @@
 
 @section('scripts')
     <script src="{{asset("assets/pages/scripts/admin/file/index.js")}}" type="text/javascript"></script>       
+    <script src="{{asset("assets/pages/scripts/admin/forms-dinamicos/index.js")}}" type="text/javascript"></script>
+    <script src="{{asset("assets/pages/scripts/admin/preview/index.js")}}"type="text/javascript"></script>
 
 @endsection
 
 
 @section('contenido')    
-<div class="row">
-    <div class="col-lg-12">
-        <div class="card card-danger">
-            <div class="card-header">
-                <h3 class="card-title">Crear un Terapeuta</h3>
+
+<section class="content-header">
+    <div class="container-fluid">
+        @include('includes.form-error')
+        @include('includes.mensaje')
+        <div class="row mb-2">
+            <div class="col-sm-12">
+                <h1>Ingresar informacion del Terapeuta</h1>
             </div>
-            <form action="{{route('terapeuta.store')}}" class="form-horizontal" id="form-general" method="POST" autocomplete="off" enctype="multipart/form-data">
-                @csrf
-                <div class="card-body"> @include('includes.formularios.form-datosIdentificacion')    </div>
-                <div class="card-body"> @include('includes.formularios.form-datosAcademicos')    </div>
-                <div class="card-body"> @include('includes.formularios.form-datosConsultorios')    </div>
-                <div class="card-footer">
-                    <div class="col-lg-3"></div>
-                    <div class="col-lg-6">    @include('includes.boton-form-crear')    </div>            
-                </div>    
-            </form>
         </div>
     </div>
-</div>
+</section>
+<section class="content">
+    <div class="container-fluid">      
+        
+        <form action="{{route('terapeuta.store')}}" class="form-horizontal" id="form-general" method="POST" autocomplete="off" enctype="multipart/form-data">
+            @csrf @method("put")
+            <div class="card card-danger">
+                <div class="card-header">
+                    <h3 class="card-title">Identificacion</h3>                
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+                    </div>
+                </div>
+                <div class="card-body"> @include('includes.formularios.form-datosIdentificacion') </div>
+            </div>
 
+            <div class="card card-danger">
+                <div class="card-header">
+                    <h3 class="card-title">Academicos</h3>                
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+                    </div>
+                </div>
+                <div class="card-body"> @include('includes.formularios.form-datosAcademicos')    </div>
+            </div>
+
+            <div class="card card-danger">
+                <div class="card-header">
+                    <h3 class="card-title">Consultorios</h3>                
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+                    </div>
+                </div>
+                <div class="card-body"> @include('includes.formularios.form-datosConsultorios')    </div>
+            </div>
+
+            <div class="card">
+                <div class="card-footer">    
+                    <div class="col-lg-6">    @include('includes.boton-form-crear')    </div>            
+                </div>
+            </div>  
+        </form>
+    </div>            
+</section>
 @endsection

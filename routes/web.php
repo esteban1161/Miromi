@@ -56,15 +56,14 @@ Route::post('/paciente', 'PerfilPacienteController@store')->name('paciente.store
 Route::put('/paciente/{id}', 'PerfilPacienteController@update')->name('paciente.update')->middleware('auth');
 Route::post('/paciente/crear/fetch', 'PerfilPacienteController@fetch')->name('paciente.fetch');
 
+/*Rutas para ListaAtenciones*/ 
+Route::get('/paciente/{id}/listaAtenciones', 'ListaAtencionesController@index')->name('listaAtenciones.index')->middleware('auth');
+
 /*Rutas de Historias Clinicas */
-Route::get('/paciente/{id}/historiaClinica', 'HistoriaClinicaBController@index')->name('historiaC.index')->middleware('auth');
 Route::get('/paciente/{id}/historiaClinica/crear', 'HistoriaClinicaBController@create')->name('historiaC.create')->middleware('auth');
 Route::get('/paciente/{id}/historiaClinica/{idh}', 'HistoriaClinicaBController@show')->name('historiaC.show')->middleware('auth');
 Route::post('/paciente/{id}/historiaClinica', 'HistoriaClinicaBController@store')->name('historiaC.store')->middleware('auth');
 Route::get('/ejemplos2', 'HistoriaClinicaBController@crearPDF')->name('historiaC.crearPDF');
-
-
-
 
 /*Rutas del Menu */
 Route::get('admin/menu', 'Admin\MenuController@index')->name('menu.index')->middleware('auth', 'superAdmin');
@@ -83,10 +82,26 @@ Route::get('/blanco', function () {
     return view('historiaClinicaBlanco.index');
 });
 
-
-Route::get('/ejemplos', function () {
-    return view('ejemplos.example_categories');
+use App\Models\Pais;
+Route::get('/ejemploFormulas', function () {
+    
+    $paises = Pais::orderBy('id')->get();
+    return view ('formulas.index', compact('paises'));
 });
+
+Route::get('/paises', function () {
+    
+    $paises = Pais::orderBy('id')->get();
+    return $paises;
+});
+
+use App\Models\Cie10;
+Route::get('/cie10', function () {
+    
+    $cie10 = Cie10::orderBy('id')->get();
+    return $cie10;
+});
+
 
 Route::get('/ejemplos2', function () {
     $pdf = PDF::loadView('historiasCB.create');

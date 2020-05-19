@@ -1,35 +1,66 @@
 <h2>Datos Profesionales y Academicos</h2>  
 
 <div class="row">
-    <div class="col-md-11 row">
-        <div class="col-md-6">
-            <div class="form-group">
-                <label for="numeroRegistroProfesional">Numero Registro Profecional</label>
-                <input type="text" name="numeroRegistroProfesional" class="form-control" id="numeroRegistroProfesional" value="{{old('numeroRegistroProfesional', $data->academico->numeroRegistroProfesional ?? '')}}" tabindex="13">
-            </div>    
-            <div class="from-group">
-                <label for="tituloAcademico">Titulo Academico Obtenido</label>
-                <input list="tituloAcademico" name="tituloAcademico" type="text" class="form-control" placeholder="Escribe Titulo academico" value="{{old('tituloAcademico', $data->academico->tituloAcademico ?? '')}}" tabindex="15">
-                <datalist id="tituloAcademico">
-                    @foreach( $titulo as $id => $titulo)                
-                        <option value="{{$titulo}}"{{ old('ciudadNacimiento',  $data->academico->tituloAcademico ?? '') == $id ? 'selected' : ' ' }}>
-                            {{$titulo}}
-                        </option>
-                    @endforeach  
-                </datalist>
-            </div>
-        </div>
-
-        <div class="col-md-6">
-            <div class="form-group">
-                <label for="institucion">Institucion</label>
-                <input type="text" name="institucion" class="form-control" id="institucion" value="{{old('institucion', $data->academico->institucion ?? '')}}" tabindex="14">
-            </div>   
-            <label for=""></label>
-            <a href="#" class="btn-accion-tabla tooltipsC" title="Añadir Datos Academicos">
-                <i class="fas fa-plus-circle"></i>
-            </a>
-        </div>           
+    <div class="col-md-12">
+        <table id="tablaAcademico" class="table table-condensed table-striped">
+			<thead>
+				<tr>
+					<th class="">Numero de Registro (Si aplica)</th>
+                    <th class="">Titulo Academico Obtenido</th>
+                    <th class="">Institucion</th>
+                    <th class=""><button id="addAcademico" name="adicional" type="button" class="btn btn-primary"> <i class="fas fa-plus-circle"></i></button></th>
+				</tr>
+			</thead>
+			<tbody>   
+                @if ($data == [0])
+                    <tr>
+                        <td>                                           
+                            <input type="text" name="numeroRegistroProfesional[]" class="form-control" id="numeroRegistroProfesional" value="{{old('numeroRegistroProfesional', $academico->numeroRegistroProfesional ?? '')}}" tabindex="13">
+                        </td>
+                        <td>         
+                            <input list="tituloAcademico" name="tituloAcademico[]" type="text" class="form-control" placeholder="Escribe Titulo academico" value="{{old('tituloAcademico', $academico->tituloAcademico ?? '')}}" tabindex="14">
+                            <datalist id="tituloAcademico">
+                                @foreach( $titulo as $id => $tituloA)                
+                                    <option value="{{$tituloA}}"{{ old('tituloAcademico',  $academico->tituloAcademico ?? '') == $id ? 'selected' : ' ' }}>
+                                        {{$tituloA}}
+                                    </option>
+                                @endforeach  
+                            </datalist>                           
+                        </td>
+                        <td>                            
+                            <input type="text" name="institucion[]" class="form-control" id="institucion" value="{{old('institucion', $academico->institucion ?? '')}}" tabindex="15">
+                        </td>
+                        <td>
+                            <button type='button' class='btn btn-danger delAcademico'><i class='fas fa-times-circle'></i></button>
+                        </td>
+                    </tr>        
+                @else
+                    @foreach ($data->academicos as $academico)                 
+                    <tr>
+                        <td>                                   
+                            <input type="text" name="numeroRegistroProfesional[]" class="form-control" id="numeroRegistroProfesional" value="{{old('numeroRegistroProfesional', $academico->numeroRegistroProfesional ?? '')}}" tabindex="13">
+                        </td>
+                        <td>                                 
+                            <input list="tituloAcademico" name="tituloAcademico[]" type="text" class="form-control" placeholder="Escribe Titulo academico" value="{{old('tituloAcademico', $academico->tituloAcademico ?? '')}}" tabindex="14">
+                            <datalist id="tituloAcademico">
+                                @foreach( $titulo as $id => $tituloA)                
+                                    <option value="{{$tituloA}}"{{ old('tituloAcademico',  $academico->tituloAcademico ?? '') == $id ? 'selected' : ' ' }}>
+                                        {{$tituloA}}
+                                    </option>
+                                @endforeach  
+                            </datalist>
+                        </td>
+                        <td>                                   
+                            <input type="text" name="institucion[]" class="form-control" id="institucion" value="{{old('institucion', $academico->institucion ?? '')}}" tabindex="15">
+                        </td>
+                        <td>
+                            <button type='button' class='btn btn-danger delAcademico'><i class='fas fa-times-circle'></i></button>
+                        </td>
+                    </tr>          
+                    @endforeach 
+                @endif                         
+            </tbody>
+		</table> 
     </div>
 </div>
 

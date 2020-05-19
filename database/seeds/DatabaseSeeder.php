@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Seguridad\Usuario;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -13,9 +14,16 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->truncateTablas([
-            'titulo_academicos'
+            'titulo_academicos',
+            'rols',
+            'usuarios',
+            'usuario_rols',
+            'formularios'
+
         ]);
         $this->call(TituloAcademicoSeeder::class);
+        $this->call(TablaRolSeeder::class);
+        $this->call(UsuarioAdministradorSeeder::class);
     }
 
     protected function truncateTablas(array $tablas){

@@ -51,7 +51,7 @@ class ValidacionInfoTerapeuta extends FormRequest
         ];
     }
 
-    public function crearTerapeuta()
+    /* public function crearTerapeuta()
     {   
         DB::transaction(function () 
         {                   
@@ -98,11 +98,11 @@ class ValidacionInfoTerapeuta extends FormRequest
                 'tipoCorreo'=>$data['tipoCorreo'],
             ]);
         });
-    }
+    } */
 
     public function actualizarTerapeuta($identificacion)
     {  
-        $data = $this->validated();
+        /* $data = $this->validated();
         $evento = Evento::findOrFail($identificacion); 
         
         $evento->identificacion()->update([
@@ -136,6 +136,6 @@ class ValidacionInfoTerapeuta extends FormRequest
             'correoElectronico' =>$data['correoElectronico'],
             'tipoCorreo' =>$data['tipoCorreo'],
         ]);
-    }
+    } */
 
 }
