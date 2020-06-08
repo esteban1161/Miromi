@@ -33,9 +33,15 @@ class AppServiceProvider extends ServiceProvider
         });
 
         View::composer("theme.lte.aside", function($view){
-            $usuario = Evento::ConsultaTerapeuta();
+            $usuario = Evento::ConsultaTerapeuta()->first();
             $view->with('eventoComposer', $usuario); 
         });
         View::share('theme', 'lte');
+
+       /*  View::composer("theme.lte.aside", function($view){
+            $usuario = Evento::ConsultaTerapeuta()->first()->identificacion;
+            $view->with('eventoComposer2', $usuario); 
+        });
+        View::share('theme', 'lte'); */
     }
 }

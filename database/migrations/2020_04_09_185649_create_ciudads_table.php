@@ -15,8 +15,10 @@ class CreateCiudadsTable extends Migration
     {
         Schema::create('ciudads', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->timestamps();
+            $table->bigInteger('pais_id')->unsigned()->nullable();
+            $table->foreign('pais_id')->references('id')->on('pais')->onUpdate('cascade')->nullable();            
             $table->string('nombreCiudad');
+            $table->timestamps();
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_spanish_ci';
         });

@@ -44,8 +44,8 @@
             </div>  
         <!--Fin Contenido-->
         <!--InicioFooter-->            
-            @include("theme/$theme/footer")
-        <!--Fin Footer-->
+{{--             @include("theme/$theme/footer")
+ --}}        <!--Fin Footer-->
             {{-- Inicio Ventana Modal --}}
             @if(session()->get("roles") && count(session()->get("roles")) > 1)
             @csrf

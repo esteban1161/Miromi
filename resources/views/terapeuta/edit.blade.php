@@ -20,23 +20,8 @@
 @section('scripts')
     <script src="{{asset("assets/pages/scripts/admin/file/index.js")}}" type="text/javascript"></script>       
     <script src="{{asset("assets/pages/scripts/admin/forms-dinamicos/index.js")}}" type="text/javascript"></script>
-    <script src="{{asset("assets/pages/scripts/admin/preview/index.js")}}"type="text/javascript"></script>
-    <script type="text/javascript">
-        $(document).ready(function (){
-            $('#foto').fileinput({
-                language: 'es',
-                allowedFileExtensions: ['jpg', 'jpeg', 'png'], 
-                maxFileSize: 1000,
-                showUpload: false,
-                showClose: false,
-                initialPreviewAsData: true,
-                dropZoneEnabled: false,
-                theme: "fas",
-            });
-        });
-    </script>
-
-    @endsection
+    <script src="{{asset("assets/pages/scripts/admin/imagenPerfil/index.js")}}" type="text/javascript"></script>
+@endsection
 
 
 @section('contenido')    

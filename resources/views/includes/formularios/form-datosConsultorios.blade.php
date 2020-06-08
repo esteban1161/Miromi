@@ -14,6 +14,28 @@
 				</tr>
 			</thead>
 			<tbody>
+                @if ($data == [0])
+                    <tr>
+                        <td>                                   
+                            <input type="text" name="nombreConsultorio[]" class="form-control" id="nombreConsultorio" value="{{old('nombreConsultorio', $consultorio->nombreConsultorio ?? '')}}" tabindex="16">
+                        </td>
+                        <td>                                 
+                            <input type="text" name="direccionConsultorio[]" class="form-control" id="direccionConsultorio" value="{{old('direccionConsultorio', $consultorio->direccionConsultorio ?? '')}}" tabindex="17">
+                        </td>
+                        <td>                                   
+                            <input type="text" name="paginaWebConsultorio[]" class="form-control" id="paginaWebConsultorio" value="{{old('paginaWebConsultorio', $consultorio->paginaWebConsultorio ?? '')}}" tabindex="18">
+                        </td>
+                        <td>
+                            <input type="text" name="codigoSecretaria[]" class="form-control" id="codigoSecretaria" value="{{old('codigoSecretaria', $consultorio->codigoSecretaria ?? '')}}" tabindex="19">
+                        </td>
+                        <td>
+                            <input type="text" name="nitConsultorio[]" class="form-control" id="nitConsultorio" value="{{old('nitConsultorio', $consultorio->nitConsultorio ?? '')}}" tabindex="20">
+                        </td>
+                        <td>
+                            <button type='button' class='btn btn-danger delConsultorios'><i class='fas fa-times-circle'></i></button>
+                        </td>
+                    </tr>          
+                @else
                     @foreach ($data->consultorios as $consultorio)                 
                     <tr>
                         <td>                                   
@@ -35,7 +57,8 @@
                             <button type='button' class='btn btn-danger delConsultorios'><i class='fas fa-times-circle'></i></button>
                         </td>
                     </tr>          
-                    @endforeach                      
+                    @endforeach               
+                @endif                                    
             </tbody>
 		</table>
     </div>

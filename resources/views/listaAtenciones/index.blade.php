@@ -22,9 +22,10 @@
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-                <div class="col-sm-8">
-                    <h1>Lista de Atenciones a {{$identificacion->primerNombre}}</h1>
+                <div class="col-sm-7">
+                    <h1>Lista de Atenciones - {{$identificacion->primerNombre}} {{$identificacion->segundoNombre}} {{$identificacion->primerApellido}}</h1>
                 </div>
+                
                 <div class="row col-sm-4 card-tolls">                 
                     <div class="btn-group">
                         <div class="dropdown">
@@ -33,8 +34,9 @@
                             </button>
                             <div class="dropdown-menu">                                
                                 @foreach ($data->formularios as $formulario)
-                                    <a class="dropdown-item" href="{{route($formulario->route, ['id'=>$identificacion->id])}}">
-                                        <i class="fas fa-book-medical"></i> {{$formulario->nombre}}</a>                                        
+                                    <a class="dropdown-item" href="{{route($formulario->routeCreate, ['id'=>$identificacion->id])}}">
+                                        <i class="fas fa-book-medical"></i> {{$formulario->nombre}}
+                                    </a>                                        
                                 @endforeach
                             </div>                   
                         </div>                               
@@ -44,7 +46,11 @@
                             </a>
                         </div>                            
                     </div> 
-                </div>                             
+                </div>  
+                <div class="col-sm-1">
+                    <img width="100%" class=" img-fluid" src="{{Storage::url("FotosPerfil/$identificacion->foto" ?? 'user.png')}}"
+                    alt="User profile picture">
+                </div>                           
             </div><!-- /.container-fluid -->
         </div>
     </section>
@@ -57,26 +63,29 @@
                     <table id="tPacientes" class="table table-bordered table-striped">
                         <thead>
                             <tr>                            
-                                <th>Fecha Consulta</th>
-                                <th>Motivo Consulta</th>
-                                <th>Plan Tratamiento</th>
-                                <th>Informacion</th>
+                                <th WIDTH="10%">Fecha</th>
+                                <th WIDTH="40%">Motivo Consulta</th>
+                                <th WIDTH="20%">Formatos</th>
+                                <th WIDTH="25%">Consultorio</th>
+                                <th WIDTH="5%"></th>
                             </tr>
                         </thead>
                         <tbody>                            
                             @foreach ( $eventos as $evento)
                                 <tr>  
-                                    <td>{{$evento->historiaClinicaB->fechaConsulta}}</td>
-                                    <td>{{$evento->historiaClinicaB->motivoConsulta}}</td>
-                                    <td>{{$evento->consulta->plan}}</td>                                
+                                    <td>{{$evento->formatosBase->fechaConsulta}}</td>
+                                    <td>{{$evento->formatosBase->motivoConsulta}}</td>
+                                    <td>{{$evento->formularios->nombre}}</td>  
+                                    <td>{{$evento->formatosBase->consultorio}}</td>       
+
                                     <td>
-                                        <a href="{{route('historiaC.show', ['id'=>$identificacion->id, 'idh'=>$evento->id] )}}" class="btn-accion-tabla tooltipsC" title="Mostrar este Resgistro">
+                                        <a href="{{route($evento->formularios->routeShow, ['id'=>$identificacion->id, 'idh'=>$evento->id] )}}" class="btn-accion-tabla tooltipsC" title="Mostrar este Resgistro">
                                             <i class="fas fa-eye"></i>
                                         </a>
                                     </td>
                                 </tr>                  
                             @endforeach
-                        </tbody>
+                        </tbody>                        
                     </table>
                 </div>
             </div>

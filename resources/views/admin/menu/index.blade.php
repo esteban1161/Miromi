@@ -17,32 +17,42 @@
 @endsection
 
 @section('contenido')
-    <div class="row">        
-        <div class="col-lg 12">
-            @include('includes.mensaje')
-            <div class="card card-primary">
-                <div class="card-header with-border">
-                    <h3 class="card-title">Menus</h3>
-                </div >
-                <div class="card-tolls">
-                    <a href="{{route('menu.create')}}" class="btn btn-block btn-info btn-sm">
-                        <i class=""></i> Crear Menu
-                    </a>
-                </div>
-                <div class="box body">
-                    @csrf
-                    <div class="dd" id="nestable">
-                        <ol>
-                            @foreach ( $menus as $key => $item)
-                                @if ($item["menu_id"] != 0)
-                                    @break                                    
-                                @endif
-                                @include("admin.menu.menu-item", ["item" => $item])              
-                            @endforeach   
-                        </ol>
-                    </div>
+
+@section('contenido')
+<section class="content-header">
+    <div class="container-fluid">
+        @include('includes.mensaje')        
+        <div class="row mb-2">
+            <div class="col-sm-9">
+                <h1>Menus</h1>
+            </div>
+            <div class="row col-sm-3 card-tolls">  
+                <a href="{{route('menu.create')}}" class="btn btn-block btn-danger">
+                    <i class="fas fa-th-list"></i> Crear Menu
+                </a>     
+            </div>
+        </div>
+    </div>
+</section>
+<section class="content">
+    <div class="container-fluid">
+        <div class="card card-info">
+            <div class="card-header">     
+
+            </div>
+            <div class="card-body">
+                <div class="dd" id="nestable">
+                    <ol>
+                        @foreach ( $menus as $key => $item)
+                            @if ($item["menu_id"] != 0)
+                                @break                                    
+                            @endif
+                            @include("admin.menu.menu-item", ["item" => $item])              
+                        @endforeach   
+                    </ol>
                 </div>
             </div>
         </div>
     </div>
+</section>
 @endsection 

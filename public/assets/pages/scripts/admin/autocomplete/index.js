@@ -1,7 +1,7 @@
 var options = {
 	url: 'http://miromi.test/cie10',
-	
-	data: ["De apariencia normal", "Esta enfermo", "Tiene mocos", "Dolores", "No Informa sintomas", "etc"],
+	getValue: "descripcion", 
+	// data: ["De apariencia normal", "Esta enfermo", "Tiene mocos", "Dolores", "No Informa sintomas", "etc"],
 	list: {
 		sort: {
 			enabled: true
@@ -11,4 +11,4 @@ var options = {
 		}
 	}
 };
-$ (".autocomplete"). easyAutocomplete (options);
+$ (".autocomplete"). easyAutocomplete (options); 

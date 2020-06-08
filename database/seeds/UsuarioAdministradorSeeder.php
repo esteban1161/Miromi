@@ -65,12 +65,24 @@ class UsuarioAdministradorSeeder extends Seeder
 
         DB::table('formularios')->insert([
             'nombre' => 'PerfilTerapeuta ',
+            'routeCreate' => '',
+            'routeShow' => '',
         ]);
         DB::table('formularios')->insert([
             'nombre' => 'PerfilPaciente ',
+            'routeCreate' => '',
+            'routeShow' => '',
         ]);
         DB::table('formularios')->insert([
-            'nombre' => 'HistoriaClinicaBasica ',
+            'nombre' => 'Historia Clinica Basica ',
+            'routeCreate' => 'historiaC.create',
+            'routeShow' => 'historiaC.show',
         ]);
+        DB::table('formularios')->insert([
+            'nombre' => 'Historia Blanco',
+            'routeCreate' => 'historiaB.create',
+            'routeShow' => 'historiaB.show',
+        ]);
+
     }
 }

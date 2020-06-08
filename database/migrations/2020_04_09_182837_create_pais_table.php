@@ -17,6 +17,7 @@ class CreatePaisTable extends Migration
             $table->bigIncrements('id');
             $table->string('nombrePais');
             $table->string('indicativo');
+            $table->timestamps();
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_spanish_ci';
         });

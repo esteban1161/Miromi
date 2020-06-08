@@ -10,7 +10,7 @@ class Evento extends Model
 
     protected $fillable = ['usuario_id',
                                        'rol_id',
-                                       'formulario_id',
+                                       'formularios_id',
                                         'identificacion_id'];
     protected $guarded = ['id'];
 
@@ -18,8 +18,16 @@ class Evento extends Model
         return $this->hasOne(DatosIdentificacion::class);
     }
 
-    public function historiaClinicaB(){
-        return $this->hasOne(HistoriaClinicaBasica::class);
+    public function formularios(){
+        return $this->belongsTo(Formularios::class);
+    }
+
+    public function historiaBlanco(){
+        return $this->hasOne(HistoriaBlanco::class);
+    }
+
+    public function formatosBase(){
+        return $this->hasOne(FormatoBase::class);
     }
 
     public function demografico(){
@@ -64,7 +72,7 @@ class Evento extends Model
     }
     
     public function archivosAdjuntos(){
-        return $this->hasOne(ArchivosAdjuntos::class);
+        return $this->hasMany(ArchivosAdjuntos::class);
     }
 
     public function diagnosticos(){
@@ -74,23 +82,28 @@ class Evento extends Model
     public function scopeConsultaTerapeuta($query){
         return $query   ->where('usuario_id', $id = auth()->id())
                                 ->where('rol_id', 2)
-                                ->where('formulario_id', 1);
+                                ->where('formularios_id', 1);
     }
 
     public function scopeConsultaPacientes($query){
         return $query   ->where('usuario_id', $id = auth()->id())
                                 ->where('rol_id', 2)
-                                ->where('formulario_id', 2);
+                                ->where('formularios_id', 2);
     }
     
-    public function scopeConsultaHistoriasClinicas($query, $identificacion){
+    public function scopeConsultaFormatosBase($query, $identificacion){
+        return $query   ->where('usuario_id', $id = auth()->id())
+                                ->where('rol_id', 2)                                
+                                ->where('identificacion_id', $identificacion);
+    }   
+
+    public function scopeEntreFechas($query, $f1, $f2){
+        
         return $query   ->where('usuario_id', $id = auth()->id())
                                 ->where('rol_id', 2)
-                                ->where('formulario_id', 3)
-                                ->where('identificacion_id', $identificacion);
+                                ->whereIn('formularios_id', [3, 4])
+                                ->whereBetween('created_at', [$f1, $f2]);
+                                
     }
-
-    
-    
     
 }

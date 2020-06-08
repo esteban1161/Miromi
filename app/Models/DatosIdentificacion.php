@@ -23,22 +23,17 @@ class DatosIdentificacion extends Model
                                         'fechaNacimiento'];
     protected $guarded = ['id'];
 
-    public function historiaClinicaB(){
-        return $this->hasMany(HistoriaClinicaBasica::class);
-    }
-
     public static function setFotoPerfil($foto, $actual = false)
     {
         if ($foto) {
             if ($actual) {
-                Storage::disk('public')->delete("imagenes/FotosPacientes/$actual");
+                Storage::disk('public')->delete($actual);
             }
             $imageName = Str::random(20) . '.jpg';
             $imagen = Image::make($foto)->encode('jpg', 75);
             $imagen->resize(530, 470, function ($constraint) {
                 $constraint->upsize();
             });
-            Storage::disk('public')->put("imagenes/FotosPacientes/$imageName", $imagen->stream());
             return $imageName;
         } else {
             return false;  

@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', 'inicioController@index')->name('inicio.index');
+Route::get('/', 'InicioController@index')->name('inicio.index');
 
 /*RUTAS DEL ADMINISTRADOR*/
 Route::get('seguridad/login', 'Seguridad\LoginController@index')->name('login');
@@ -47,6 +47,10 @@ Route::get('admin/terapeuta/{id}/editar', 'PerfilTerapeutaController@edit')->nam
 Route::post('admin/terapeuta', 'PerfilTerapeutaController@store')->name('terapeuta.store')->middleware('auth');   
 Route::put('admin/terapeuta/{id}', 'PerfilTerapeutaController@update')->name('terapeuta.update')->middleware('auth'); 
 
+/*Rutas del RIPF*/
+Route::get('/ripf', 'RipfController@index')->name('ripf.index')->middleware('auth');
+Route::post('/ripf/fecha', 'RipfController@fecha')->name('ripf.fecha')->middleware('auth');
+
 /*Rutas del Paciente */
 Route::get('/paciente', 'PerfilPacienteController@index')->name('paciente.index')->middleware('auth'); 
 Route::get('/paciente/crear', 'PerfilPacienteController@create')->name('paciente.create')->middleware('auth');
@@ -54,7 +58,7 @@ Route::get('/paciente/{id}', 'PerfilPacienteController@show')->name('paciente.sh
 Route::get('/paciente/{id}/editar', 'PerfilPacienteController@edit')->name('paciente.edit')->middleware('auth');   
 Route::post('/paciente', 'PerfilPacienteController@store')->name('paciente.store')->middleware('auth');    
 Route::put('/paciente/{id}', 'PerfilPacienteController@update')->name('paciente.update')->middleware('auth');
-Route::post('/paciente/crear/fetch', 'PerfilPacienteController@fetch')->name('paciente.fetch');
+Route::get('/paciente/ciudadPorPais/{id}', 'PerfilPacienteController@SelectCiudad');
 
 /*Rutas para ListaAtenciones*/ 
 Route::get('/paciente/{id}/listaAtenciones', 'ListaAtencionesController@index')->name('listaAtenciones.index')->middleware('auth');
@@ -63,7 +67,12 @@ Route::get('/paciente/{id}/listaAtenciones', 'ListaAtencionesController@index')-
 Route::get('/paciente/{id}/historiaClinica/crear', 'HistoriaClinicaBController@create')->name('historiaC.create')->middleware('auth');
 Route::get('/paciente/{id}/historiaClinica/{idh}', 'HistoriaClinicaBController@show')->name('historiaC.show')->middleware('auth');
 Route::post('/paciente/{id}/historiaClinica', 'HistoriaClinicaBController@store')->name('historiaC.store')->middleware('auth');
-Route::get('/ejemplos2', 'HistoriaClinicaBController@crearPDF')->name('historiaC.crearPDF');
+Route::get('/paciente/{id}/historiaClinica/{idh}/pdf', 'HistoriaClinicaBController@crearPDF')->name('historiaC.crearPDF')->middleware('auth');
+
+/*Rutas para historias clinicas en blanco*/
+Route::get('/paciente/{id}/historiaBlanco/crear', 'HistoriaBlancoController@create')->name('historiaB.create')->middleware('auth');
+Route::get('/paciente/{id}/historiaBlanco/{idh}', 'HistoriaBlancoController@show')->name('historiaB.show')->middleware('auth');
+Route::post('/paciente/{id}/historiaBlanco', 'HistoriaBlancoController@store')->name('historiaB.store')->middleware('auth');
 
 /*Rutas del Menu */
 Route::get('admin/menu', 'Admin\MenuController@index')->name('menu.index')->middleware('auth', 'superAdmin');
@@ -79,15 +88,17 @@ Route::get('admin/menu-rol', 'Admin\MenuRolController@index')->name('menuRol.ind
 Route::post('admin/menu-rol', 'Admin\MenuRolController@store')->name('menuRol.store')->middleware('auth', 'superAdmin');
 
 Route::get('/blanco', function () {
-    return view('historiaClinicaBlanco.index');
+    return view('historiaClinicaBlanco.index');   
 });
 
 use App\Models\Pais;
+use Illuminate\Http\Response;
+
 Route::get('/ejemploFormulas', function () {
-    
     $paises = Pais::orderBy('id')->get();
     return view ('formulas.index', compact('paises'));
 });
+
 
 Route::get('/paises', function () {
     
@@ -99,16 +110,6 @@ use App\Models\Cie10;
 Route::get('/cie10', function () {
     
     $cie10 = Cie10::orderBy('id')->get();
-    return $cie10;
+    $cie10J = json_encode($cie10);
+    return $cie10J;
 });
-
-
-Route::get('/ejemplos2', function () {
-    $pdf = PDF::loadView('historiasCB.create');
-    return $pdf->stream();
-});
-
-
-
-
-

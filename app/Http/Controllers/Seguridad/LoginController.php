@@ -19,7 +19,7 @@ class LoginController extends Controller
 
     public function index()
     {
-        return view('Seguridad.index');
+        return view('seguridad.index');
     } 
 
     protected function authenticated(Request $request, $user)

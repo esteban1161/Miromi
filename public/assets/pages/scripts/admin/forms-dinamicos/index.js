@@ -253,4 +253,28 @@ $(document).ready(function(){
     });
 });
 
+$(document).ready(function(){
+    /**
+     * Funcion para añadir una nueva fila en la tabla Telefonos
+     */
+    $("#addAdjuntos").click(function(){
+        var nuevaFila=
+        "<tr>\
+            <td>\
+                <input type='file' name='url[]' value='escojer archivo'>\
+            </td>\
+            <td>\
+                <button type='button' class='btn btn-danger delAdjuntos'><i class='fas fa-times-circle'></i></button>\
+            </td>\
+        </tr>";
+        $("#tablaAdjuntos tbody").append(nuevaFila);
+    });
+
+    // evento para eliminar la fila
+    $("#tablaAdjuntos").on("click", ".delAdjuntos", function(){
+        $(this).parents("tr").remove();
+    });
+});
+
+
 

@@ -10,5 +10,10 @@ class Pais extends Model
     protected $fillable =   ['nombrePais',
                                         'indicativo'];
     protected $guarded = ['id'];
+
     public $timestamps = false;
+
+    public function ciudad(){
+        return $this->hasMany(Ciudad::class);
+    }
 }

@@ -17,7 +17,8 @@ class CreateArchivosAdjuntosTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('evento_id')->unsigned()->nullable();
             $table->foreign('evento_id')->references('id')->on('eventos')->onUpdate('cascade')->nullable();
-            $table->string('url');
+            $table->string('nombre')->nullable();
+            $table->string('url')->nullable();
             $table->timestamps();
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_spanish_ci';

@@ -5,16 +5,19 @@ namespace App\Http\Controllers;
 use App\Models\Cie10;
 use App\Models\DatosIdentificacion;
 use App\Models\Evento;
+use App\Models\Formularios;
 use App\Models\Seguridad\Usuario;
-use Barryvdh\DomPDF\PDF;
+use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class HistoriaClinicaBController extends Controller
 {
     public function create($id)
     {      
+        $terapeuta = Evento::ConsultaTerapeuta()->first();
         $cie10 = Cie10::orderBy('id')->get();        
         $identificacion = DatosIdentificacion::findOrFail($id);    
         $edad = Carbon::parse($identificacion->fechaNacimiento)->age;
@@ -22,7 +25,7 @@ class HistoriaClinicaBController extends Controller
         $time = Carbon::now();
         $date = $date->format('Y-m-d');
         $time = $time->format('H:i:s');
-        return view('historiasCB.create', compact('identificacion', 'edad', 'cie10', 'date', 'time'));
+        return view('historiasCB.create', compact('identificacion', 'edad', 'cie10', 'date', 'time', 'terapeuta'));
     }
 
     public function store(Request $request, $id)
@@ -30,18 +33,20 @@ class HistoriaClinicaBController extends Controller
         $idUser = auth()->id();
         $rol = 2;
 
-        $evento = Evento::create([
+        $formulario = Formularios::findOrFail(3);
+
+        $evento = $formulario->eventos()->create([
             'usuario_id' => $idUser,
-            'rol_id'=>$rol,
-            'formulario_id'=>3,           
+            'rol_id'=>$rol,          
             'identificacion_id'=> $id,
         ]);
-        $evento->historiaClinicaB()->create([
+        $evento->formatosBase()->create([
             'nombreAcompañante'=>request('nombreAcompañante'),
             'parentescoAcompañante'=>request('parentescoAcompañante'),
             'fechaConsulta'=>request('fechaConsulta'),
             'horaConsulta'=>request('horaConsulta'),
             'edadActual'=>request('edadActual'),
+            'consultorio'=>request('consultorio'),
             'motivoConsulta'=>request('motivoConsulta'),
             'enfermedadActual'=>request('enfermedadActual'),
         ]);
@@ -114,12 +119,22 @@ class HistoriaClinicaBController extends Controller
             ]);  
         }  
 
+        $adjunto = $request->file('url');
+        for($i = 0; $i < count($adjunto); $i ++){
 
-        /* if($request->hasFile('url')){
-            $evento->archivosAdjuntos()->create([
-               'url' => $request->file('url')->store('public/ArchivosAnexos')
-            ]);
-        } */
+            if($request->hasFile('url')){
+
+                $nombre = $adjunto[$i]->getClientOriginalName();   
+
+                $evento->archivosAdjuntos()->create([
+                    'nombre' => $nombre,
+                    'url' => $adjunto[$i]->store('public/ArchivosAnexos'),
+                ]);
+                Storage::disk('public')->put("ArchivosAnexos", $adjunto[$i]);
+
+            }          
+        } 
+        
         return redirect()->route('listaAtenciones.index',  ['id'=>$id]);        
     }
 
@@ -128,13 +143,16 @@ class HistoriaClinicaBController extends Controller
         $identificacion = DatosIdentificacion::findOrFail($id);    
         $edad = Carbon::parse($identificacion->fechaNacimiento)->age;
         $eventos = Evento::findOrFail($idh);        
-        return view('historiasCB.show', compact('edad', 'eventos', 'identificacion', 'data'));
+        return view('historiasCB.show', compact('edad', 'eventos', 'identificacion'));
     }
     
-    public function crearPDF(){
+    public function crearPDF($id, $idh){
 
-        $pdf = PDF::loadView('seguridad.index');
-        return $pdf->stream();
+        $identificacion = DatosIdentificacion::findOrFail($id);    
+        $edad = Carbon::parse($identificacion->fechaNacimiento)->age;
+        $eventos = Evento::findOrFail($idh);
+        $pdf = PDF::loadView('historiasCB.show', compact('edad', 'eventos', 'identificacion'));
+        return $pdf->stream();       
     }
 
 

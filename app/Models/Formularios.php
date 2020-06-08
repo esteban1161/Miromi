@@ -8,8 +8,13 @@ class Formularios extends Model
 {
     protected $table = "formularios";
 
-    protected $fillable = ['nombre', 'route'];
+    protected $fillable = ['nombre', 
+                                        'routeCreate',
+                                        'routeShow'];
     
     protected $guarded = ['id'];
     
+    public function eventos(){
+        return $this->hasOne(Evento::class);
+      }
 }

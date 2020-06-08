@@ -7,10 +7,11 @@ use App\Http\Requests\ValidacionInfoTerapeuta;
 use App\Models\Ciudad;
 use App\Models\DatosIdentificacion;
 use App\Models\Evento;
+use App\Models\Formularios;
 use App\Models\Localidad;
 use App\Models\Pais;
 use App\Models\Seguridad\Usuario;
-use App\Models\tituloAcademico;
+use App\Models\TituloAcademico;
 use Illuminate\Http\Request;
 
 class PerfilTerapeutaController extends Controller
@@ -38,14 +39,20 @@ class PerfilTerapeutaController extends Controller
             $id = auth()->id();
             $rol = 2;
 
-            $evento = Evento::create([
+            $formulario = Formularios::findOrFail(1);
+
+
+            $evento = $formulario->eventos()->create([
                 'usuario_id' => $id,
-                'rol_id'=>$rol,
-                'formulario_id'=>1,            
+                'rol_id'=>$rol,        
             ]);
             
+            if($foto = DatosIdentificacion::setFotoPerfil($request->foto)){
+                $request->request->add(['foto' => $foto]);
+            }  
+
             $evento->identificacion()->create([       
-                
+                'foto' => $foto,
                 'primerNombre' =>$request['primerNombre'],
                 'segundoNombre' =>$request['segundoNombre'],
                 'primerApellido' =>$request['primerApellido'],
@@ -108,13 +115,6 @@ class PerfilTerapeutaController extends Controller
         return redirect()->route('paciente.index')->with('mensaje', 'Perfil Terapeuta creado con exito');
     }
 
-    public function show($id)
-    {
-        $identificacion = DatosIdentificacion::findOrFail($id);
-        
-        return view('paciente.show', compact('identificacion'));
-    }
-
     public function edit($id)
     {
         $paises = Pais::orderBy('id')->pluck('nombrePais', 'id')->toArray();
@@ -126,8 +126,11 @@ class PerfilTerapeutaController extends Controller
     
     public function update(Request $request, $id)
     {
-        $evento = Evento::findOrFail($id);         
+        $evento = Evento::findOrFail($id);     
+        
+        $foto = $request->file('foto');
         $evento->identificacion()->update([
+            'foto' => $foto->store('public/FotosPerfil'),
             'primerNombre' =>$request['primerNombre'],
             'segundoNombre' =>$request['segundoNombre'],
             'primerApellido' =>$request['primerApellido'],
@@ -136,7 +139,11 @@ class PerfilTerapeutaController extends Controller
             'numeroIdentificacion' =>$request['numeroIdentificacion'],
             'sexo' =>$request['sexo'],
             'fechaNacimiento' =>$request['fechaNacimiento'],
-        ]);            
+        ]);    
+        
+        if($foto = DatosIdentificacion::setFotoPerfil($request->foto,  $evento->identificacion->foto)){
+            $request->request->add(['foto' => $foto]);
+        }  
 
         $consultorios = $request->input('nombreConsultorio');
         $consultorios2 = $request->input('direccionConsultorio');
@@ -184,10 +191,6 @@ class PerfilTerapeutaController extends Controller
                 'tipoCorreo'=>$correos[$i],
                 'correoElectronico'=>$correos2[$i],
             ]); 
-        }
-
-        if($request->hasFile('foto')){           
-            $evento->identificacion()->update(['foto' => $request->file('foto')->store('public/FotosPerfil')]);
         }
 
         return redirect('/paciente')->with('mensaje', 'Perfil Terapeuta actualizado con exito');

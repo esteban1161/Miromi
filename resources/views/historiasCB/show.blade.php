@@ -19,9 +19,14 @@
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-                <div class="col-sm-12">
-                    <h1>Info de la historia clinica de {{$identificacion->primerNombre}}</h1>
+                <div class="col-sm-9">
+                    <h1>{{$identificacion->primerNombre}} {{$identificacion->segundoNombre}} {{$identificacion->primerApellido}} {{$identificacion->segundoApellido}} - {{$identificacion->tipoDocumento}} - {{$identificacion->numeroIdentificacion}}</h1>
                 </div>
+                <div class="col-sm-3">        
+                    <a href="{{route('listaAtenciones.index', ['id' => $identificacion->id])}}" class="btn btn-block btn-warning">
+                        <i class="fas fa-clipboard-list"></i> Lista de Atenciones
+                    </a>
+                </div>   
             </div>
         </div>
     </section>
@@ -34,18 +39,54 @@
                         <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
                     </div>
                 </div>
-                <div class="card-body"> 
+                <div class="card-body">
+                   <div class="row">
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label for="consultorio">Consultorio</label>
+                            <input class="form-control" id="consultorio" name="consultorio" type="text" value="{{old('consultorio', $eventos->formatosBase->consultorio ?? '')}}" readonly>
+                        </div>
+                    </div>
+                    <div class="col-md-3"> 
+                        <div class="form-group">
+                            <label for="fechaConsulta">Fecha Consulta</label>
+                            <div class="input-group col-lg-12">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">            <i class="far fa-calendar-alt"></i>            </span>
+                                </div>                
+                            <input type="date" class="form-control" id="fechaConsulta" name="fechaConsulta" value="{{old('fechaConsulta', $eventos->formatosBase->fechaConsulta ?? '')}}" tabindex="3" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="horaConsulta">Hora Consulta</label>
+                            <div class="input-group col-lg-12">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">            <i class="far fa-clock"></i>            </span>
+                                </div>
+                            <input type="time" class="form-control" id="horaConsulta" name="horaConsulta" value="{{old('horaConsulta', $eventos->formatosBase->horaConsulta ?? '')}}" tabindex="4" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-group">
+                            <label for="edadActual">Edad</label>
+                            <input type="text" name="edadActual" class="form-control" id="edadActual" value="{{old('edadActual', $eventos->formatosBase->edadActual ?? '')}}" tabindex="5" readonly>
+                        </div>
+                    </div> 
+                   </div>
                     <div class="row">    
                         <div class="col-md-6">            
                             <div class="form-group">
                                 <label for="nombreAcompañante">Nombre Acompañante</label>
-                                <input type="text" name="nombreAcompañante" class="form-control" id="nombreAcompañante" value="{{old('nombreAcompañante', $eventos->historiaClinicaB->nombreAcompañante ?? '')}}" tabindex="1" readonly>
+                                <input type="text" name="nombreAcompañante" class="form-control" id="nombreAcompañante" value="{{old('nombreAcompañante', $eventos->formatosBase->nombreAcompañante ?? '')}}" tabindex="1" readonly>
                             </div>                       
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="parentescoAcompañante">Parentesco Acompañante</label>
-                                <input list="parentescoAcompañante" type="text" name="parentescoAcompañante" class="form-control" value="{{old('parentescoAcompañante', $eventos->historiaClinicaB->parentescoAcompañante ?? '')}}" tabindex="2" readonly>
+                                <input list="parentescoAcompañante" type="text" name="parentescoAcompañante" class="form-control" value="{{old('parentescoAcompañante', $eventos->formatosBase->parentescoAcompañante ?? '')}}" tabindex="2" readonly>
                                 <datalist id="parentescoAcompañante">
                                     <option value="Padre"></option>
                                     <option value="Madre"></option>
@@ -56,46 +97,17 @@
                                     <option value="Otro Parentesco"></option>
                                 </datalist>
                             </div>               
-                        </div>
-                        <div class="col-md-4"> 
-                            <div class="form-group">
-                                <label for="fechaConsulta">Fecha Consulta</label>
-                                <div class="input-group col-lg-12">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">            <i class="far fa-calendar-alt"></i>            </span>
-                                    </div>                
-                                <input type="date" class="form-control" id="fechaConsulta" name="fechaConsulta" value="{{old('fechaConsulta', $eventos->historiaClinicaB->fechaConsulta ?? '')}}" tabindex="3" readonly>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="horaConsulta">Hora Consulta</label>
-                                <div class="input-group col-lg-12">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">            <i class="far fa-clock"></i>            </span>
-                                    </div>
-                                <input type="time" class="form-control" id="horaConsulta" name="horaConsulta" value="{{old('horaConsulta', $eventos->historiaClinicaB->horaConsulta ?? '')}}" tabindex="4" readonly>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="edadActual">Edad Actual</label>
-                                <input type="text" name="edadActual" class="form-control" id="edadActual" value="{{old('edadActual', $eventos->historiaClinicaB->edadActual ?? '')}}" tabindex="5" readonly>
-                            </div>
-                        </div>
-                    
+                        </div>                    
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="motivoConsulta">Motivo de Consulta</label>
-                                <input type="text" name="motivoConsulta" class="form-control" id="motivoConsulta" value="{{old('motivoConsulta', $eventos->historiaClinicaB->motivoConsulta ?? '')}}" tabindex="6" readonly>
+                                <input type="text" name="motivoConsulta" class="form-control" id="motivoConsulta" value="{{old('motivoConsulta', $eventos->formatosBase->motivoConsulta ?? '')}}" tabindex="6" readonly>
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="enfermedadActual">Enfermedad Actual</label>
-                                <textarea class="form-control" rows="2" name="enfermedadActual" id="enfermedadActual" tabindex="7" readonly>{{old('enfermedadActual', $eventos->historiaClinicaB->enfermedadActual ?? '')}} </textarea>
+                                <textarea class="form-control" rows="2" name="enfermedadActual" id="enfermedadActual" tabindex="7" readonly>{{old('enfermedadActual', $eventos->formatosBase->enfermedadActual ?? '')}} </textarea>
                             </div>
                         </div>
                     </div>
@@ -403,7 +415,7 @@
                                     @foreach ($eventos->diagnosticos as $diagnostico1)
                                     <tr>
                                         <td>                                        
-                                            <input type="text" class="form-control" value="{{$diagnostico1->cie10s->id}} - {{$diagnostico1->cie10s->codigo}} - {{$diagnostico1->cie10s->descripcion}}" readonly>
+                                            <input type="text" class="form-control" value="{{$diagnostico1->cie10s->id ?? ''}} - {{$diagnostico1->cie10s->codigo ?? ''}} - {{$diagnostico1->cie10s->descripcion ?? ''}}" readonly>
                                         </td>
                                         <td>    
                                             <select name="tipoDiagnostico[]" id="tipoDiagnostico" class="form-control"  tabindex="55" readonly>
@@ -492,20 +504,38 @@
                             </div>        
                     
                         </div>  
-                    </div>
-                    
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="url">Archivo Adjunto</label>
-                                <div class="custom-file col-lg-12">
-                                    <input type="file" class="custom-file-input" id="url" name="url" readonly>
-                                    <label class="custom-file-label" for="url">Escojer archivo</label>
-                                </div>
-                            </div>
+                    </div>                    
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <table>
+                                <thead>
+                                    <th>Archivos Anexados</th>
+                                </thead>
+                                <tbody>
+                                    @foreach ($eventos->archivosAdjuntos as $adjuntos)
+                                        <tr>
+                                            <td>
+                                                <a target="_blank" class="" href="{{Storage::url($adjuntos->url ?? ' ')}}">
+                                                <i class="fas fa-file"></i> {{$adjuntos->nombre}}</a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
                         </div>
+                       {{--  <div>
+                            <a class="dropdown-item" href="{{route('historiaC.crearPDF', ['id'=>$identificacion->id, 'idh'=>$eventos->id])}}">
+                            <i class="fas fa-file-pdf"></i> Descargar Info PDF</a>
+                        </div>      --}}                       
+                    </div>
                     </div>
                 </div>
             </div>
+            <div class="card">
+                <div class="card-footer">    
+                    <div class="col-lg-6">    @include('includes.boton-form-retroceder')    </div>              
+                </div>
+            </div>        
         </div>             
     </section>
 @endsection 

@@ -7,6 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 class Ciudad extends Model
 {
     protected $table = "ciudads";
-    protected $fillable = ['nombreCiudad'];
+    protected $fillable = ['pais_id',
+                                        'nombreCiudad'];
     protected $guarded = ['id'];
+    
+    public $timestamps = false;
+
+    public function pais(){
+        return $this->belongsTo(Pais::class);
+    }
 }

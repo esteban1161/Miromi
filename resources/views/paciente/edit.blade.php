@@ -22,22 +22,9 @@
 @section('scripts')
     <script src="{{asset("assets/pages/scripts/admin/file/index.js")}}" type="text/javascript"></script>       
     <script src="{{asset("assets/pages/scripts/admin/forms-dinamicos/index.js")}}" type="text/javascript"></script>
-    <script type="text/javascript">
-        $(document).ready(function (){
-            $('#foto').fileinput({
-                language: 'es',
-                allowedFileExtensions: ['jpg', 'jpeg', 'png'], 
-                maxFileSize: 1000,
-                showUpload: false,
-                showClose: false,
-                initialPreviewAsData: true,
-                dropZoneEnabled: false,
-                theme: "fas",
-            });
-        });
-    </script>
+    <script src="{{asset("assets/pages/scripts/admin/imagenPerfil/index.js")}}" type="text/javascript"></script>
+@endsection
 
-    @endsection
 @section('contenido')    
 
 <section class="content-header">
@@ -45,8 +32,13 @@
         @include('includes.form-error')
         @include('includes.mensaje')
         <div class="row mb-2">
-            <div class="col-sm-12">
+            <div class="col-sm-9">
                 <h1>Editar Paciente</h1>
+            </div>
+            <div class="row col-sm-3 card-tolls">  
+                <a href="{{route('paciente.index')}}" class="btn btn-block btn-warning">
+                    <i class="fas fa-clipboard-list"></i> Lista de pacientes
+                </a>
             </div>
         </div>
     </div>

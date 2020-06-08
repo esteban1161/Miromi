@@ -27,7 +27,7 @@
                 <h1>Lista Pacientes</h1>
             </div>
             <div class="row col-sm-3 card-tolls">           
-                <a href="{{route('paciente.create')}}" class="btn btn-block btn-danger btn-sm">
+                <a href="{{route('paciente.create')}}" class="btn btn-block btn-danger">
                     <i class="fas fa-user-plus"></i> Crear Paciente
                 </a>
             </div>                
@@ -64,9 +64,6 @@
                                 <td>{{$evento->identificacion->numeroIdentificacion}}</td>
                                 <td>{{$evento->identificacion->fechaNacimiento}}</td>     
                                 <td>
-                                    <a href="{{route('paciente.show', ['id'=>$evento->id])}}" class="btn-accion-tabla tooltipsC" title="Mostrar este Resgistro">
-                                        <i class="fas fa-eye"></i>
-                                    </a>
                                     <a href="{{route('paciente.edit', ['id' => $evento->id])}}" class="btn-accion-tabla tooltipsC" title="Editar este Registro">
                                         <i class="fas fa-pencil-alt"></i>
                                     </a>

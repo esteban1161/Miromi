@@ -50,7 +50,7 @@
         <div class="col-md-6">        
             <div class="form-group">
                 <label for="foto">Foto</label>
-                <input type="file" name="foto" id="foto" data-initial-preview="{{isset($data->identificacion->foto) ? Storage::url("imagenes/FotosPacientes/$identificacion->foto") : "http://www.placehold.it/200x150/EFEFEF/AAAAAA&text=Foto+Perfil"}}" accept="image/*">            
+                <input type="file" name="foto" id="foto" data-initial-preview="{{isset($data->identificacion->foto) ? Storage::url($identificacion->foto) : "http://www.placehold.it/200x150/EFEFEF/AAAAAA&text=Foto+Perfil"}}" accept="image/*">            
             </div>
             <div class="form-group">
                 <label for="numeroIdentificacion">Numero de Identificacion</label>

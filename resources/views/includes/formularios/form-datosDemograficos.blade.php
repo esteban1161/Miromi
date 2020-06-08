@@ -3,14 +3,30 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label for="paisNacimiento">Pais Nacimiento</label>
-                <select id="paisNacimiento" name="paisNacimiento" class="form-control select2" style="width: 100%;" tabindex="13">
+                {{-- <select name="paisNacimiento" id="pais" class="select2 form-control" tabindex="13">
+                    <option selected="selected">--Seleccionar Pais--</option>
+                    @foreach($paises as $pais)
+                         <option value="{{ $pais->id }}">{{ $pais->nombrePais }}</option> 
+                    @endforeach
+                    </select><br><br> --}}
+
+                <input name="paisNacimiento" list="paisL" type="text"  id="pais" class="form-control" value="{{old('paisNacimiento', $data->demografico->paisNacimiento ?? '')}}">
+                <datalist id="paisL">
+                    @foreach($paises as $pais)
+                        <option value="{{ $pais->id }} {{ $pais->nombrePais }}"></option> 
+                @endforeach
+                </datalist>
+
+                {{-- <select id="paisNacimiento" name="paisNacimiento" class="form-control select2" style="width: 100%;" >
                     <option value="">...Selecionar Pais...</option>
                     @foreach($paises as $id => $nombrePais)
                     <option value="{{$id}} "{{ old('paisNacimiento',  $data->demografico->paisNacimiento ?? '') == $id ? 'selected' : ' ' }}>
                         {{$nombrePais}}
                     </option>
                     @endforeach  
-                </select>
+                </select> --}}
+
+
             </div>
             <div class="form-group">
                 <label for="estadoCivil">Estado Civil</label>
@@ -43,15 +59,27 @@
         </div>
         <div class="col-md-6">
             <div class="form-group">
+                
                 <label for="ciudadNacimiento">Ciudad Nacimiento</label>
-                <select id="ciudadNacimiento" name="ciudadNacimiento" class=" select2 form-control" tabindex="14">
+                {{--<select name="ciudadNacimiento" id="ciudad" class=" select2 form-control" tabindex="14">
+                    <option value="">...Seleccione Ciudad...</option>
+                </select><br><br> --}}
+
+                <input name="ciudadNacimiento" list="ciudad" type="text" class="form-control" value="{{old('ciudadNacimiento', $data->demografico->ciudadNacimiento ?? '')}}">
+                <datalist id="ciudad">
+                    
+                </datalist>
+
+                {{-- <select id="ciudadNacimiento" name="ciudadNacimiento" class=" select2 form-control" >
                     <option value="">...Selecionar Ciudad...</option>    
                     @foreach($ciudades as $id => $nombreCiudad)                
                         <option value="{{$id}}"{{ old('ciudadNacimiento',  $data->demografico->ciudadNacimiento ?? '') == $id ? 'selected' : ' ' }}>
                             {{$nombreCiudad}}
                         </option>
                     @endforeach  
-                </select>
+                </select> --}}
+
+
             </div>
             <div class="form-group">
                 <label for="escolaridad">Escolaridad</label>

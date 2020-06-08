@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateImagenesTable extends Migration
+class CreateHistoriaBlancosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateImagenesTable extends Migration
      */
     public function up()
     {
-        Schema::create('imagenes', function (Blueprint $table) {
+        Schema::create('historia_blancos', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('url');
-            $table->morphs('imagenable');
+            $table->bigInteger('evento_id')->unsigned()->nullable();
+            $table->foreign('evento_id')->references('id')->on('eventos')->onUpdate('cascade')->nullable();            
+            $table->string('formatoBlanco')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ class CreateImagenesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('imagenes');
+        Schema::dropIfExists('historia_blancos');
     }
 }

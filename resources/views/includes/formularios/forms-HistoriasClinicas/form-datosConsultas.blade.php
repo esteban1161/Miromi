@@ -122,15 +122,24 @@
 
     </div>  
 </div>
-
     <div class="col-md-12">
-        <div class="form-group">
-            <label for="url">Archivo Adjunto</label>
-            <div class="custom-file col-lg-12">
-                <input type="file" class="custom-file-input" id="url" name="url">
-                <label class="custom-file-label" for="url">Escojer archivo</label>
-            </div>
-        </div>
+        <table id="tablaAdjuntos" class="table table-condensed table-striped">
+            <thead>
+                <tr>
+                    <th>Adjuntar Archivos</th>
+                    <th>Mas</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <input type="file" name="url[]" >                        
+                    </td>
+                    <td><button id="addAdjuntos" name="adicional" type="button" class="btn btn-primary"> <i class="fas fa-plus-circle"></i></button></td>
+                </tr>
+            </tbody> 
+        </table><br><br>
+        
     </div>
 </div>
 
