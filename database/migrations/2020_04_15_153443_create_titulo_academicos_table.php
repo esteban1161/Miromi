@@ -17,7 +17,6 @@ class CreateTituloAcademicosTable extends Migration
             $table->bigIncrements('id');
             $table->string('titulo', 500);
             $table->string('descripcion', 500)->nullable();
-            $table->timestamps();
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_spanish_ci';
         });

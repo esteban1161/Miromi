@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="{{ asset("assets/$theme/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css")}}"> 
     <link rel="stylesheet" href="{{ asset("assets/js/bootstrap-fileinput/css/fileinput.min.css")}}"> 
 
+    <link rel="stylesheet" href="{{asset("assets/js/easy-autocomplete/dist/easy-autocomplete.min.css")}}">
+
+
   
 @endsection
 
@@ -19,6 +22,9 @@
     <script src="{{ asset("assets/js/bootstrap-fileinput/js/locales/es.js")}}"></script>
     <script src="{{ asset("assets/js/bootstrap-fileinput/themes/fas/theme.min.js")}}"></script>
 
+    <script src="{{asset("assets/js/easy-autocomplete/dist/jquery.easy-autocomplete.min.js")}}"></script>
+
+
 @endsection
 
 @section('scripts')
@@ -27,6 +33,82 @@
     <script src="{{asset("assets/pages/scripts/admin/forms-dinamicos/index.js")}}" type="text/javascript"></script>
     <script src="{{asset("assets/pages/scripts/admin/imagenPerfil/index.js")}}" type="text/javascript"></script>  
     <script src="{{asset("assets/pages/scripts/admin/Select_Ciudad/index.js")}}" type="text/javascript"></script>
+
+<script>
+    var options = {
+        url: 'http://miromi.test/paises',
+        getValue: "nombrePais", 
+        list: {
+            sort: {
+                enabled: true
+            },
+            match: {
+                enabled: true
+            }
+        }
+    };
+    $ ("#paisR"). easyAutocomplete (options); 
+
+    var options = {
+        url: 'http://miromi.test/ciudades',
+        getValue: "nombreCiudad", 
+        list: {
+            sort: {
+                enabled: true
+            },
+            match: {
+                enabled: true
+            }
+        }
+    };
+    $ ("#ciudadR"). easyAutocomplete (options); 
+    
+    $(function(){
+        $('#paisR').change(function(){
+            var paisNombre = this.value;
+            var options = {
+            url: 'http://miromi.test/paciente/departamentos/'+ paisNombre,
+
+            getValue: "nombreDepartamento",
+
+            list: {
+                sort: {
+                    enabled: true
+                },
+                match: {
+                    enabled: true
+                },
+                
+            }
+        };
+        $("#departamentoR").easyAutocomplete(options);
+        });
+    });
+
+    $(function(){
+        $('#departamentoR').change(function(){
+            var departamentoNombre = this.value;
+            var options = {
+            url: 'http://miromi.test/paciente/ciudades/'+ departamentoNombre,
+
+            getValue: "nombreCiudad",
+
+            list: {
+                sort: {
+                    enabled: true
+                },
+                match: {
+                    enabled: true
+                },
+                
+            }
+        };
+        $("#ciudadR").easyAutocomplete(options);
+        });
+    });
+    
+</script>
+    
 @endsection
 
 @section('contenido')

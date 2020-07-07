@@ -13,6 +13,8 @@ class Formularios extends Model
                                         'routeShow'];
     
     protected $guarded = ['id'];
+
+    public $timestamps = false;
     
     public function eventos(){
         return $this->hasOne(Evento::class);

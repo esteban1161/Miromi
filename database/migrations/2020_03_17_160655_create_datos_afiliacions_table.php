@@ -22,7 +22,6 @@ class CreateDatosAfiliacionsTable extends Migration
             $table->string('responsableMedico')->nullable();
             $table->string('parentescoResponsable')->nullable();
             $table->string('telefonoResponsable')->nullable();
-            $table->timestamps();
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_spanish_ci';
         });

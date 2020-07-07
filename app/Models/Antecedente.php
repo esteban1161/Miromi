@@ -24,4 +24,7 @@ class Antecedente extends Model
                                         'menopausia',
                                         'planificación',];
     protected $guarded = ['id'];
+
+    public $timestamps = false;
+
 }

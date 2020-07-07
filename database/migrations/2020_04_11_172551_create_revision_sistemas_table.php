@@ -27,7 +27,7 @@ class CreateRevisionSistemasTable extends Migration
             $table->string('genital')->nullable(); 
             $table->string('pielAnexosRS')->nullable();
             $table->string('endocrinologico')->nullable();
-            $table->timestamps();
+            $table->string('otrosRSistemas')->nullable();
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_spanish_ci';
         });

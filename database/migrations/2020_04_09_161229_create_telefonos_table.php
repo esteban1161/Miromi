@@ -19,7 +19,6 @@ class CreateTelefonosTable extends Migration
             $table->foreign('evento_id')->references('id')->on('eventos')->onUpdate('cascade')->nullable();
             $table->string('tipoTelefono')->nullable();
             $table->string('numeroTelefono')->nullable();
-            $table->timestamps();
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_spanish_ci';
         });

@@ -32,72 +32,29 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item">
-                    <a href="{{route('ripf.index')}}" class="nav-link">
-                        <i class="nav-icon fas fa-file-medical-alt"></i>
+                    <a href="{{route('auxiliar.index')}}" class="nav-link">
+                        <i class="nav-icon fas fa-ambulance"></i>
                         <p>
-                            Ripf
+                            Auxiliar
                         </p>
                     </a>
                 </li>
-                <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-file-upload"></i>
+                <li class="nav-item">
+                    <a href="{{route('rips.index')}}" class="nav-link">
+                        <i class="nav-icon fas fa-file-medical-alt"></i>
                         <p>
-                            UI Elements
-                            <i class="fas fa-angle-left right"></i>
+                            Rips
                         </p>
                     </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>General</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Icons</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Buttons</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Sliders</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Modals & Alerts</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Navbar & Tabs</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Timeline</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Ribbons</p>
-                            </a>
-                        </li>
-                    </ul>
-                  </li>
+                </li>  
+                <li class="nav-item">
+                    <a href="{{route('procedimientosE.index')}}" class="nav-link">
+                        <i class="nav-icon fas fa-file-medical-alt"></i>
+                        <p>
+                            Procedimientos
+                        </p>
+                    </a>
+                </li>             
                 @foreach ($menusComposer as $key => $item)
                     @if ($item["menu_id"] != 0)
                         @break

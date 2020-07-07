@@ -13,6 +13,7 @@ use App\Models\Evento;
 use App\Models\Localidad;
 use App\Models\Pais;
 use App\Models\correoElectronico;
+use App\Models\Departamentos;
 use App\Models\Formularios;
 use App\Models\Seguridad\Usuario;
 use Illuminate\Http\Request;
@@ -28,8 +29,7 @@ class PerfilPacienteController extends Controller
     }
 
     public function create()
-    {/* 
-        $paises = Pais::orderBy('id')->pluck('nombrePais', 'id')->toArray(); */
+    {         
         $paises = Pais::orderBy('id')->get();
         $localidades = Localidad::orderBy('id')->pluck('localidadResidencia', 'id')->toArray();
         $data = [0];
@@ -43,18 +43,12 @@ class PerfilPacienteController extends Controller
 
         $formulario = Formularios::findOrFail(2);
 
-
         $evento = $formulario->eventos()->create([
             'usuario_id' => $id,
             'rol_id'=>$rol,
-        ]);                  
+        ]);          
         
-        if($foto = DatosIdentificacion::setFotoPerfil($request->foto)){
-            $request->request->add(['foto' => $foto]);
-        }  
-
         $identificacion = $evento->identificacion()->create([
-            'foto' => $foto,
             'primerNombre' => $request['primerNombre'],
             'segundoNombre' => $request['segundoNombre'],
             'primerApellido' => $request['primerApellido'],
@@ -62,9 +56,20 @@ class PerfilPacienteController extends Controller
             'tipoDocumento' => $request['tipoDocumento'],
             'numeroIdentificacion' => $request['numeroIdentificacion'],
             'sexo' => $request['sexo'],
-            'fechaNacimiento' => $request['fechaNacimiento'],  
-                        
+            'fechaNacimiento' => $request['fechaNacimiento'],           
+            'grupoSanguineo'  => $request['grupoSanguineo']            
         ]);      
+        if($foto = DatosIdentificacion::setFotoPerfil($request->foto)){
+            $foto = request()->file('foto')->store('public/FotosPerfil');
+            $identificacion->foto = $foto;
+            $identificacion->save();
+        } 
+       /*  if($request->hasfile('foto')){
+            if($foto = DatosIdentificacion::setFotoPerfil($request->foto)){
+                $foto = request()->file('foto')->store('public/FotosPerfil');
+                $identificacion + ['foto' => $foto];
+            }
+        } */
     
         $evento->demografico()->create([
             'paisNacimiento'=>$request['paisNacimiento'],
@@ -105,7 +110,9 @@ class PerfilPacienteController extends Controller
                 'tipoCorreo'=>$correos[$i],
                 'correoElectronico'=>$correos2[$i],
             ]);
-        }            
+        }       
+        
+        
             
         return redirect()->route('paciente.index') ->with('mensaje', 'Paciente creado con exito'); 
     }
@@ -125,12 +132,7 @@ class PerfilPacienteController extends Controller
     {
         $evento = Evento::findOrFail($id);        
 
-        if($foto = DatosIdentificacion::setFotoPerfil($request->foto, $evento->identificacion->foto)){
-            $request->request->add(['foto' => $foto]);
-        } 
-
         $evento->identificacion()->update([
-            'foto' => $foto,
             'primerNombre' => $request['primerNombre'],
             'segundoNombre' => $request['segundoNombre'],
             'primerApellido' => $request['primerApellido'],
@@ -140,7 +142,13 @@ class PerfilPacienteController extends Controller
             'sexo' => $request['sexo'],
             'fechaNacimiento' => $request['fechaNacimiento'],           
         ]);
-    
+
+        if($foto = DatosIdentificacion::setFotoPerfil($request->foto, $evento->identificacion->foto)){
+            $foto = request()->file('foto')->store('public/FotosPerfil');
+            $evento->identificacion->foto = $foto;
+            $evento->identificacion->save();
+        } 
+
         $evento->demografico()->update([
             'paisNacimiento'=>$request['paisNacimiento'],
             'ciudadNacimiento'=>$request['ciudadNacimiento'],
@@ -187,12 +195,21 @@ class PerfilPacienteController extends Controller
         return redirect('/paciente') ->with('mensaje', 'Paciente Actualizado con Exito');
     }   
 
-    public function SelectCiudad($id){
-        return Ciudad::where('pais_id','=',$id)->get();
+    
+
+    public function selectDepartamento($nombre){
+        $pais = Pais::where('nombrePais', $nombre)->first();
+        $departamento = Departamentos::Departamentos($pais->id)->get();   
+        $departamentoJ = json_encode($departamento);
+        return $departamentoJ;
+    }   
+    
+    public function selectCiudad($nombre){
+        $departamento = Departamentos::where('nombreDepartamento', $nombre)->first();
+        $ciudad = Ciudad::Ciudades($departamento->id)->get();
+        $ciudadJ = json_encode($ciudad);
+        return $ciudadJ;
     }
-    
 
 
-    
-    
 }

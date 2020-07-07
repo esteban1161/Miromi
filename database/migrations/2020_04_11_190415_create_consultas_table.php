@@ -24,7 +24,6 @@ class CreateConsultasTable extends Migration
             $table->string('valorConsulta')->nullable();
             $table->string('codigoConsulta')->nullable();
             $table->string('tipoUsuario')->nullable();
-            $table->timestamps();
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_spanish_ci';
         });

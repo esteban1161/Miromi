@@ -35,15 +35,24 @@ class HistoriaBlancoController extends Controller
             'identificacion_id'=> $id,
         ]);
 
+        switch ($request->get('subirBoton')) {
+            case 'guardar':
+                $evento->estado = true;
+                $evento->save();
+                break;
+            
+            case 'borrador':
+                $evento->estado = false;
+                $evento->save();
+                break;
+        }
+
         $evento->formatosBase()->create([
-            'nombreAcompañante'=>request('nombreAcompañante'),
-            'parentescoAcompañante'=>request('parentescoAcompañante'),
-            'fechaConsulta'=>request('fechaConsulta'),
-            'horaConsulta'=>request('horaConsulta'),
-            'edadActual'=>request('edadActual'),
-            'consultorio'=>request('consultorio'),
-            'motivoConsulta'=>request('motivoConsulta'),
-            'enfermedadActual'=>request('enfermedadActual'),
+            'fechaConsulta' => request('fechaConsulta'),
+            'horaConsulta' => request('horaConsulta'),
+            'edadActual' => request('edadActual'),
+            'consultorio' => request('consultorio'),
+            'motivoConsulta' => request('motivoConsulta'),
         ]);
 
         $evento->historiaBlanco()->create([
@@ -58,6 +67,51 @@ class HistoriaBlancoController extends Controller
         $identificacion = DatosIdentificacion::findOrFail($id);            
         $eventos = Evento::findOrFail($idh);
         return view('historiaClinicaBlanco.show', compact('eventos', 'identificacion'));
+    }
+
+    public function edit($id, $idh)
+    {
+        $terapeuta = Evento::ConsultaTerapeuta()->first();
+        $identificacion = DatosIdentificacion::findOrFail($id);
+        $eventos = Evento::findOrFail($idh);
+        $edad = Carbon::parse($identificacion->fechaNacimiento)->age;
+        $date = Carbon::now();
+        $time = Carbon::now();
+        $date = $date->format('Y-m-d');
+        $time = $time->format('H:i:s');
+        return view('historiaClinicaBlanco.edit', compact('identificacion', 'edad', 'cie10', 'date', 'time', 'terapeuta', 'eventos'));
+    }
+
+    public function update(Request $request, $id, $idh)
+    {
+        $evento = Evento::findOrFail($idh);       
+
+        $evento->formatosBase()->update([
+            'fechaConsulta'=>request('fechaConsulta'),
+            'horaConsulta'=>request('horaConsulta'),
+            'edadActual'=>request('edadActual'),
+            'consultorio'=>request('consultorio'),
+            'motivoConsulta'=>request('motivoConsulta'),
+        ]);
+
+        switch ($request->get('subirBoton')) {
+            case 'guardar':
+                $evento->estado = true;
+                $evento->save();
+                break;
+            
+            case 'borrador':
+                $evento->estado = false;
+                $evento->save();
+                break;
+        }
+
+        $evento->historiaBlanco()->update([
+            'formatoBlanco' => request('formatoBlanco'),
+        ]);
+
+        return redirect()->route('listaAtenciones.index',  ['id'=>$id]);
+
     }
     
 }

@@ -9,4 +9,7 @@ class Localidad extends Model
     protected $table = "localidads";
     protected $fillable = ['localidadResidencia'];
     protected $guarded = ['id'];
+
+    public $timestamps = false;
+
 }

@@ -14,4 +14,7 @@ class DatosConsultorios extends Model
                                         'codigoSecretaria',
                                         'nitConsultorio',];
     protected $guarded = ['id'];
+
+    public $timestamps = false;
+
 }

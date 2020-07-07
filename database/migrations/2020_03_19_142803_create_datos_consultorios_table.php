@@ -22,7 +22,6 @@ class CreateDatosConsultoriosTable extends Migration
             $table->string('paginaWebConsultorio')->nullable();
             $table->string('codigoSecretaria')->nullable();
             $table->string('nitConsultorio')->nullable();
-            $table->timestamps();
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_spanish_ci';    
         });

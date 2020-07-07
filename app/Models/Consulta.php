@@ -18,4 +18,7 @@ class Consulta extends Model
                                         'tipoUsuario',];
                                        
     protected $guarded = ['id'];
+
+    public $timestamps = false;
+
 }

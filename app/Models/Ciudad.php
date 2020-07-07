@@ -7,13 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class Ciudad extends Model
 {
     protected $table = "ciudads";
-    protected $fillable = ['pais_id',
+    protected $fillable = ['departamentos_id',
                                         'nombreCiudad'];
     protected $guarded = ['id'];
     
     public $timestamps = false;
 
-    public function pais(){
-        return $this->belongsTo(Pais::class);
+    public function scopeCiudades($query, $depatamentos){
+        
+        return $query   ->where('departamentos_id', $depatamentos);                                
     }
 }

@@ -20,14 +20,18 @@ class DatosIdentificacion extends Model
                                         'tipoDocumento',
                                         'numeroIdentificacion',
                                         'sexo',
-                                        'fechaNacimiento'];
+                                        'fechaNacimiento',
+                                        'grupoSanguineo'];
     protected $guarded = ['id'];
+
+    public $timestamps = false;
 
     public static function setFotoPerfil($foto, $actual = false)
     {
         if ($foto) {
+            
             if ($actual) {
-                Storage::disk('public')->delete($actual);
+                Storage::delete("$actual");
             }
             $imageName = Str::random(20) . '.jpg';
             $imagen = Image::make($foto)->encode('jpg', 75);

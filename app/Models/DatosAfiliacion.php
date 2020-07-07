@@ -14,4 +14,7 @@ class DatosAfiliacion extends Model
                                         'parentescoResponsable',
                                         'telefonoResponsable',];
     protected $guarded = ['id'];
+
+    public $timestamps = false;
+
 }

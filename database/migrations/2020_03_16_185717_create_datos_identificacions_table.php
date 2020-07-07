@@ -17,7 +17,7 @@ class CreateDatosIdentificacionsTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('evento_id')->unsigned()->nullable();
             $table->foreign('evento_id')->references('id')->on('eventos')->onUpdate('cascade')->nullable();
-            $table->string('foto')->default('user.png'); 
+            $table->string('foto')->default('public/FotosPerfil/user.png')->nullable(); 
             $table->string('primerNombre')->nullable();
             $table->string('segundoNombre')->nullable(); 
             $table->string('primerApellido')->nullable(); 
@@ -26,7 +26,7 @@ class CreateDatosIdentificacionsTable extends Migration
             $table->string('numeroIdentificacion')->nullable();
             $table->string('sexo')->nullable();
             $table->date('fechaNacimiento')->nullable();
-            $table->timestamps();
+            $table->string('grupoSanguineo')->nullable();
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_spanish_ci';
         });

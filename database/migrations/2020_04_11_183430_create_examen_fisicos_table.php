@@ -35,8 +35,7 @@ class CreateExamenFisicosTable extends Migration
             $table->string('cardioPulmonarEF')->nullable();
             $table->string('extremidadesEF')->nullable();
             $table->string('genitales')->nullable();
-            $table->string('otros')->nullable();
-            $table->timestamps();
+            $table->string('otrosEF')->nullable();
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_spanish_ci';
         });

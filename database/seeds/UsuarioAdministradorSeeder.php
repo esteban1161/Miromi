@@ -37,7 +37,12 @@ class UsuarioAdministradorSeeder extends Seeder
             'nombre' => 'Esteban Rojas', 
             'password' => bcrypt('pass123'),
         ]);
-
+        DB::table('usuarios')->insert([
+            'usuario' => '12345678',
+            'email'=>'marcela@gmail.com',
+            'nombre' => 'Marcela Leyva', 
+            'password' => bcrypt('pass123'),
+        ]);
         /* Meter usuarios rol al programa */
         DB::table('usuario_rols')->insert([
             'rol_id' => 2,
@@ -62,6 +67,10 @@ class UsuarioAdministradorSeeder extends Seeder
             'rol_id' => 1,
             'usuario_id' => 1,
         ]);
+        DB::table('usuario_rols')->insert([
+            'rol_id' => 4,
+            'usuario_id' => 5,
+        ]);
 
         DB::table('formularios')->insert([
             'nombre' => 'PerfilTerapeuta ',
@@ -77,11 +86,29 @@ class UsuarioAdministradorSeeder extends Seeder
             'nombre' => 'Historia Clinica Basica ',
             'routeCreate' => 'historiaC.create',
             'routeShow' => 'historiaC.show',
+            'routeEdit' => 'historiaC.edit',
         ]);
         DB::table('formularios')->insert([
             'nombre' => 'Historia Blanco',
             'routeCreate' => 'historiaB.create',
             'routeShow' => 'historiaB.show',
+            'routeEdit' => 'historiaB.edit',
+        ]);
+        DB::table('formularios')->insert([
+            'nombre' => 'Historia Homeopatica',
+            'routeCreate' => 'historiaH.create',
+            'routeShow' => 'historiaH.show',
+            'routeEdit' => 'historiaH.edit',
+        ]);
+        DB::table('formularios')->insert([
+            'nombre' => 'Procedimientos Enfermeria',
+            'routeCreate' => 'procedimientosE.create',
+            'routeShow' => 'procedimientosE.show',
+        ]);
+        DB::table('formularios')->insert([
+            'nombre' => 'Notas',
+            'routeCreate' => null,
+            'routeShow' => null,
         ]);
 
     }

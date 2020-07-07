@@ -13,4 +13,7 @@ class CorreoElectronico extends Model
                                        'correoElectronico'];
                                        
     protected $guarded = ['id'];
+
+    public $timestamps = false;
+
 }

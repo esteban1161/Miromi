@@ -18,6 +18,7 @@ class CreateFormulariosTable extends Migration
             $table->string('nombre')->nullable();
             $table->string('routeCreate')->nullable();
             $table->string('routeShow')->nullable();
+            $table->string('routeEdit')->nullable();
             $table->timestamps();
         });
     }

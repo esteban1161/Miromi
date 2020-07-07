@@ -29,7 +29,6 @@ class CreateDatosDemograficosTable extends Migration
             $table->string('localidadResidencia')->nullable();
             $table->string('direccionResidencia')->nullable();
             $table->char('zonaResidencia')->nullable();
-            $table->timestamps();
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_spanish_ci';
         });

@@ -10,7 +10,7 @@ class LoginController extends Controller
 {
     use AuthenticatesUsers;
 
-    protected $redirectTo = '/paciente';  //cuando es un terapeuta redicereccionar a los pacientes, si es administrador redireccionar a otra vista
+    protected $redirectTo = '/paciente';  //cuando es un terapeuta redicereccionar a los pacientes, si es administrador redireccionar a otra vista, si es un auxiliar redireccionar a auxiliares
 
     public function __construct()
     {

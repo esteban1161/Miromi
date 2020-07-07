@@ -10,9 +10,12 @@ class Diagnostico extends Model
 
     protected $fillable = ['evento_id',
                                        'cie10s_id',
-                                       'tipoDiagnostico'];
+                                       'tipoDiagnostico',
+                                        'observacionesDx'];
                                        
     protected $guarded = ['id'];
+
+    public $timestamps = false;
 
     public function cie10s(){
         return $this->belongsTo(Cie10::class);

@@ -14,16 +14,20 @@ class FormatoBase extends Model
                                         'fechaConsulta',
                                         'horaConsulta',
                                         'edadActual',
-                                        'consultorios',
+                                        'consultorio',
                                         'motivoConsulta',
                                         'enfermedadActual',
-                                        'consultorio',
+                                        'consultorio',                                        
+                                        'paraclinicos',
+                                        'tratamientoActual',
                                         'personalizado1',
                                         'personalizado2',
                                         'personalizado3',
                                         'personalizado4',
+                                        'observacionesPrivadas',
                                       ];
     protected $guarded = ['id'];
 
-    
+    public $timestamps = false;
+   
 }

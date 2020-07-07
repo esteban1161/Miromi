@@ -45,14 +45,10 @@ class PerfilTerapeutaController extends Controller
             $evento = $formulario->eventos()->create([
                 'usuario_id' => $id,
                 'rol_id'=>$rol,        
-            ]);
-            
-            if($foto = DatosIdentificacion::setFotoPerfil($request->foto)){
-                $request->request->add(['foto' => $foto]);
-            }  
-
-            $evento->identificacion()->create([       
-                'foto' => $foto,
+            ]);           
+              
+            $foto = $request->file('foto');
+            $identificacion = $evento->identificacion()->create([       
                 'primerNombre' =>$request['primerNombre'],
                 'segundoNombre' =>$request['segundoNombre'],
                 'primerApellido' =>$request['primerApellido'],
@@ -61,7 +57,13 @@ class PerfilTerapeutaController extends Controller
                 'numeroIdentificacion' =>$request['numeroIdentificacion'],
                 'sexo' =>$request['sexo'],
                 'fechaNacimiento' =>$request['fechaNacimiento'],
-            ]);        
+            ]);       
+            
+            if($foto = DatosIdentificacion::setFotoPerfil($request->foto)){
+                $foto = request()->file('foto')->store('public/FotosPerfil');
+                $identificacion->foto = $foto;
+                $identificacion->save();
+            } 
             
             $consultorios = $request->input('nombreConsultorio');
             $consultorios2 = $request->input('direccionConsultorio');
@@ -128,9 +130,7 @@ class PerfilTerapeutaController extends Controller
     {
         $evento = Evento::findOrFail($id);     
         
-        $foto = $request->file('foto');
         $evento->identificacion()->update([
-            'foto' => $foto->store('public/FotosPerfil'),
             'primerNombre' =>$request['primerNombre'],
             'segundoNombre' =>$request['segundoNombre'],
             'primerApellido' =>$request['primerApellido'],
@@ -141,9 +141,11 @@ class PerfilTerapeutaController extends Controller
             'fechaNacimiento' =>$request['fechaNacimiento'],
         ]);    
         
-        if($foto = DatosIdentificacion::setFotoPerfil($request->foto,  $evento->identificacion->foto)){
-            $request->request->add(['foto' => $foto]);
-        }  
+        if($foto = DatosIdentificacion::setFotoPerfil($request->foto, $evento->identificacion->foto)){
+            $foto = request()->file('foto')->store('public/FotosPerfil');
+            $evento->identificacion->foto = $foto;
+            $evento->identificacion->save();
+        } 
 
         $consultorios = $request->input('nombreConsultorio');
         $consultorios2 = $request->input('direccionConsultorio');

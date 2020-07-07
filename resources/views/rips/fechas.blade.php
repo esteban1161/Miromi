@@ -1,7 +1,7 @@
 @extends("theme.$theme.layout")
 
 @section('titulo')
-    RIPF
+    RIPS
 @endsection   
 
 @section('styles')
@@ -22,7 +22,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-12">
-                <h1>RIPF</h1>
+                <h1>RIPS</h1>
             </div>
         </div>
     </div>
@@ -31,7 +31,7 @@
     <div class="container-fluid">
         <div class="card card-info ">
             <div class="card-header">
-                Ripfs
+                Rips
             </div>
         
             <div class="card-body">

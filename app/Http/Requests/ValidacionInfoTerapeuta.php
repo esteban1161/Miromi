@@ -135,7 +135,7 @@ class ValidacionInfoTerapeuta extends FormRequest
         $evento->correosElectronicos()->update([
             'correoElectronico' =>$data['correoElectronico'],
             'tipoCorreo' =>$data['tipoCorreo'],
-        ]);
-    } */
+        ]);*/
+    } 
 
 }

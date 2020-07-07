@@ -28,28 +28,24 @@ class PaisSeeder extends Seeder
         ]);
 
         DB::table('ciudads')->insert([
-            'pais_id' => 1,
+            'departamentos_id' => 1,
             'nombreCiudad' => 'Bogota',
         ]);
         DB::table('ciudads')->insert([
-            'pais_id' => 1,
+            'departamentos_id' => 1,
             'nombreCiudad' => 'Cali',
         ]);
         DB::table('ciudads')->insert([
-            'pais_id' =>  1,
+            'departamentos_id' =>  1,
             'nombreCiudad' => 'Cartagena',
         ]);
         DB::table('ciudads')->insert([
-            'pais_id' => 2,
+            'departamentos_id' => 2,
             'nombreCiudad' => 'Brazilia',
         ]);
         DB::table('ciudads')->insert([
-            'pais_id' => 2,
+            'departamentos_id' => 2,
             'nombreCiudad' => 'Rio de Janeiro',
-        ]);
-        DB::table('ciudads')->insert([
-            'pais_id' => 3,
-            'nombreCiudad' => 'Ciudad de Mexico',
         ]);
     }
 }

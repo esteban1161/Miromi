@@ -32,7 +32,7 @@ class CreateAntecedentesTable extends Migration
             $table->string('tratamientoOdontológico')->nullable();
             $table->string('fechaUltimaMenstruacion')->nullable();
             $table->string('menopausia')->nullable();
-            $table->timestamps();
+            $table->string('otrosAntecedentes')->nullable();
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_spanish_ci';
         });

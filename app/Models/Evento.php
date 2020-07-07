@@ -10,6 +10,7 @@ class Evento extends Model
 
     protected $fillable = ['usuario_id',
                                        'rol_id',
+                                       'usuario_r_id',
                                        'formularios_id',
                                         'identificacion_id'];
     protected $guarded = ['id'];
@@ -57,6 +58,14 @@ class Evento extends Model
     public function antecedentes(){
         return $this->hasOne(Antecedente::class);
     }
+
+    public function formula(){
+        return $this->hasMany(FormulaPaciente::class);
+    }
+
+    public function recomendacion(){
+        return $this->hasMany(RecomendacionPaciente::class);
+    }
     
     public function consulta(){
         return $this->hasOne(Consulta::class);
@@ -65,7 +74,6 @@ class Evento extends Model
     public function examenFisico(){
         return $this->hasOne(ExamenFisico::class);
     }
-
     
     public function revisionSistema(){
         return $this->hasOne(RevisionSistema::class);
@@ -79,31 +87,82 @@ class Evento extends Model
         return $this->hasMany(Diagnostico::class);
     }
 
+    public function sintomasGenerales(){
+        return $this->hasOne(SintomasGenerales::class);
+    }
+
+    public function sintomasMentales(){
+        return $this->hasOne(SintomasMentales::class);
+    }
+
+    public function entornoSocial(){
+        return $this->hasOne(EntornoSocial::class);
+    }
+
+    public function procedimientosEnfermeria(){
+        return $this->hasOne(ProcedimientosEnfermeria::class);
+    }
+
+    public function notas(){
+        return $this->hasOne(Notas::class);
+    }
+
     public function scopeConsultaTerapeuta($query){
-        return $query   ->where('usuario_id', $id = auth()->id())
+        return $query   ->where('usuario_id', auth()->id())
                                 ->where('rol_id', 2)
                                 ->where('formularios_id', 1);
     }
 
-    public function scopeConsultaPacientes($query){
+    public function scopeConsultaTerapeutas($query){
+        return $query  ->where('rol_id', 2)
+                                ->where('formularios_id', 1);
+    }
+
+    public function scopeInfoTerapeuta($query, $id){
+        return $query  ->where('usuario_id', $id)
+                                ->where('rol_id', 2)
+                                ->where('formularios_id', 1);
+    }
+
+    public function scopeConsultaNotas($query){
         return $query   ->where('usuario_id', $id = auth()->id())
+                                ->where('rol_id', 2)
+                                ->where('formularios_id', 7);
+    }
+
+    public function scopeConsultaPacientes($query){
+        return $query   ->where('usuario_id', auth()->id())
                                 ->where('rol_id', 2)
                                 ->where('formularios_id', 2);
     }
     
     public function scopeConsultaFormatosBase($query, $identificacion){
-        return $query   ->where('usuario_id', $id = auth()->id())
+        return $query   /* ->where('usuario_id', $id = auth()->id()) */
                                 ->where('rol_id', 2)                                
                                 ->where('identificacion_id', $identificacion);
     }   
 
+    public function scopeAuxiliarPaciente($query, $id){
+        
+        return $query   ->where('usuario_id', $id)
+                                ->where('rol_id', 2)
+                                ->where('usuario_r_id', auth()->id())
+                                ->where('formularios_id', 2);                             
+    }
+
+    public function scopeConsultaProcedimientosEnfermeria($query, $id){
+        
+        return $query   ->where('usuario_id', $id)
+                                ->where('rol_id', 2)
+                                ->where('formularios_id', 2);                             
+    }
+
     public function scopeEntreFechas($query, $f1, $f2){
         
-        return $query   ->where('usuario_id', $id = auth()->id())
+        return $query   ->where('usuario_id', auth()->id())
                                 ->where('rol_id', 2)
                                 ->whereIn('formularios_id', [3, 4])
-                                ->whereBetween('created_at', [$f1, $f2]);
-                                
+                                ->whereBetween('created_at', [$f1, $f2]);                                
     }
     
 }

@@ -18,16 +18,16 @@
     <script src="{{ asset("assets/$theme/plugins/bs-custom-file-input/bs-custom-file-input.min.js")}}"></script>
     <script src="{{asset("assets/js/easy-autocomplete/dist/jquery.easy-autocomplete.min.js")}}"></script>
 
-    <script src="" type="text/javascript"></script>
-
 @endsection
 
 @section('scripts')
     <script src="{{asset("assets/pages/scripts/admin/file/index.js")}}" type="text/javascript"></script>       
     <script src="{{asset("assets/pages/scripts/admin/select2/index.js")}}" type="text/javascript"></script>
     <script src="{{asset("assets/pages/scripts/admin/forms-dinamicos/index.js")}}" type="text/javascript"></script>
+    <script src="{{asset("assets/pages/scripts/admin/forms-dinamicos/index2.js")}}" type="text/javascript"></script>
     <script src="{{asset("assets/pages/scripts/admin/textArea/index.js")}}" type="text/javascript"></script>
-    <script src="{{asset("assets/pages/scripts/admin/autocomplete/index.js")}}" type="text/javascript"></script> 
+    <script src="{{asset("assets/pages/scripts/admin/autocomplete/index.js")}}" type="text/javascript"></script>        
+        
 @endsection
 
 @section('contenido')
@@ -97,6 +97,30 @@
                     </div>  
                 <!-- Fin Examen Fisico-->
                 
+                <!-- Inicio Formulas-->
+                <div class="card card-danger">
+                    <div class="card-header">
+                        <h3 class="card-title">Formulas</h3>                
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+                        </div>
+                    </div>
+                    <div class="card-body"> @include('includes.formularios.form-datosFormulas')    </div>
+                </div>
+                <!-- Fin Formulas--> 
+
+                <!-- Inicio Formulas-->
+                <div class="card card-danger">
+                    <div class="card-header">
+                        <h3 class="card-title">Recomendaciones</h3>                
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+                        </div>
+                    </div>
+                    <div class="card-body"> @include('includes.formularios.form-datosRecomendaciones')    </div>
+                </div>
+                <!-- Fin Formulas--> 
+
                <!-- Inicio Consultas-->
                     <div class="card card-danger">
                         <div class="card-header">
@@ -112,7 +136,7 @@
                 <!-- Inicio Botones-->
                 <div class="card">
                     <div class="card-footer">    
-                        <div class="col-lg-6">    @include('includes.boton-form-crear')    </div>              
+                        <div class="col-lg-6">    @include('includes.boton-form-crear2')    </div>              
                     </div>
                 </div>  
                 <!-- Fin Botones-->

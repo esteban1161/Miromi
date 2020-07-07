@@ -15,9 +15,8 @@ class CreatePaisTable extends Migration
     {
         Schema::create('pais', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nombrePais');
-            $table->string('indicativo');
-            $table->timestamps();
+            $table->string('nombrePais')->nullable();
+            $table->string('indicativo')->nullable();
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_spanish_ci';
         });

@@ -12,4 +12,7 @@ class DatosAcademicos extends Model
                                         'tituloAcademico',
                                         'institucion',];
     protected $guarded = ['id'];
+
+    public $timestamps = false;
+
 }

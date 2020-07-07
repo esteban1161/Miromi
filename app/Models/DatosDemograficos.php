@@ -22,4 +22,7 @@ class DatosDemograficos extends Model
                                         'direccionResidencia',
                                         'zonaResidencia',];
     protected $guarded = ['id'];
+
+    public $timestamps = false;
+
 }

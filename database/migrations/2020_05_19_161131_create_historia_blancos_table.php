@@ -18,7 +18,6 @@ class CreateHistoriaBlancosTable extends Migration
             $table->bigInteger('evento_id')->unsigned()->nullable();
             $table->foreign('evento_id')->references('id')->on('eventos')->onUpdate('cascade')->nullable();            
             $table->string('formatoBlanco')->nullable();
-            $table->timestamps();
         });
     }
 

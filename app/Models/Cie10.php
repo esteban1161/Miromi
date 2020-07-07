@@ -14,4 +14,6 @@ class Cie10 extends Model
                                         'nombreCapitulo',];
     protected $guarded = ['id'];
 
+    public $timestamps = false;
+
 }

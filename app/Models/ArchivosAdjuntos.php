@@ -11,4 +11,7 @@ class ArchivosAdjuntos extends Model
                                         'nombre',
                                         'url',];
     protected $guarded = ['id'];
+
+    public $timestamps = false;
+
 }

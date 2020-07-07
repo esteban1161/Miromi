@@ -20,7 +20,6 @@ class CreateDatosAcademicosTable extends Migration
             $table->string('numeroRegistroProfesional')->nullable();
             $table->string('tituloAcademico')->nullable();
             $table->string('institucion')->nullable();
-            $table->timestamps();
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_spanish_ci';
         });

@@ -13,7 +13,7 @@
                 @if ($data == [0])
                     <tr>
                         <td>
-                            <input list="tipoTelefono" name="tipoTelefono[]" type="text" class="form-control" placeholder="Tipo de Telefono" value="{{old('tipoTelefono', $telefono->tipoTelefono ??'')}}" tabindex="9">
+                            <input list="tipoTelefono" name="tipoTelefono[]" type="text" class="form-control " placeholder="Tipo de Telefono" value="{{old('tipoTelefono', $telefono->tipoTelefono ??'')}}" tabindex="9" required>
                             <datalist id="tipoTelefono">
                                 <option value="Hogar"></option>
                                 <option value="Celular"></option>
@@ -22,7 +22,7 @@
                             </datalist>
                         </td>
                         <td>             
-                            <input type="text" name="numeroTelefono[]" class="form-control" id="numeroTelefono" value="{{old('tipoTelefono', $telefono->numeroTelefono ??'')}}" tabindex="10">
+                            <input type="text" name="numeroTelefono[]" class="form-control" value="{{old('tipoTelefono', $telefono->numeroTelefono ??'')}}" tabindex="10">
                         </td>
                         <td>
                             <button type="button" class="btn btn-danger delTelefonos"><i class="fas fa-times-circle"></i></button>     
@@ -41,7 +41,7 @@
                                 </datalist>
                             </td>
                             <td>                  
-                                <input type="text" name="numeroTelefono[]" class="form-control" id="numeroTelefono" value="{{old('tipoTelefono', $telefono->numeroTelefono ??'')}}" tabindex="10"> 
+                                <input type="text" name="numeroTelefono[]" class="form-control" value="{{old('tipoTelefono', $telefono->numeroTelefono ??'')}}" tabindex="10"> 
                             </td>
                             <td>
                                 <button type="button" class="btn btn-danger delTelefonos"><i class="fas fa-times-circle"></i></button>                        

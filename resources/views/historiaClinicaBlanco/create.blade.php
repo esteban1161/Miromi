@@ -1,7 +1,7 @@
 @extends("theme.$theme.layout")
 
 @section('titulo')
-    Sistema Usuarios
+    Crear Historia en Blanco
 @endsection   
 
 @section('styles')
@@ -44,55 +44,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="row">    
-                        <div class="col-md-5">
-                            <div class="form-group">
-                                <label for="consultorio">Consultorio</label>
-                                <select name="consultorio" id="" class="form-control"  tabindex="1">
-                                    <option value="">...Seleccionar Consultorio...</option>
-                                    @foreach ($terapeuta->consultorios as $consultorio)
-                                        <option value="{{$consultorio->nombreConsultorio}}">{{$consultorio->nombreConsultorio}} - {{$consultorio->nitConsultorio}}</option>                                            
-                                    @endforeach                                    
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-3"> 
-                            <div class="form-group">
-                                <label for="fechaConsulta">Fecha Consulta</label>
-                                <div class="input-group col-lg-12">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">            <i class="far fa-calendar-alt"></i>            </span>
-                                    </div>                
-                                <input type="date" class="form-control" id="fechaConsulta" name="fechaConsulta" value="{{$date}}" tabindex="1">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="horaConsulta">Hora Consulta</label>
-                                <div class="input-group col-lg-12">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">            <i class="far fa-clock"></i>            </span>
-                                    </div>
-                                <input type="time" class="form-control" id="horaConsulta" name="horaConsulta" value="{{$time}}" tabindex="1">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-1">
-                            <div class="form-group">
-                                <label for="edadActual">Edad</label>
-                                <input type="text" name="edadActual" class="form-control" id="edadActual" value="{{$edad}}" tabindex="1">
-                            </div>
-                        </div>
-                        
-                    
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="motivoConsulta">Motivo de Consulta</label>
-                                <input type="text" name="motivoConsulta" class="form-control" id="motivoConsulta" tabindex="1">
-                            </div>
-                        </div>
-                    </div>
+                    @include('includes.formularios.forms-HistoriasClinicas.form-datosFormatoBase2')
                     
                 </div>
             </div>
@@ -111,7 +63,7 @@
             </div>
             <div class="card">
                 <div class="card-footer">    
-                    <div class="col-lg-6">    @include('includes.boton-form-crear')    </div>              
+                    <div class="col-lg-6">    @include('includes.boton-form-crear2')    </div>              
                 </div>
             </div>
         </form>

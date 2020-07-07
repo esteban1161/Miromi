@@ -1,7 +1,7 @@
 @extends("theme.$theme.layout")
 
 @section('titulo')
-    RIPF
+    RIPS
 @endsection   
 
 @section('styles')
@@ -34,14 +34,14 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-12">
-                <h1>RIPF</h1>
+                <h1>RIPS</h1>
             </div>
         </div>
     </div>
 </section>
 <section class="content">
     <div class="container-fluid">     
-        <form action="{{route('ripf.fecha')}}" class="form-horizontal" id="form-general" method="POST" autocomplete="off" enctype="multipart/form-data">
+        <form action="{{route('rips.fecha')}}" class="form-horizontal" id="form-general" method="POST" autocomplete="off" enctype="multipart/form-data">
         @csrf
             <div class="card card-info ">
                 <div class="card-header">

@@ -27,7 +27,10 @@ class ExamenFisico extends Model
                                         'cardioPulmonarEF',
                                         'extremidadesEF',
                                         'genitales',
-                                        'otros',];
+                                        'otrosEF',];
     
     protected $guarded = ['id'];
+
+    public $timestamps = false;
+
 }

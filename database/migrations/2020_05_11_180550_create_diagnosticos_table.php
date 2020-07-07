@@ -20,7 +20,7 @@ class CreateDiagnosticosTable extends Migration
             $table->bigInteger('cie10s_id')->unsigned()->nullable();
             $table->foreign('cie10s_id')->references('id')->on('cie10s')->onUpdate('cascade')->nullable();
             $table->string('tipoDiagnostico')->nullable();
-            $table->timestamps();
+            $table->string('observacionesDx')->nullable();
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_spanish_ci';
         });

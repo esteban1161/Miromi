@@ -14,6 +14,8 @@ class Telefono extends Model
                                        
     protected $guarded = ['id'];
 
+    public $timestamps = false;
+
     public function evento(){
         return $this->belongsTo(Evento::class) ;
     }

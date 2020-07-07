@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCiudadsTable extends Migration
+class CreateRecomendacionesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateCiudadsTable extends Migration
      */
     public function up()
     {
-        Schema::create('ciudads', function (Blueprint $table) {
+        Schema::create('recomendaciones', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('pais_id')->unsigned()->nullable();
-            $table->foreign('pais_id')->references('id')->on('pais')->onUpdate('cascade')->nullable();            
-            $table->string('nombreCiudad');
-            $table->timestamps();
+            $table->string('recomendacion')->nullable();
+            $table->string('descripcion')->nullable();
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_spanish_ci';
         });
@@ -31,6 +29,6 @@ class CreateCiudadsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ciudads');
+        Schema::dropIfExists('recomendaciones');
     }
 }

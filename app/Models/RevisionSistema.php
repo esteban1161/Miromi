@@ -19,4 +19,7 @@ class RevisionSistema extends Model
                                         'pielAnexosRS',
                                         'endocrinologico',];
     protected $guarded = ['id'];
+
+    public $timestamps = false;
+
 }

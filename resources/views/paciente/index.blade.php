@@ -39,8 +39,7 @@
         <div class="card card-info ">
             <div class="card-header">
                 
-            </div>
-           
+            </div>           
             <div class="card-body">
                 <table id="tPacientes" class="table table-bordered table-striped">
                     <thead>
@@ -80,14 +79,4 @@
     </div>
 </section>
 
-
-
-
-
-    <div class="row">
-        <div class="col-lg-12">
-            
-            
-        </div>
-    </div>
 @endsection

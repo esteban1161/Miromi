@@ -12,4 +12,7 @@ class HistoriaBlanco extends Model
                                        'formatoBlanco',
                                       ];
     protected $guarded = ['id'];
+
+    public $timestamps = false;
+
 }

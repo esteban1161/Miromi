@@ -21,9 +21,12 @@ class CreateEventosTable extends Migration
             $table->integer('usuario_r_id')->nullable();
             $table->integer('consultorio_id')->nullable();
             $table->bigInteger('identificacion_id')->nullable();
+            $table->boolean('estado')->nullable();
             $table->bigInteger('formularios_id')->unsigned();
             $table->foreign('formularios_id')->references('id')->on('formularios')->onUpdate('cascade');            
             $table->timestamps();
+            $table->charset = 'utf8mb4';
+            $table->collation = 'utf8mb4_spanish_ci';
         });
     }
 

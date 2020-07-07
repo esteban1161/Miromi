@@ -16,7 +16,7 @@ class ListaAtencionesController extends Controller
         $data = Usuario::with('formularios')->findOrFail(auth()->id());
         $eventos = Evento::ConsultaFormatosBase($id)->get();
         $identificacion = DatosIdentificacion::findOrFail($id);         
-        return view('listaAtenciones.index', compact('eventos', 'eventos2', 'identificacion', 'data'));
+        return view('listaAtenciones.index', compact('eventos', 'identificacion', 'data'));
     }
     
 }

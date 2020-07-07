@@ -5,7 +5,7 @@
 			<thead>
 				<tr>
 					<th>Tipo de Correo</th>
-                    <th>Correo Electronico Personal</th>
+                    <th>Correo Electronico</th>
                     <th><button id="addCorreos" name="adicional" type="button" class="btn btn-primary"> <i class="fas fa-plus-circle"></i></button></th>
 				</tr>
 			</thead>

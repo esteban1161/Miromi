@@ -48,8 +48,7 @@
                     </div> 
                 </div>  
                 <div class="col-sm-1">
-                    <img width="100%" class=" img-fluid" src="{{Storage::url("FotosPerfil/$identificacion->foto" ?? 'user.png')}}"
-                    alt="User profile picture">
+                    <img width="100%" class=" img-fluid" src="{{Storage::url($identificacion->foto ?? "FotosPerfil/user.png")}}">
                 </div>                           
             </div><!-- /.container-fluid -->
         </div>
@@ -67,7 +66,7 @@
                                 <th WIDTH="40%">Motivo Consulta</th>
                                 <th WIDTH="20%">Formatos</th>
                                 <th WIDTH="25%">Consultorio</th>
-                                <th WIDTH="5%"></th>
+                                <th WIDTH="5%">Info</th>
                             </tr>
                         </thead>
                         <tbody>                            
@@ -79,9 +78,15 @@
                                     <td>{{$evento->formatosBase->consultorio}}</td>       
 
                                     <td>
-                                        <a href="{{route($evento->formularios->routeShow, ['id'=>$identificacion->id, 'idh'=>$evento->id] )}}" class="btn-accion-tabla tooltipsC" title="Mostrar este Resgistro">
-                                            <i class="fas fa-eye"></i>
-                                        </a>
+                                        @if ($evento->estado == 1)
+                                            <a href="{{route($evento->formularios->routeShow, ['id'=>$identificacion->id, 'idh'=>$evento->id] )}}" class="btn-accion-tabla tooltipsC" title="Mostrar este Resgistro">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                        @else
+                                            <a href="{{route($evento->formularios->routeEdit, ['id' => $identificacion->id, 'idh'=>$evento->id])}}" class="btn-accion-tabla tooltipsC" title="Editar este Registro">
+                                                <i class="fas fa-pencil-alt"></i>
+                                            </a>
+                                        @endif
                                     </td>
                                 </tr>                  
                             @endforeach

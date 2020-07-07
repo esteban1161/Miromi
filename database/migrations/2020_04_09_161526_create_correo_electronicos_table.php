@@ -19,7 +19,6 @@ class CreateCorreoElectronicosTable extends Migration
             $table->foreign('evento_id')->references('id')->on('eventos')->onUpdate('cascade')->nullable();
             $table->string('tipoCorreo')->nullable();
             $table->string('correoElectronico')->nullable();
-            $table->timestamps();
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_spanish_ci';
         });
