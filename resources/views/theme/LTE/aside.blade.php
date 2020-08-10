@@ -30,31 +30,7 @@
 
       <!-- Sidebar Menu -->
         <nav class="mt-2">
-            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                <li class="nav-item">
-                    <a href="{{route('auxiliar.index')}}" class="nav-link">
-                        <i class="nav-icon fas fa-ambulance"></i>
-                        <p>
-                            Auxiliar
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{route('rips.index')}}" class="nav-link">
-                        <i class="nav-icon fas fa-file-medical-alt"></i>
-                        <p>
-                            Rips
-                        </p>
-                    </a>
-                </li>  
-                <li class="nav-item">
-                    <a href="{{route('procedimientosE.index')}}" class="nav-link">
-                        <i class="nav-icon fas fa-file-medical-alt"></i>
-                        <p>
-                            Procedimientos
-                        </p>
-                    </a>
-                </li>             
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">         
                 @foreach ($menusComposer as $key => $item)
                     @if ($item["menu_id"] != 0)
                         @break

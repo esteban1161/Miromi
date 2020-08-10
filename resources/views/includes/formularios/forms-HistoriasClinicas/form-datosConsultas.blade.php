@@ -2,13 +2,13 @@
     <div class="col-md-12">
         <div class="form-group">
             <label for="observacionAnálisis">Observacion y/o Analisis</label>
-            <textarea class="form-control" rows="2" name="observacionAnálisis" id="observacionAnálisis" tabindex="52">{{old('observacionAnálisis', $eventos->consulta->observacionAnálisis ?? '')}}</textarea>
+            <textarea class="form-control" rows="2" name="observacionAnálisis" id="observacionAnálisis" tabindex="5">{{old('observacionAnálisis', $eventos->consulta->observacionAnálisis ?? '')}}</textarea>
         </div>
     </div>
     <div class="col-md-12">
         <div class="form-group">
             <label for="plan">Plan</label>
-            <textarea class="form-control" rows="2" name="plan" id="plan" tabindex="53">{{old('plan', $eventos->consulta->plan ?? '')}}</textarea>
+            <textarea class="form-control" rows="2" name="plan" id="plan" tabindex="5">{{old('plan', $eventos->consulta->plan ?? '')}}</textarea>
         </div>
     </div>
     <div class="col-md-12">
@@ -18,7 +18,7 @@
 
         <div class="form-group">
             <label for="finalidadConsulta">Finalidad de la Consulta</label>
-            <select name="finalidadConsulta" id="finalidadConsulta" class="form-control" tabindex="56">
+            <select name="finalidadConsulta" id="finalidadConsulta" class="form-control" tabindex="5">
                 <option value="">...Seleccionar Finalidad de la Consulta...</option>
                 <option value="1" {{ old('finalidadConsulta',  $eventos->consulta->finalidadConsulta ?? '') == '1' ? 'selected' : ' ' }}>Atención del parto(Atención del embarazo y del postparto)</option>
                 <option value="2" {{ old('finalidadConsulta',  $eventos->consulta->finalidadConsulta ?? '') == '2' ? 'selected' : ' ' }}>Atención Recién Nacido</option>
@@ -34,7 +34,7 @@
         </div>
         <div class="form-group">
             <label for="causaExterna">Causa Externa</label>
-            <select name="causaExterna" id="causaExterna" class="form-control" tabindex="58">
+            <select name="causaExterna" id="causaExterna" class="form-control" tabindex="5">
                 <option value="">...Seleccionar Causa Externa...</option>
                 <option value="1" {{ old('causaExterna',  $eventos->consulta->causaExterna ?? '') == '1' ? 'selected' : ' ' }}>Accidente de trabajo (Atención del embarazo y el Postparto)</option>
                 <option value="2" {{ old('causaExterna',  $eventos->consulta->causaExterna ?? '') == '2' ? 'selected' : ' ' }}>Accidente de tránsito</option>
@@ -55,20 +55,17 @@
         </div>
         <div class="form-group">
             <label for="valorConsulta">Valor de la Consulta</label>
-            <input type="text" name="valorConsulta" class="form-control" id="valorConsulta" value="{{old('valorConsulta', $eventos->consulta->valorConsulta ?? '')}}" tabindex="60">
-        </div>
-        
+            <input type="text" name="valorConsulta" class="form-control" id="valorConsulta" value="{{old('valorConsulta', $eventos->consulta->valorConsulta ?? '')}}" tabindex="5">
+        </div>        
     </div>
     <div class="col-md-6">
-        
-        
         <div class="form-group">
             <label for="codigoConsulta">Codigo de Consulta</label>
-            <input type="text" name="codigoConsulta" class="form-control" id="codigoConsulta" value="{{old('codigoConsulta', $eventos->consulta->codigoConsulta ?? '')}}" tabindex="57">        
+            <input type="text" name="codigoConsulta" class="form-control" id="codigoConsulta" value="{{old('codigoConsulta', $eventos->consulta->codigoConsulta ?? '')}}" tabindex="5">        
         </div>        
         <div class="form-group">
             <label for="tipoUsuario">Tipo de Usuario</label>
-            <select name="tipoUsuario" id="tipoUsuario" class="form-control" tabindex="59">
+            <select name="tipoUsuario" id="tipoUsuario" class="form-control" tabindex="5">
                 <option value="">...Seleccionar Tipo de Usuario...</option>
                 <option value="1" {{ old('tipoUsuario',  $eventos->consulta->tipoUsuario ?? '') == '1' ? 'selected' : ' ' }}>Contributivo</option>
                 <option value="2" {{ old('tipoUsuario',  $eventos->consulta->tipoUsuario ?? '') == '2' ? 'selected' : ' ' }}>Subsidiado</option>
@@ -92,14 +89,32 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>
-                        <input type="file" name="url[]" >                        
-                    </td>
-                    <td><button id="addAdjuntos" name="adicional" type="button" class="btn btn-primary"> <i class="fas fa-plus-circle"></i></button></td>
-                </tr>
+                @if ($eventos == [0])
+                    <tr>
+                        <td>
+                            <p>{{old('url', $adjuntos->url ?? '')}}</p>
+                            <input type="file" name="url[]" value="{{old('url', $adjuntos->url ?? '')}}">                        
+                        </td>
+                        <td><button id="addAdjuntos" name="adicional" type="button" class="btn btn-primary"> <i class="fas fa-plus-circle"></i></button></td>
+                    </tr>       
+                @else
+                    @foreach ($eventos->archivosAdjuntos as $adjuntos)
+                        <tr>
+                            <td colspan="2">
+                                <a target="_blank" class="" href="{{Storage::url($adjuntos->url ?? ' ')}}">
+                                <i class="fas fa-file"></i> {{$adjuntos->nombre}}</a>
+                            </td>
+                        </tr>
+                    @endforeach
+                        <tr>
+                            <td>
+                                <input type="file" name="url[]" value="{{old('url', $adjuntos->url ?? '')}}">                        
+                            </td>
+                            <td><button id="addAdjuntos" name="adicional" type="button" class="btn btn-primary"> <i class="fas fa-plus-circle"></i></button></td>
+                        </tr>    
+                @endif
             </tbody> 
-        </table><br><br>
+        </table>
         
     </div>
 </div>

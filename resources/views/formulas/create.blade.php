@@ -1,25 +1,33 @@
 @extends("theme.$theme.layout")
 
 @section('titulo')
-    Crear Historia en Blanco
+    Formulas
 @endsection   
 
 @section('styles')
+    <link rel="stylesheet" href="{{asset("assets/js/easy-autocomplete/dist/easy-autocomplete.min.css")}}">
+
 @endsection    
 
 @section('scriptsPlugins')
-    <script src="{{ asset("assets/$theme/plugins/ckeditor/ckeditor.js")}}"></script>
+    <script src="{{asset("assets/js/easy-autocomplete/dist/jquery.easy-autocomplete.min.js")}}"></script>
+
 @endsection
 
-@section('scripts')
-    <script src="{{ asset("assets/pages/scripts/admin/editor/index.js")}}"></script>    
-    <script src="{{ asset("assets/pages/scripts/admin/autocomplete/index.js")}}"></script>    
+@section('scripts')     
+    <script src="{{asset("assets/pages/scripts/admin/forms-dinamicos/index2.js")}}" type="text/javascript"></script>
+    <script src="{{asset("assets/pages/scripts/admin/textArea/index.js")}}" type="text/javascript"></script>
+
+
 @endsection
 
 @section('contenido')   
+<!-- Main content -->
 
 <section class="content-header">
     <div class="container-fluid">
+        @include('includes.form-error')
+        @include('includes.mensaje')
         <div class="row mb-2">
             <div class="col-sm-9">
                 <h1>{{$identificacion->primerNombre}} {{$identificacion->segundoNombre}} {{$identificacion->primerApellido}} {{$identificacion->segundoApellido}} - {{$identificacion->tipoDocumento}} - {{$identificacion->numeroIdentificacion}}</h1>
@@ -33,8 +41,8 @@
     </div>
 </section>
 <section class="content">
-    <div class="container-fluid">     
-        <form action="{{route('historiaB.store', ['id'=>$identificacion->id])}}" id="form-general" method="POST" autocomplete="off" enctype="multipart/form-data">  
+    <div class="container-fluid"> 
+        <form action="{{route('historiaF.store', ['id'=>$identificacion->id])}}" id="form-general" method="POST" autocomplete="off" enctype="multipart/form-data">  
             @csrf
             <div class="card card-danger">
                 <div class="card-header">
@@ -47,24 +55,33 @@
             </div>
             <div class="card card-danger">
                 <div class="card-header">
-                    <h3 class="card-title">Formato en Blanco</h3>                
+                    <h3 class="card-title">Formulas</h3>                
                     <div class="card-tools">
                         <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
                     </div>
                 </div>
-                <div class="card-body">
-                    <textarea id="editor1" name="formatoBlanco" rows="10" cols="80" tabindex="1">
-                        {{old('fechaConsulta', $eventos->historiaBlanco->formatoBlanco ?? '')}}
-                    </textarea>
-                </div>
+                <div class="card-body">@include('includes.formularios.form-datosFormulas')</div>    
             </div>
-            <div class="card">
-                <div class="card-footer">    
-                    <div class="col-lg-6">    @include('includes.boton-form-crear2')  </div>              
+            
+            <div class="card card-danger">
+                <div class="card-header">
+                    <h3 class="card-title">Recomendacion</h3>                
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+                    </div>
                 </div>
+                <div class="card-body">@include('includes.formularios.form-datosRecomendaciones') </div>
+            
+            </div>  
+            <div class="card-footer">    
+                <div class="col-lg-6">    @include('includes.boton-form-crear2')    </div>              
             </div>
-        </form>
-    </div>
+        </div>
+    </form>
 </section>
-
+  
 @endsection
+
+
+
+  

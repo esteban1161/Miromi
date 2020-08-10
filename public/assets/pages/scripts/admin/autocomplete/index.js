@@ -1,14 +1,18 @@
 var options = {
-	url: 'http://miromi.test/cie10',
-	getValue: "descripcion", 
-	// data: ["De apariencia normal", "Esta enfermo", "Tiene mocos", "Dolores", "No Informa sintomas", "etc"],
-	list: {
-		sort: {
-			enabled: true
-		},
-		match: {
-			enabled: true
+	data: [ {name: "Avionet", type: "air", icon: "http://lorempixel.com/100/50/transport/2"},
+		{name: "Car", type: "ground", icon: "http://lorempixel.com/100/50/transport/8"},
+		{name: "Motorbike", type: "ground", icon: "http://lorempixel.com/100/50/transport/10"},
+		{name: "Plane", type: "air", icon: "http://lorempixel.com/100/50/transport/1"},
+		{name: "Train", type: "ground", icon: "http://lorempixel.com/100/50/transport/6"}],
+
+	getValue: "name",
+
+	template: {
+		type: "description",
+		fields: {
+			description: "type"
 		}
 	}
 };
-$ (".autocomplete"). easyAutocomplete (options); 
+
+$("#template-desc").easyAutocomplete(options);

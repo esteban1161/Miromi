@@ -13,7 +13,7 @@
                 @if ($data == [0])
                 <tr>
 					<td>
-                        <input list="tipoCorreo" type="text" name="tipoCorreo[]" class="form-control" placeholder="Tipo de Correo" value="{{old('tipoCorreo', $correo->tipoCorreo ??'')}}" tabindex="11">
+                        <input list="tipoCorreo" type="text" name="tipoCorreo[]" class="form-control" placeholder="Tipo de Correo" value="{{old('tipoCorreo', $correo->tipoCorreo ??'')}}" tabindex="3">
                         <datalist id="tipoCorreo">
                             <option value="Personal"></option>
                             <option value="Del trabajo"></option>
@@ -21,7 +21,7 @@
                         </datalist>
                     </td>
 					<td>             
-                        <input type="text" name="correoElectronico[]" class="form-control" id="correoElectronico" value="{{old('correoElectronico', $correo->correoElectronico ??'')}}" tabindex="12">
+                        <input type="text" name="correoElectronico[]" class="form-control" id="correoElectronico" value="{{old('correoElectronico', $correo->correoElectronico ??'')}}" tabindex="3">
                     </td>
 					<td>
                         <button type="button" class="btn btn-danger delCorreos"><i class="fas fa-times-circle"></i></button>                        
@@ -31,7 +31,7 @@
                 @foreach ($data->correosElectronicos as $correo)                 
                 <tr>
 					<td>
-                        <input list="tipoCorreo" type="text" name="tipoCorreo[]" class="form-control" placeholder="Tipo de Correo" value="{{old('tipoCorreo', $correo->tipoCorreo ??'')}}" tabindex="11">
+                        <input list="tipoCorreo" type="text" name="tipoCorreo[]" class="form-control" placeholder="Tipo de Correo" value="{{old('tipoCorreo', $correo->tipoCorreo ??'')}}" tabindex="3">
                         <datalist id="tipoCorreo">
                             <option value="Personal"></option>
                             <option value="Del trabajo"></option>
@@ -39,7 +39,7 @@
                         </datalist>
                     </td>
 					<td>             
-                        <input type="text" name="correoElectronico[]" class="form-control" id="correoElectronico" value="{{old('correoElectronico', $correo->correoElectronico ??'')}}" tabindex="12">
+                        <input type="text" name="correoElectronico[]" class="form-control" id="correoElectronico" value="{{old('correoElectronico', $correo->correoElectronico ??'')}}" tabindex="3">
                     </td>
 					<td>
                         <button type="button" class="btn btn-danger delCorreos"><i class="fas fa-times-circle"></i></button>                        

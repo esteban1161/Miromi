@@ -15,10 +15,10 @@
                 @if ($data == [0])
                     <tr>
                         <td>                                           
-                            <input type="text" name="numeroRegistroProfesional[]" class="form-control" id="numeroRegistroProfesional" value="{{old('numeroRegistroProfesional', $academico->numeroRegistroProfesional ?? '')}}" tabindex="13">
+                            <input type="text" name="numeroRegistroProfesional[]" class="form-control" id="numeroRegistroProfesional" value="{{old('numeroRegistroProfesional', $academico->numeroRegistroProfesional ?? '')}}" tabindex="4">
                         </td>
                         <td>         
-                            <input list="tituloAcademico" name="tituloAcademico[]" type="text" class="form-control" placeholder="Escribe Titulo academico" value="{{old('tituloAcademico', $academico->tituloAcademico ?? '')}}" tabindex="14">
+                            <input list="tituloAcademico" name="tituloAcademico[]" type="text" class="form-control" placeholder="Escribe Titulo academico" value="{{old('tituloAcademico', $academico->tituloAcademico ?? '')}}" tabindex="4">
                             <datalist id="tituloAcademico">
                                 @foreach( $titulo as $id => $tituloA)                
                                     <option value="{{$tituloA}}"{{ old('tituloAcademico',  $academico->tituloAcademico ?? '') == $id ? 'selected' : ' ' }}>
@@ -28,7 +28,7 @@
                             </datalist>                           
                         </td>
                         <td>                            
-                            <input type="text" name="institucion[]" class="form-control" id="institucion" value="{{old('institucion', $academico->institucion ?? '')}}" tabindex="15">
+                            <input type="text" name="institucion[]" class="form-control" id="institucion" value="{{old('institucion', $academico->institucion ?? '')}}" tabindex="4">
                         </td>
                         <td>
                             <button type='button' class='btn btn-danger delAcademico'><i class='fas fa-times-circle'></i></button>
@@ -38,10 +38,10 @@
                     @foreach ($data->academicos as $academico)                 
                     <tr>
                         <td>                                   
-                            <input type="text" name="numeroRegistroProfesional[]" class="form-control" id="numeroRegistroProfesional" value="{{old('numeroRegistroProfesional', $academico->numeroRegistroProfesional ?? '')}}" tabindex="13">
+                            <input type="text" name="numeroRegistroProfesional[]" class="form-control" id="numeroRegistroProfesional" value="{{old('numeroRegistroProfesional', $academico->numeroRegistroProfesional ?? '')}}" tabindex="4">
                         </td>
                         <td>                                 
-                            <input list="tituloAcademico" name="tituloAcademico[]" type="text" class="form-control" placeholder="Escribe Titulo academico" value="{{old('tituloAcademico', $academico->tituloAcademico ?? '')}}" tabindex="14">
+                            <input list="tituloAcademico" name="tituloAcademico[]" type="text" class="form-control" placeholder="Escribe Titulo academico" value="{{old('tituloAcademico', $academico->tituloAcademico ?? '')}}" tabindex="4">
                             <datalist id="tituloAcademico">
                                 @foreach( $titulo as $id => $tituloA)                
                                     <option value="{{$tituloA}}"{{ old('tituloAcademico',  $academico->tituloAcademico ?? '') == $id ? 'selected' : ' ' }}>
@@ -51,7 +51,7 @@
                             </datalist>
                         </td>
                         <td>                                   
-                            <input type="text" name="institucion[]" class="form-control" id="institucion" value="{{old('institucion', $academico->institucion ?? '')}}" tabindex="15">
+                            <input type="text" name="institucion[]" class="form-control" id="institucion" value="{{old('institucion', $academico->institucion ?? '')}}" tabindex="4">
                         </td>
                         <td>
                             <button type='button' class='btn btn-danger delAcademico'><i class='fas fa-times-circle'></i></button>

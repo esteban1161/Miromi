@@ -59,11 +59,11 @@ class Evento extends Model
         return $this->hasOne(Antecedente::class);
     }
 
-    public function formula(){
+    public function formulas(){
         return $this->hasMany(FormulaPaciente::class);
     }
 
-    public function recomendacion(){
+    public function recomendaciones(){
         return $this->hasMany(RecomendacionPaciente::class);
     }
     
@@ -134,6 +134,12 @@ class Evento extends Model
         return $query   ->where('usuario_id', auth()->id())
                                 ->where('rol_id', 2)
                                 ->where('formularios_id', 2);
+    }
+
+    public function scopeConsultaEvento($query, $formulario, $identificacion)
+    {
+        return $query   ->where('identificacion_id', $identificacion)
+                                ->where('formularios_id', $formulario);
     }
     
     public function scopeConsultaFormatosBase($query, $identificacion){

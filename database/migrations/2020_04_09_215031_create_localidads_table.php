@@ -16,6 +16,9 @@ class CreateLocalidadsTable extends Migration
         Schema::create('localidads', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('localidadResidencia');
+            $table->string('ciudad');
+            $table->string('departamento');
+            $table->string('pais');
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_spanish_ci';
         });

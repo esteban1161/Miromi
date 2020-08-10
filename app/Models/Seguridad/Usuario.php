@@ -31,6 +31,10 @@ class Usuario extends Authenticatable
         return $this->belongsToMany(Formularios::class, 'usuarios_formularios');
     }
 
+    public function usuarios(){
+        return $this->belongsToMany(Usuario::class, 'usuario_usuario');
+    }
+
     public function evento(){
         return $this->hasOne(Evento::class);
     }
@@ -54,21 +58,5 @@ class Usuario extends Authenticatable
     }
     public function setPasswordAttribute($pass){
         $this->attributes['password'] = Hash::make($pass);
-    }
-
-    public function identificacion(){
-        return $this->hasOneThrough(Evento::class, DatosIdentificacion::class);
-    }
-
-    public function consultorios(){
-        return $this->hasOneThrough(Evento::class, DatosConsultorios::class);
-    }
-
-    public function academicos(){
-        return $this->hasOneThrough(Evento::class, DatosAcademicos::class);
-    }
-
-     public function personales(){
-        return $this->hasOneThrough(Evento::class, DatosPersonales::class);
     }
 }

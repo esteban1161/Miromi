@@ -25,6 +25,7 @@
         <div class="row mb-2">
             <div class="col-sm-9">
                 <h1>Lista Pacientes</h1>
+
             </div>
             <div class="row col-sm-3 card-tolls">           
                 <a href="{{route('paciente.create')}}" class="btn btn-block btn-danger">

@@ -5,7 +5,12 @@ $(document).ready(function(){
 
         getValue: "recomendacion",  
         list: {
-
+            sort: {
+                enabled: true
+            },
+            match: {
+                enabled: true
+            },
             onSelectItemEvent: function() {
                 var value = $("#recomendacion1").getSelectedItemData().descripcion;
                 $("#descripcion1").val(value).trigger("change");
@@ -41,7 +46,12 @@ $(document).ready(function(){
 
             getValue: "recomendacion",  
             list: {
-
+                sort: {
+                    enabled: true
+                },
+                match: {
+                    enabled: true
+                },
                 onSelectItemEvent: function() {
                     var value = $("#recomendacion"+pos).getSelectedItemData().descripcion;
                     $("#descripcion"+pos).val(value).trigger("change");
@@ -72,7 +82,12 @@ $(document).ready(function(){
 
         getValue: "prescripcion",  
         list: {
-
+            sort: {
+                enabled: true
+            },
+            match: {
+                enabled: true
+            },
             onSelectItemEvent: function() {
                 var value = $("#prescripcion1").getSelectedItemData().cantidad;
                 var value1 = $("#prescripcion1").getSelectedItemData().observaciones;
@@ -114,6 +129,12 @@ $(document).ready(function(){
 
             getValue: "prescripcion",  
             list: {
+                sort: {
+                    enabled: true
+                },
+                match: {
+                    enabled: true
+                },
 
                 onSelectItemEvent: function() {
 
@@ -142,8 +163,111 @@ $(document).ready(function(){
 
 
 
-
 $(document).ready(function(){
+    var pos=1;
+    var options = {
+        url: 'http://miromi.test/paciente/historiaClinica/cie10',
+        getValue: "descripcion",         
+        list: {
+            sort: {
+                enabled: true
+            },
+            match: {
+                enabled: true
+            },
+            onSelectItemEvent: function() {
+                var value = $("#cie10_Desc1").getSelectedItemData().codigo;
+                $("#cie10_cod1").val(value).trigger("change");
+            }
+        }      
+    
+    };
+
+    $("#addDiagnosticos").click(function(){
+        pos++;
+
+        $("#tablaDiagnosticos").append(
+
+            '<tbody id="row'+pos+'">'+
+                '<tr>'+
+                    '<td WIDTH="60%">'+
+                        '<label for="cie10s_id">Diagnostico</label>'+
+                        '<input type="text" name="cie10_Desc[]" class="form-control" id="cie10_Desc'+pos+'" tabindex="18">'+        
+                    '</td>'+
+                    '<td WIDTH="20%">'+
+                        '<label for="cie10_cod1">Codigo</label>'+
+                        '<input type="text" name="cie10_cod[]" class="form-control" id="cie10_cod'+pos+'" tabindex="18">'+ 
+                    '</td>'+
+                    '<td WIDTH="15%">'+
+                        '<label for="tipoDiagnostico">Tipo Diagnostico</label>'+                 
+                        '<select name="tipoDiagnostico[]" id="tipoDiagnostico'+pos+'" class="form-control" tabindex="55">'+
+                            '<option value="">...Seleccionar...</option>'+
+                            '<option value="1">Impresión Diagnostica</option>'+
+                            '<option value="2">Confrimado Nuevo</option>'+
+                            '<option value="3">Confirmado Repetido</option>'+
+                        '</select>'+
+                    '</td>'+
+                    '<td WIDTH="5%">'+
+                        '<button id="delDiagnosticos'+pos+'" data-id="'+pos+'" type="button" class="btn btn-danger"><i class="fas fa-times-circle"></i></button>'+
+                    '</td>'+
+                '</tr>'+
+                '<tr>'+
+                    '<td colspan="3">'+
+                        '<label for="observacionesDx">Observaciones</label>'+
+                        '<textarea name="observacionesDx[]" id="observacionesDx'+pos+'" class="form-control" rows="2"></textarea>'+       
+                    '</td>'+
+                '</tr>'+
+            '</tbody>'
+        );
+        var options = {
+            url: 'http://miromi.test/paciente/historiaClinica/cie10',
+
+            getValue: "descripcion",  
+
+            list: {
+                onSelectItemEvent: function() {
+                    var value = $('#cie10_Desc'+pos).getSelectedItemData().codigo;
+                    $('#cie10_cod'+pos).val(value).trigger("change");
+                }
+            }
+        };
+        $('#cie10_Desc'+pos).easyAutocomplete(options);        
+
+        $('#delDiagnosticos'+pos)
+            .button()
+            .on({
+                click: function(){
+                    var id = $(this).attr('data-id');
+                    $('#row'+id).remove();
+                }
+            });               
+
+        
+    });
+    $ ("#cie10_Desc1"). easyAutocomplete (options); 
+
+});
+
+
+
+var options = {
+	url: 'http://miromi.test/paciente/historiaClinica/cie10',
+	getValue: "descripcion", 
+	// data: ["De apariencia normal", "Esta enfermo", "Tiene mocos", "Dolores", "No Informa sintomas", "etc"],
+	
+	list: {
+
+		onSelectItemEvent: function() {
+			var value = $("#cie10_Desc1").getSelectedItemData().codigo;
+			$("#cie10_cod1").val(value).trigger("change");
+		}
+	}      
+
+};
+$ ("#cie10_Desc1"). easyAutocomplete (options); 
+
+
+/* $(document).ready(function(){
 
     $.ajax({
 		url: 'http://miromi.test/cie10',
@@ -162,7 +286,7 @@ $(document).ready(function(){
         
         var option = '';
         var cie10Array =  JSON.parse(JSON.stringify(cie10));
-        cie10Array.forEach(element => {
+        cie10Array.forEach(element => { 
             option += '<option value='+ element['id']+'>'+element['codigo']+' - '+element['descripcion']+'</option>';
         });
         console.log(cie10Array);
@@ -215,3 +339,4 @@ $(document).ready(function(){
     $('#cie10s_id1').select2();        
 
 });
+ */

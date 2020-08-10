@@ -34,6 +34,7 @@
                             <th>Nombre</th>                            
                             <th>Roles</th>
                             <th>Formularios</th>
+                            <th>Terapeutas</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -50,6 +51,11 @@
                                 <td>
                                     @foreach ($data->formularios as $formulario)
                                         {{$loop->last ? $formulario->nombre : $formulario->nombre.', '}}                                        
+                                    @endforeach
+                                </td>
+                                <td>
+                                    @foreach ($data->usuarios as $usuario)
+                                        {{$loop->last ? $usuario->nombre : $formulario->usuario.', '}}                                        
                                     @endforeach
                                 </td>
                                 <td>

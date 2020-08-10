@@ -34,43 +34,10 @@
     <script src="{{asset("assets/pages/scripts/admin/imagenPerfil/index.js")}}" type="text/javascript"></script>  
     <script src="{{asset("assets/pages/scripts/admin/Select_Ciudad/index.js")}}" type="text/javascript"></script>
 
-<script>
-    var options = {
-        url: 'http://miromi.test/paises',
-        getValue: "nombrePais", 
-        list: {
-            sort: {
-                enabled: true
-            },
-            match: {
-                enabled: true
-            }
-        }
-    };
-    $ ("#paisR"). easyAutocomplete (options); 
-
-    var options = {
-        url: 'http://miromi.test/ciudades',
-        getValue: "nombreCiudad", 
-        list: {
-            sort: {
-                enabled: true
-            },
-            match: {
-                enabled: true
-            }
-        }
-    };
-    $ ("#ciudadR"). easyAutocomplete (options); 
-    
-    $(function(){
-        $('#paisR').change(function(){
-            var paisNombre = this.value;
-            var options = {
-            url: 'http://miromi.test/paciente/departamentos/'+ paisNombre,
-
-            getValue: "nombreDepartamento",
-
+    <script>
+        var options = {
+            url: 'http://miromi.test/paciente/localidades/bogota',
+            getValue: "localidadResidencia", 
             list: {
                 sort: {
                     enabled: true
@@ -78,21 +45,22 @@
                 match: {
                     enabled: true
                 },
-                
+                onSelectItemEvent: function() {
+                var value = $("#localidadR").getSelectedItemData().ciudad;
+                var value2 = $("#localidadR").getSelectedItemData().departamento;
+                var value3 = $("#localidadR").getSelectedItemData().pais;
+
+                $("#ciudadR").val(value).trigger("change");
+                $("#departamentoR").val(value2).trigger("change");
+                $("#paisR").val(value3).trigger("change");
+                }
             }
         };
-        $("#departamentoR").easyAutocomplete(options);
-        });
-    });
+        $ ("#localidadR"). easyAutocomplete (options); 
 
-    $(function(){
-        $('#departamentoR').change(function(){
-            var departamentoNombre = this.value;
-            var options = {
-            url: 'http://miromi.test/paciente/ciudades/'+ departamentoNombre,
-
-            getValue: "nombreCiudad",
-
+        var options = {
+            url: 'http://miromi.test/paises',
+            getValue: "nombrePais", 
             list: {
                 sort: {
                     enabled: true
@@ -100,14 +68,70 @@
                 match: {
                     enabled: true
                 },
-                
+               
             }
         };
-        $("#ciudadR").easyAutocomplete(options);
+        $ ("#paisR"). easyAutocomplete (options); 
+
+        var options = {
+            url: 'http://miromi.test/ciudades',
+            getValue: "nombreCiudad", 
+            list: {
+                sort: {
+                    enabled: true
+                },
+                match: {
+                    enabled: true
+                }
+            }
+        };
+        $ ("#ciudadR"). easyAutocomplete (options); 
+        
+        $(function(){
+            $('#paisR').change(function(){
+                var paisNombre = this.value;
+                var options = {
+                url: 'http://miromi.test/paciente/departamentos/'+ paisNombre,
+
+                getValue: "nombreDepartamento",
+
+                list: {
+                    sort: {
+                        enabled: true
+                    },
+                    match: {
+                        enabled: true
+                    },
+                    
+                }
+            };
+            $("#departamentoR").easyAutocomplete(options);
+            });
         });
-    });
-    
-</script>
+
+        $(function(){
+            $('#departamentoR').change(function(){
+                var departamentoNombre = this.value;
+                var options = {
+                url: 'http://miromi.test/paciente/ciudades/'+ departamentoNombre,
+
+                getValue: "nombreCiudad",
+
+                list: {
+                    sort: {
+                        enabled: true
+                    },
+                    match: {
+                        enabled: true
+                    },
+                    
+                }
+            };
+            $("#ciudadR").easyAutocomplete(options);
+            });
+        });
+        
+    </script>
     
 @endsection
 

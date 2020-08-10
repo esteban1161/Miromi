@@ -43,35 +43,7 @@ class UsuarioAdministradorSeeder extends Seeder
             'nombre' => 'Marcela Leyva', 
             'password' => bcrypt('pass123'),
         ]);
-        /* Meter usuarios rol al programa */
-        DB::table('usuario_rols')->insert([
-            'rol_id' => 2,
-            'usuario_id' => 1,
-            
-        ]);
-        DB::table('usuario_rols')->insert([
-            'rol_id' => 2,
-            'usuario_id' => 2,
         
-        ]);
-        DB::table('usuario_rols')->insert([
-            'rol_id' => 2,
-            'usuario_id' => 3,
-        
-        ]);
-        DB::table('usuario_rols')->insert([
-            'rol_id' => 1,
-            'usuario_id' => 4,
-        ]);
-        DB::table('usuario_rols')->insert([
-            'rol_id' => 1,
-            'usuario_id' => 1,
-        ]);
-        DB::table('usuario_rols')->insert([
-            'rol_id' => 4,
-            'usuario_id' => 5,
-        ]);
-
         DB::table('formularios')->insert([
             'nombre' => 'PerfilTerapeuta ',
             'routeCreate' => '',
@@ -87,19 +59,31 @@ class UsuarioAdministradorSeeder extends Seeder
             'routeCreate' => 'historiaC.create',
             'routeShow' => 'historiaC.show',
             'routeEdit' => 'historiaC.edit',
+            'routeDestroy' => 'historiaC.destroy'
         ]);
         DB::table('formularios')->insert([
             'nombre' => 'Historia Blanco',
             'routeCreate' => 'historiaB.create',
             'routeShow' => 'historiaB.show',
             'routeEdit' => 'historiaB.edit',
+            'routeDestroy' => 'historiaB.destroy'
+
         ]);
         DB::table('formularios')->insert([
             'nombre' => 'Historia Homeopatica',
             'routeCreate' => 'historiaH.create',
             'routeShow' => 'historiaH.show',
             'routeEdit' => 'historiaH.edit',
+            'routeDestroy' => 'historiaH.destroy'
         ]);
+        DB::table('formularios')->insert([
+            'nombre' => 'Formulas',
+            'routeCreate' => 'historiaF.create',
+            'routeShow' => 'historiaF.show',
+            'routeEdit' => 'historiaF.edit',
+            'routeDestroy' => 'historiaF.destroy'
+        ]);
+
         DB::table('formularios')->insert([
             'nombre' => 'Procedimientos Enfermeria',
             'routeCreate' => 'procedimientosE.create',

@@ -19,7 +19,10 @@ class HistoriaBlancoController extends Controller
         $time = Carbon::now();
         $date = $date->format('Y-m-d');
         $time = $time->format('H:i:s');
-        return view('historiaClinicaBlanco.create', compact('identificacion', 'edad', 'cie10', 'date', 'time', 'terapeuta'));
+        
+        return view('historiaClinicaBlanco.create', compact('identificacion', 'edad', 'date', 'time', 'terapeuta'));
+       
+
     }
 
     public function store(Request $request, $id)
@@ -35,18 +38,6 @@ class HistoriaBlancoController extends Controller
             'identificacion_id'=> $id,
         ]);
 
-        switch ($request->get('subirBoton')) {
-            case 'guardar':
-                $evento->estado = true;
-                $evento->save();
-                break;
-            
-            case 'borrador':
-                $evento->estado = false;
-                $evento->save();
-                break;
-        }
-
         $evento->formatosBase()->create([
             'fechaConsulta' => request('fechaConsulta'),
             'horaConsulta' => request('horaConsulta'),
@@ -59,7 +50,19 @@ class HistoriaBlancoController extends Controller
             'formatoBlanco' => request('formatoBlanco'),
         ]);
 
+        switch ($request->get('subirBoton')) {
+            case 'guardar':
+                $evento->estado = true;
+                $evento->save();
+                break;
+            
+            case 'borrador':
+                $evento->estado = false;
+                $evento->save();
+                break;
+        }
         return redirect()->route('listaAtenciones.index',  ['id'=>$id]);
+
     }
 
     public function show($id, $idh)
@@ -79,7 +82,7 @@ class HistoriaBlancoController extends Controller
         $time = Carbon::now();
         $date = $date->format('Y-m-d');
         $time = $time->format('H:i:s');
-        return view('historiaClinicaBlanco.edit', compact('identificacion', 'edad', 'cie10', 'date', 'time', 'terapeuta', 'eventos'));
+        return view('historiaClinicaBlanco.edit', compact('identificacion', 'edad', 'date', 'time', 'terapeuta', 'eventos'));
     }
 
     public function update(Request $request, $id, $idh)
@@ -92,6 +95,10 @@ class HistoriaBlancoController extends Controller
             'edadActual'=>request('edadActual'),
             'consultorio'=>request('consultorio'),
             'motivoConsulta'=>request('motivoConsulta'),
+        ]);        
+
+        $evento->historiaBlanco()->update([
+            'formatoBlanco' => request('formatoBlanco'), 
         ]);
 
         switch ($request->get('subirBoton')) {
@@ -105,13 +112,16 @@ class HistoriaBlancoController extends Controller
                 $evento->save();
                 break;
         }
-
-        $evento->historiaBlanco()->update([
-            'formatoBlanco' => request('formatoBlanco'),
-        ]);
-
         return redirect()->route('listaAtenciones.index',  ['id'=>$id]);
+    }
 
+    public function destroy($id, $idh)
+    {
+        $evento = Evento::findOrFail($idh);
+        $evento->formatosBase()->delete();
+        $evento->historiaBlanco()->delete();
+        $evento->delete();
+        return redirect()->route('listaAtenciones.index',  ['id'=>$id]);
     }
     
 }

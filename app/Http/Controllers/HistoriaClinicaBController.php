@@ -19,15 +19,15 @@ class HistoriaClinicaBController extends Controller
 {
     public function create($id)
     {      
-        $terapeuta = Evento::ConsultaTerapeuta()->first();
-        $cie10 = Cie10::orderBy('id')->get();        
+        $eventos = [0];
+        $terapeuta = Evento::ConsultaTerapeuta()->first();     
         $identificacion = DatosIdentificacion::findOrFail($id);    
         $edad = Carbon::parse($identificacion->fechaNacimiento)->age;
         $date = Carbon::now();
         $time = Carbon::now();
         $date = $date->format('Y-m-d');
         $time = $time->format('H:i:s');
-        return view('historiasCB.create', compact('identificacion', 'edad', 'cie10', 'date', 'time', 'terapeuta'));
+        return view('historiasCB.create', compact('identificacion', 'edad', 'date', 'time', 'terapeuta', 'eventos'));
     }
 
     public function store(Request $request, $id)
@@ -116,26 +116,6 @@ class HistoriaClinicaBController extends Controller
             'otros'=>request('otros'),
         ]);
         
-        $formulas1 = $request->input('prescripcion');
-        $formulas2 = $request->input('cantidad');
-        $formulas3 = $request->input('observaciones');
-        for($i = 0; $i< count($formulas1); $i++){
-            $evento->formula()->create([
-                'prescripcion' => $formulas1[$i],
-                'cantidad' => $formulas2[$i],
-                'observaciones' => $formulas3[$i],
-            ]);
-        }
-
-        $recomendacion1 = $request->input('recomendacion');
-        $recomendacion2 = $request->input('descripcion');
-        for($i = 0; $i < count($recomendacion1); $i ++){
-            $evento->recomendacion()->create([
-                'recomendacion' => $recomendacion1[$i],
-                'descripcion' => $recomendacion2[$i],
-            ]);
-        }
-
         $evento->consulta()->create([
             'observacionAnálisis'=>request('observacionAnálisis'),
             'plan'=>request('plan'),
@@ -146,32 +126,33 @@ class HistoriaClinicaBController extends Controller
             'tipoUsuario'=>request('tipoUsuario'),
         ]);
 
-        $diagnostico = $request->input('cie10s_id');
-        $diagnostico2 = $request->input('tipoDiagnostico');
-        $diagnostico3 = $request->input('observacionesDx');
-        
+        $diagnostico = $request->input('cie10_Desc');
+        $diagnostico2 = $request->input('cie10_cod');
+        $diagnostico3 = $request->input('tipoDiagnostico');
+        $diagnostico4 = $request->input('observacionesDx');
         for($i = 0; $i < count($diagnostico); $i ++) {
             $evento->diagnosticos()->create([
-                'cie10s_id' => $diagnostico[$i],
-                'tipoDiagnostico' => $diagnostico2[$i],    
-                'observacionesDx' => $diagnostico3[$i],   
+                'cie10_Desc' => $diagnostico[$i],         
+                'cie10_cod' => $diagnostico2[$i],
+                'tipoDiagnostico' => $diagnostico3[$i],    
+                'observacionesDx' => $diagnostico4[$i],   
             ]);  
         }  
 
-        $adjunto = $request->file('url');
-        for($i = 0; $i < count($adjunto); $i ++){
-
-            if($request->hasFile('url')){
-
+        if($request->hasFile('url')){
+            $adjunto = $request->file('url');
+            
+            for($i = 0; $i < count($adjunto); $i ++){
                 $nombre = $adjunto[$i]->getClientOriginalName();   
 
                 $evento->archivosAdjuntos()->create([
                     'nombre' => $nombre,
-                    'url' => $adjunto[$i]->store('public/ArchivosAnexos'),
+                    'url' => $adjunto[$i]->storeAs('public/ArchivosAnexos', $nombre),
                 ]);
+
                 Storage::disk('public')->put("ArchivosAnexos", $adjunto[$i]);
 
-            }          
+            }              
         } 
         
         return redirect()->route('listaAtenciones.index',  ['id'=>$id]);        
@@ -190,13 +171,12 @@ class HistoriaClinicaBController extends Controller
         $identificacion = DatosIdentificacion::findOrFail($id);    
         $eventos = Evento::findOrFail($idh);        
         $terapeuta = Evento::ConsultaTerapeuta()->first();
-        $cie10 = Cie10::orderBy('id')->get();        
         $edad = Carbon::parse($identificacion->fechaNacimiento)->age;
         $date = Carbon::now();
         $time = Carbon::now();
         $date = $date->format('Y-m-d');
         $time = $time->format('H:i:s');
-        return view('historiasCB.edit', compact('identificacion', 'edad', 'cie10', 'date', 'time', 'terapeuta', 'eventos'));
+        return view('historiasCB.edit', compact('identificacion', 'edad', 'date', 'time', 'terapeuta', 'eventos'));
     }
 
     public function update(Request $request, $id, $idh){
@@ -278,28 +258,7 @@ class HistoriaClinicaBController extends Controller
             'otrosEF'=>request('otrosEF'),
         ]);
         
-        $formulas1 = $request->input('prescripcion');
-        $formulas2 = $request->input('cantidad');
-        $formulas3 = $request->input('observaciones');
-        $evento->formula()->delete();
-        for($i = 0; $i< count($formulas1); $i++){
-            $evento->formula()->create([
-                'prescripcion' => $formulas1[$i],
-                'cantidad' => $formulas2[$i],
-                'observaciones' => $formulas3[$i],
-            ]);
-        }
-
-        $recomendacion1 = $request->input('recomendacion');
-        $recomendacion2 = $request->input('descripcion');
-        $evento->recomendacion()->delete();
-        for($i = 0; $i < count($recomendacion1); $i ++){
-            $evento->recomendacion()->create([
-                'recomendacion' => $recomendacion1[$i],
-                'descripcion' => $recomendacion2[$i],
-            ]);
-        }
-
+        
         $evento->consulta()->update([
             'observacionAnálisis'=>request('observacionAnálisis'),
             'plan'=>request('plan'),
@@ -310,36 +269,51 @@ class HistoriaClinicaBController extends Controller
             'tipoUsuario'=>request('tipoUsuario'),
         ]);
 
-        $diagnostico = $request->input('cie10s_id');
-        $diagnostico2 = $request->input('tipoDiagnostico');
-        $diagnostico3 = $request->input('observacionesDx');
+        $diagnostico = $request->input('cie10_Desc');
+        $diagnostico2 = $request->input('cie10_cod');
+        $diagnostico3 = $request->input('tipoDiagnostico');
+        $diagnostico4 = $request->input('observacionesDx');
         $evento->diagnosticos()->delete();
         for($i = 0; $i < count($diagnostico); $i ++) {
             $evento->diagnosticos()->create([
-                'cie10s_id' => $diagnostico[$i],
-                'tipoDiagnostico' => $diagnostico2[$i],    
-                'observacionesDx' => $diagnostico3[$i],   
+                'cie10_Desc' => $diagnostico[$i],         
+                'cie10_cod' => $diagnostico2[$i],
+                'tipoDiagnostico' => $diagnostico3[$i],    
+                'observacionesDx' => $diagnostico4[$i],   
             ]);  
         }  
 
-        /* $adjunto = $request->file('url');
-        for($i = 0; $i < count($adjunto); $i ++){
-
-            if($request->hasFile('url')){
-
-                $nombre = $adjunto[$i]->getClientOriginalName();   
-
-                $evento->archivosAdjuntos()->update([
+        if($request->hasFile('url')){
+            $adjunto = $request->file('url');
+            for($i = 0; $i < count($adjunto); $i ++){
+                $nombre = $adjunto[$i]->getClientOriginalName(); +
+                $evento->archivosAdjuntos()->create([
                     'nombre' => $nombre,
-                    'url' => $adjunto[$i]->store('public/ArchivosAnexos'),
+                    'url' => $adjunto[$i]->storeAs('public/ArchivosAnexos', $nombre),
                 ]);
                 Storage::disk('public')->put("ArchivosAnexos", $adjunto[$i]);
 
             }          
-        }  */
+        } 
         
         return redirect()->route('listaAtenciones.index',  ['id'=>$id]);        
+    }   
+    
+    public function destroy($id, $idh)
+    {
+        $evento = Evento::findOrFail($idh);
+        $evento->formatosBase()->delete();
+        $evento->antecedentes()->delete();
+        $evento->revisionSistema()->delete();
+        $evento->examenFisico()->delete();
+        $evento->formula()->delete();
+        $evento->recomendaciones()->delete();
+        $evento->consulta()->delete();
+        $evento->diagnosticos()->delete();        
+        $evento->delete();
+        return redirect()->route('listaAtenciones.index',  ['id'=>$id]);
     }
+    
     
     
     public function crearPDF($id, $idh){
@@ -364,6 +338,13 @@ class HistoriaClinicaBController extends Controller
         $recomendacion = Recomendaciones::orderBy('id')->get();
         $recomendacionJ = json_encode($recomendacion);
         return $recomendacionJ;
+    }
+
+    public function selectCie10()
+    {
+        $cie10 = Cie10::orderBy('id')->get();
+        $cie10J = json_encode($cie10);
+        return $cie10J;
     }
 
 

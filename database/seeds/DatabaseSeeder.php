@@ -21,10 +21,14 @@ class DatabaseSeeder extends Seeder
             'usuarios',
             'usuario_rols',
             'formularios',
+            'usuarios_formularios',
+            'menus'
         ]);
         $this->call(TablaRolSeeder::class);
         $this->call(TituloAcademicoSeeder::class);
         $this->call(UsuarioAdministradorSeeder::class);
+        $this->call(RolsFormularios::class);
+        $this->call(Menus::class);
     }
 
     protected function truncateTablas(array $tablas){

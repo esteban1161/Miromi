@@ -15,7 +15,10 @@ $(document).ready(function () {
         html: true,
         container: 'body'
     });
-    $('ul.nav nav-treeview').find('li.active').parents('li').addClass('active');
+    var menu = $('ul.nav-sidebar').find('a.active').parents('li.has-treeview');
+    menu.addClass('menu-open');
+    menu.children('a').addClass('active');
+    
     const modal = $('#modal-seleccionar-rol');
     if (modal.length && modal.data('rol-set') == 'NO') {
         modal.modal('show');

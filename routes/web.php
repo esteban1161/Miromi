@@ -47,7 +47,7 @@ Route::get('admin/terapeuta/{id}/editar', 'PerfilTerapeutaController@edit')->nam
 Route::post('admin/terapeuta', 'PerfilTerapeutaController@store')->name('terapeuta.store')->middleware('auth');   
 Route::put('admin/terapeuta/{id}', 'PerfilTerapeutaController@update')->name('terapeuta.update')->middleware('auth'); 
 
-/*Rutas del RIPF*/
+/*Rutas del RIPS*/
 Route::get('/rips', 'RipsController@index')->name('rips.index')->middleware('auth');
 Route::post('/rips/fecha', 'RipsController@fecha')->name('rips.fecha')->middleware('auth');
 
@@ -60,6 +60,8 @@ Route::post('/paciente', 'PerfilPacienteController@store')->name('paciente.store
 Route::put('/paciente/{id}', 'PerfilPacienteController@update')->name('paciente.update')->middleware('auth');
 Route::get('/paciente/departamentos/{nombre}', 'PerfilPacienteController@selectDepartamento');
 Route::get('paciente/ciudades/{nombre}', 'PerfilPacienteController@selectCiudad');
+Route::get('paciente/localidades/bogota', 'PerfilPacienteController@selectLocalidad');
+
 
 /*Rutas del Notas */
 Route::get('/notas', 'NotasController@index')->name('notas.index')->middleware('auth'); 
@@ -90,10 +92,12 @@ Route::get('/paciente/{id}/historiaClinica/{idh}', 'HistoriaClinicaBController@s
 Route::get('/paciente/{id}/historiaClinica/{idh}/editar', 'HistoriaClinicaBController@edit')->name('historiaC.edit')->middleware('auth'); 
 Route::post('/paciente/{id}/historiaClinica', 'HistoriaClinicaBController@store')->name('historiaC.store')->middleware('auth');
 Route::put('/paciente/{id}/historiaClinica/{idh}', 'HistoriaClinicaBController@update')->name('historiaC.update')->middleware('auth');
-
+Route::delete('/paciente/{id}/historiaClinica/{idh}', 'HistoriaClinicaBController@destroy')->name('historiaC.destroy')->middleware('auth');
 Route::get('/paciente/{id}/historiaClinica/{idh}/pdf', 'HistoriaClinicaBController@crearPDF')->name('historiaC.crearPDF')->middleware('auth');
 Route::get('/paciente/historiaClinica/formulas', 'HistoriaClinicaBController@selectFormula');
 Route::get('/paciente/historiaClinica/recomendacion', 'HistoriaClinicaBController@selectRecomendacion');
+Route::get('/paciente/historiaClinica/cie10', 'HistoriaClinicaBController@selectCie10');
+
 
 /*Rutas para Historias Clinicas en Blanco*/
 Route::get('/paciente/{id}/historiaBlanco/crear', 'HistoriaBlancoController@create')->name('historiaB.create')->middleware('auth');
@@ -101,7 +105,7 @@ Route::get('/paciente/{id}/historiaBlanco/{idh}', 'HistoriaBlancoController@show
 Route::get('/paciente/{id}/historiaBlanco/{idh}/editar', 'HistoriaBlancoController@edit')->name('historiaB.edit')->middleware('auth'); 
 Route::post('/paciente/{id}/historiaBlanco', 'HistoriaBlancoController@store')->name('historiaB.store')->middleware('auth');
 Route::put('/paciente/{id}/historiaBlanco/{idh}', 'HistoriaBlancoController@update')->name('historiaB.update')->middleware('auth');
-
+Route::delete('/paciente/{id}/historiaBlanco/{idh}', 'HistoriaBlancoController@destroy')->name('historiaB.destroy')->middleware('auth');
 
 /*Rutas para Historias Homeopatia*/
 Route::get('/paciente/{id}/historiaHomeopatia/crear', 'HistoriaHomeopatiaController@create')->name('historiaH.create')->middleware('auth');
@@ -109,6 +113,14 @@ Route::get('/paciente/{id}/historiaHomeopatia/{idh}', 'HistoriaHomeopatiaControl
 Route::get('/paciente/{id}/historiaHomeopatia/{idh}/editar', 'HistoriaHomeopatiaController@edit')->name('historiaH.edit')->middleware('auth'); 
 Route::post('/paciente/{id}/historiaHomeopatia', 'HistoriaHomeopatiaController@store')->name('historiaH.store')->middleware('auth');
 Route::put('/paciente/{id}/historiaHomeopatia/{idh}', 'HistoriaHomeopatiaController@update')->name('historiaH.update')->middleware('auth');
+Route::delete('/paciente/{id}/historiaHomeopatia/{idh}', 'HistoriaHomeopatiaController@destroy')->name('historiaH.destroy')->middleware('auth');
+
+Route::get('/paciente/{id}/formulas/crear', 'FormulasController@create')->name('historiaF.create')->middleware('auth');
+Route::get('/paciente/{id}/formulas/{idh}', 'FormulasController@show')->name('historiaF.show')->middleware('auth');
+Route::get('/paciente/{id}/formulas/{idh}/editar', 'FormulasController@edit')->name('historiaF.edit')->middleware('auth'); 
+Route::post('/paciente/{id}/formulas', 'FormulasController@store')->name('historiaF.store')->middleware('auth');
+Route::put('/paciente/{id}/formulas/{idh}', 'FormulasController@update')->name('historiaF.update')->middleware('auth');
+Route::delete('/paciente/{id}/formulas/{idh}', 'FormulasController@destroy')->name('historiaF.destroy')->middleware('auth');
 
 
 /*Rutas para Procedimientos Enfermeria*/
@@ -175,12 +187,4 @@ Route::get('/ubicacion', function () {
     $ubicacion = Ubicacion::orderBy('id')->get();
     $ubicacionJ = json_encode($ubicacion);
     return $ubicacionJ;
-});
-
-use App\Models\Cie10;
-Route::get('/cie10', function () {
-    
-    $cie10 = Cie10::orderBy('id')->get();
-    $cie10J = json_encode($cie10);
-    return $cie10J;
 });

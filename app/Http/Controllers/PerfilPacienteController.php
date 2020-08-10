@@ -25,6 +25,7 @@ class PerfilPacienteController extends Controller
     public function index()
     {
         $eventos = Evento::ConsultaPacientes()->get();  
+
         return view('paciente.index', compact('eventos'));
     }
 
@@ -140,8 +141,9 @@ class PerfilPacienteController extends Controller
             'tipoDocumento' => $request['tipoDocumento'],
             'numeroIdentificacion' => $request['numeroIdentificacion'],
             'sexo' => $request['sexo'],
-            'fechaNacimiento' => $request['fechaNacimiento'],           
-        ]);
+            'fechaNacimiento' => $request['fechaNacimiento'],    
+            'grupoSanguineo'  => $request['grupoSanguineo']    
+       ]);
 
         if($foto = DatosIdentificacion::setFotoPerfil($request->foto, $evento->identificacion->foto)){
             $foto = request()->file('foto')->store('public/FotosPerfil');
@@ -178,8 +180,8 @@ class PerfilPacienteController extends Controller
         for($i = 0; $i < count($telefonos); $i ++) {
             $evento->telefonos()->create([
                 'tipoTelefono' => $telefonos[$i],
-                'numeroTelefono' => $telefonos2[$i],                
-            ]);  
+                'numeroTelefono' => $telefonos2[$i],
+            ]);
         }  
 
         $correos = $request->input('tipoCorreo');
@@ -194,6 +196,13 @@ class PerfilPacienteController extends Controller
 
         return redirect('/paciente') ->with('mensaje', 'Paciente Actualizado con Exito');
     }   
+
+
+    public function selectLocalidad(){
+        $localidades = Localidad::orderBy('id')->get();   
+        $localidadesJ = json_encode($localidades);
+        return $localidadesJ;
+    }
 
     
 

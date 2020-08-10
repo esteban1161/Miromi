@@ -5,20 +5,10 @@
             <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="{{route('paciente.index')}}" class="nav-link">
-                <i class="nav-icon fas fa-user-injured"></i> Pacientes
-            </a>
-        </li>
-        <li class="nav-item d-none d-sm-inline-block">
             <a href="{{route('notas.index')}}" class="nav-link">
                 <i class="nav-icon fas fa-clipboard"></i> Notas
             </a>
         </li>
-        <li class="nav-item d-none d-sm-inline-block">
-            <a href="{{route('formula.index')}}" class="nav-link">
-                <i class="nav-icon fas fa-file-medical-alt"></i> Formulas        
-            </a>
-        </li>       
     </ul>
 
     <!-- SEARCH FORM -->

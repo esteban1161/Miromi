@@ -26,7 +26,6 @@
     <script src="{{asset("assets/pages/scripts/admin/forms-dinamicos/index.js")}}" type="text/javascript"></script>
     <script src="{{asset("assets/pages/scripts/admin/forms-dinamicos/index2.js")}}" type="text/javascript"></script>
     <script src="{{asset("assets/pages/scripts/admin/textArea/index.js")}}" type="text/javascript"></script>
-    <script src="{{asset("assets/pages/scripts/admin/autocomplete/index.js")}}" type="text/javascript"></script>        
         
 @endsection
 
@@ -97,30 +96,6 @@
                     </div>  
                 <!-- Fin Examen Fisico-->
                 
-                <!-- Inicio Formulas-->
-                <div class="card card-danger">
-                    <div class="card-header">
-                        <h3 class="card-title">Formulas</h3>                
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
-                        </div>
-                    </div>
-                    <div class="card-body"> @include('includes.formularios.form-datosFormulas')    </div>
-                </div>
-                <!-- Fin Formulas--> 
-
-                <!-- Inicio Formulas-->
-                <div class="card card-danger">
-                    <div class="card-header">
-                        <h3 class="card-title">Recomendaciones</h3>                
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
-                        </div>
-                    </div>
-                    <div class="card-body"> @include('includes.formularios.form-datosRecomendaciones')    </div>
-                </div>
-                <!-- Fin Formulas--> 
-
                <!-- Inicio Consultas-->
                     <div class="card card-danger">
                         <div class="card-header">

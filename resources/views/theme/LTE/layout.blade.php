@@ -47,7 +47,7 @@
 {{--             @include("theme/$theme/footer")
  --}}        <!--Fin Footer-->
             {{-- Inicio Ventana Modal --}}
-            @if(session()->get("roles") && count(session()->get("roles")) > 1)
+        @if(session()->get("roles") && count(session()->get("roles")) > 1)
             @csrf
             <div class="modal fade" id="modal-seleccionar-rol" data-rol-set="{{empty(session()->get("rol_id")) ? 'NO' : 'SI'}}" tabindex="-1" data-backdrop="static" data-keyboard="false">
                 <div class="modal-dialog">

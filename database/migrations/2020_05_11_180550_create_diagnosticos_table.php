@@ -17,8 +17,8 @@ class CreateDiagnosticosTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('evento_id')->unsigned()->nullable();
             $table->foreign('evento_id')->references('id')->on('eventos')->onUpdate('cascade')->nullable();
-            $table->bigInteger('cie10s_id')->unsigned()->nullable();
-            $table->foreign('cie10s_id')->references('id')->on('cie10s')->onUpdate('cascade')->nullable();
+            $table->string('cie10_Desc')->nullable();
+            $table->string('cie10_cod')->nullable();            
             $table->string('tipoDiagnostico')->nullable();
             $table->string('observacionesDx')->nullable();
             $table->charset = 'utf8mb4';

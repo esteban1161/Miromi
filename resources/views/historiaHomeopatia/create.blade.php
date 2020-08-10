@@ -56,19 +56,19 @@
                     <div>
                         <div class="form-group">
                             <label for="sintomasSecundarios">Sintomas Secundarios</label>
-                            <textarea class="form-control" rows="2" name="sintomasSecundarios"></textarea>
+                            <textarea class="form-control" rows="2" name="sintomasSecundarios" tabindex="1"></textarea>
                         </div>
                     </div>
                     <div>
                         <div class="form-group">
                             <label for="paraclinicos">Paraclinicos</label>
-                            <textarea class="form-control" rows="2" name="paraclinicos"></textarea>
+                            <textarea class="form-control" rows="2" name="paraclinicos" tabindex="1"></textarea>
                         </div>
                     </div>
                     <div>
                         <div class="form-group">
                             <label for="tratamientoActual">Tratamiento Actual</label>
-                            <textarea class="form-control" rows="2" name="tratamientoActual"></textarea>
+                            <textarea class="form-control" rows="2" name="tratamientoActual" tabindex="1"></textarea>
                         </div>
                     </div>
                 </div>

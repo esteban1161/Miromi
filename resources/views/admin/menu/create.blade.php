@@ -26,7 +26,7 @@
 </section>
 <section class="content">
     <div class="container-fluid">
-        <form action="{{route('menu.store')}}" class="form-horizontal" id="form-general" method="POST" autocomplete="off">
+        <form action="{{route('menu.store')}}" class="form-horizontal form--label-right" id="form-general" method="POST" autocomplete="off">
             @csrf
             <div class="card card-danger">
                 <div class="card-header">

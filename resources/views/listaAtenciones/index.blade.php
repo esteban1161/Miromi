@@ -65,8 +65,8 @@
                                 <th WIDTH="10%">Fecha</th>
                                 <th WIDTH="40%">Motivo Consulta</th>
                                 <th WIDTH="20%">Formatos</th>
-                                <th WIDTH="25%">Consultorio</th>
-                                <th WIDTH="5%">Info</th>
+                                <th WIDTH="20%">Consultorio</th>
+                                <th WIDTH="10%">Info</th>
                             </tr>
                         </thead>
                         <tbody>                            
@@ -86,6 +86,15 @@
                                             <a href="{{route($evento->formularios->routeEdit, ['id' => $identificacion->id, 'idh'=>$evento->id])}}" class="btn-accion-tabla tooltipsC" title="Editar este Registro">
                                                 <i class="fas fa-pencil-alt"></i>
                                             </a>
+                                            <form action="{{route($evento->formularios->routeDestroy, ['id' => $identificacion->id, 'idh'=>$evento->id])}}" method="POST">
+                                                @csrf @method("delete")
+                                                {{-- <a href="" type="submit"class="btn-accion-tabla tooltipsC" title="Editar este Registro"> 
+                                                    <i class="fas fa-trash-alt text-danger"></i>
+                                                </a> --}}
+                                               <button type="submit" class="eliminar tooltipsC" title="Eliminar este registro">
+                                                    <i class="fas fa-trash-alt text-danger"></i>
+                                                </button> 
+                                            </form>
                                         @endif
                                     </td>
                                 </tr>                  

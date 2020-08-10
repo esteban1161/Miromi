@@ -109,7 +109,7 @@
                 </div>
                 <!-- Fin Formulas--> 
 
-                <!-- Inicio Formulas-->
+                <!-- Inicio Recomendaciones-->
                 <div class="card card-success">
                     <div class="card-header">
                         <h3 class="card-title">Recomendaciones</h3>                
@@ -119,7 +119,7 @@
                     </div>
                     <div class="card-body"> @include('includes.formularios.form-datosRecomendaciones')    </div>
                 </div>
-                <!-- Fin Formulas--> 
+                <!-- Fin Recomendaciones--> 
 
                <!-- Inicio Consultas-->
                     <div class="card card-success">

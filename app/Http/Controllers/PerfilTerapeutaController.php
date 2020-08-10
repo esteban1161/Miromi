@@ -57,6 +57,7 @@ class PerfilTerapeutaController extends Controller
                 'numeroIdentificacion' =>$request['numeroIdentificacion'],
                 'sexo' =>$request['sexo'],
                 'fechaNacimiento' =>$request['fechaNacimiento'],
+                'grupoSanguineo'  => $request['grupoSanguineo']    
             ]);       
             
             if($foto = DatosIdentificacion::setFotoPerfil($request->foto)){
@@ -139,6 +140,8 @@ class PerfilTerapeutaController extends Controller
             'numeroIdentificacion' =>$request['numeroIdentificacion'],
             'sexo' =>$request['sexo'],
             'fechaNacimiento' =>$request['fechaNacimiento'],
+            'grupoSanguineo'  => $request['grupoSanguineo']    
+
         ]);    
         
         if($foto = DatosIdentificacion::setFotoPerfil($request->foto, $evento->identificacion->foto)){

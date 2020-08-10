@@ -14,6 +14,8 @@ class HistoriaHomeopatiaController extends Controller
 {   
     public function create($id)
     {
+        $eventos = [0];
+        
         $terapeuta = Evento::ConsultaTerapeuta()->first();
         $identificacion = DatosIdentificacion::findOrFail($id);    
         $cie10 = Cie10::orderBy('id')->get();        
@@ -22,7 +24,8 @@ class HistoriaHomeopatiaController extends Controller
         $time = Carbon::now();
         $date = $date->format('Y-m-d');
         $time = $time->format('H:i:s');
-        return view('historiaHomeopatia.create', compact('identificacion', 'terapeuta', 'edad', 'cie10', 'date', 'time', 'cie10'));
+        
+        return view('historiaHomeopatia.create', compact('identificacion', 'terapeuta', 'edad', 'cie10', 'date', 'time', 'cie10', 'eventos'));
     }
 
     public function store(Request $request, $id)
@@ -145,7 +148,7 @@ class HistoriaHomeopatiaController extends Controller
         $formulas2 = $request->input('cantidad');
         $formulas3 = $request->input('observaciones');
         for($i = 0; $i< count($formulas1); $i++){
-            $evento->formula()->create([
+            $evento->formulas()->create([
                 'prescripcion' => $formulas1[$i],
                 'cantidad' => $formulas2[$i],
                 'observaciones' => $formulas3[$i],
@@ -155,7 +158,7 @@ class HistoriaHomeopatiaController extends Controller
         $recomendacion1 = $request->input('recomendacion');
         $recomendacion2 = $request->input('descripcion');
         for($i = 0; $i < count($recomendacion1); $i ++){
-            $evento->recomendacion()->create([
+            $evento->recomendaciones()->create([
                 'recomendacion' => $recomendacion1[$i],
                 'descripcion' => $recomendacion2[$i],
             ]);
@@ -171,15 +174,16 @@ class HistoriaHomeopatiaController extends Controller
             'tipoUsuario'=>request('tipoUsuario'),
         ]);
 
-        $diagnostico = $request->input('cie10s_id');
-        $diagnostico2 = $request->input('tipoDiagnostico');
-        $diagnostico3 = $request->input('observacionesDx');
-
+        $diagnostico = $request->input('cie10_Desc');
+        $diagnostico2 = $request->input('cie10_cod');
+        $diagnostico3 = $request->input('tipoDiagnostico');
+        $diagnostico4 = $request->input('observacionesDx');
         for($i = 0; $i < count($diagnostico); $i ++) {
             $evento->diagnosticos()->create([
-                'cie10s_id' => $diagnostico[$i],
-                'tipoDiagnostico' => $diagnostico2[$i],  
-                'observacionesDx' => $diagnostico3[$i],   
+                'cie10_Desc' => $diagnostico[$i],         
+                'cie10_cod' => $diagnostico2[$i],
+                'tipoDiagnostico' => $diagnostico3[$i],    
+                'observacionesDx' => $diagnostico4[$i],   
             ]);  
         }  
 
@@ -191,7 +195,7 @@ class HistoriaHomeopatiaController extends Controller
 
                 $evento->archivosAdjuntos()->create([
                     'nombre' => $nombre,
-                    'url' => $adjunto[$i]->store('public/ArchivosAnexos'),
+                    'url' => $adjunto[$i]->storeAs('public/ArchivosAnexos', $nombre),
                 ]);
                 Storage::disk('public')->put("ArchivosAnexos", $adjunto[$i]);
 
@@ -336,7 +340,7 @@ class HistoriaHomeopatiaController extends Controller
         $evento->formula()->delete();
 
         for($i = 0; $i< count($formulas1); $i++){
-            $evento->formula()->create([
+            $evento->formulas()->create([
                 'prescripcion' => $formulas1[$i],
                 'cantidad' => $formulas2[$i],
                 'observaciones' => $formulas3[$i],
@@ -345,10 +349,10 @@ class HistoriaHomeopatiaController extends Controller
 
         $recomendacion1 = $request->input('recomendacion');
         $recomendacion2 = $request->input('descripcion');
-        $evento->recomendacion()->delete();
+        $evento->recomendaciones()->delete();
 
         for($i = 0; $i < count($recomendacion1); $i ++){
-            $evento->recomendacion()->create([
+            $evento->recomendaciones()->create([
                 'recomendacion' => $recomendacion1[$i],
                 'descripcion' => $recomendacion2[$i],
             ]);
@@ -364,16 +368,17 @@ class HistoriaHomeopatiaController extends Controller
             'tipoUsuario'=>request('tipoUsuario'),
         ]);
 
-        $diagnostico = $request->input('cie10s_id');
-        $diagnostico2 = $request->input('tipoDiagnostico');
-        $diagnostico3 = $request->input('observacionesDx');
+        $diagnostico = $request->input('cie10_Desc');
+        $diagnostico2 = $request->input('cie10_cod');
+        $diagnostico3 = $request->input('tipoDiagnostico');
+        $diagnostico4 = $request->input('observacionesDx');
         $evento->diagnosticos()->delete();
-
         for($i = 0; $i < count($diagnostico); $i ++) {
             $evento->diagnosticos()->create([
-                'cie10s_id' => $diagnostico[$i],
-                'tipoDiagnostico' => $diagnostico2[$i],  
-                'observacionesDx' => $diagnostico3[$i],   
+                'cie10_Desc' => $diagnostico[$i],         
+                'cie10_cod' => $diagnostico2[$i],
+                'tipoDiagnostico' => $diagnostico3[$i],    
+                'observacionesDx' => $diagnostico4[$i],   
             ]);  
         }  
 
@@ -385,7 +390,7 @@ class HistoriaHomeopatiaController extends Controller
 
                 $evento->archivosAdjuntos()->create([
                     'nombre' => $nombre,
-                    'url' => $adjunto[$i]->store('public/ArchivosAnexos'),
+                    'url' => $adjunto[$i]->storeAs('public/ArchivosAnexos', $nombre),
                 ]);
                 Storage::disk('public')->put("ArchivosAnexos", $adjunto[$i]);
 
@@ -394,5 +399,23 @@ class HistoriaHomeopatiaController extends Controller
 
         return redirect()->route('listaAtenciones.index',  ['id'=>$id]);        
 
+    }
+
+    public function destroy($id, $idh)
+    {
+        $evento = Evento::findOrFail($idh);
+        $evento->formatosBase()->delete();
+        $evento->revisionSistema()->delete();
+        $evento->sintomasGenerales()->delete();
+        $evento->sintomasMentales()->delete();
+        $evento->entornoSocial()->delete();
+        $evento->antecedentes()->delete();
+        $evento->examenFisico()->delete();
+        $evento->formula()->delete();
+        $evento->recomendaciones()->delete();
+        $evento->consulta()->delete();
+        $evento->diagnosticos()->delete();        
+        $evento->delete();
+        return redirect()->route('listaAtenciones.index',  ['id'=>$id]);
     }
 }

@@ -9,7 +9,8 @@ class Diagnostico extends Model
     protected $table = "diagnosticos";
 
     protected $fillable = ['evento_id',
-                                       'cie10s_id',
+                                       'cie10_Desc',
+                                       'cie10_cod',
                                        'tipoDiagnostico',
                                         'observacionesDx'];
                                        

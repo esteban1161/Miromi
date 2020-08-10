@@ -44,19 +44,36 @@
         </div>
         <div class="col-md-6">
             <div class="form-group">
-                <label for="rol_id" class="requerido">Formularios</label>
-                    <select name="formulario_id[]" id="formulario_id" class="form-control" multiple required>
-                        <option value="">...Selecionar Formularios...</option>   
-                        @foreach($formularios as $id => $nombre) 
-                        <option value="{{$id}}" 
-                                {{is_array(old('formulario_id')) ? (in_array($id, old('formulario_id')) ? 'selected' : ' ')  : 
-                                (isset($data) ? ($data->formularios->firstWhere('id', $id) ? 'selected' : '') : ' ')}}
-                        >
-                            {{$nombre}} 
-                        </option>
-                        @endforeach
-                    </select>
-                </div>
+                <label for="formulario_id" class="requerido">Formularios</label>
+                <select name="formulario_id[]" id="formulario_id" class="form-control" multiple required>
+                    <option value="">...Selecionar Formularios...</option>   
+                    @foreach($formularios as $id => $nombre) 
+                    <option value="{{$id}}" 
+                            {{is_array(old('formulario_id')) ? (in_array($id, old('formulario_id')) ? 'selected' : ' ')  : 
+                            (isset($data) ? ($data->formularios->firstWhere('id', $id) ? 'selected' : '') : ' ')}}
+                    >
+                        {{$nombre}} 
+                    </option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="usuario_id" class="requerido">Terapeutas</label>
+                <select name="usuario_id[]" id="usuario_id" class="form-control" multiple required>
+                    <option value="">...Selecionar Terapeutas...</option>   
+                    @foreach($usuarios as $id => $nombre) 
+                    
+                    <option value="{{$id}}" 
+                            {{is_array(old('usuario_id')) ? (in_array($id, old('usuario_id')) ? 'selected' : ' ')  : 
+                            (isset($data) ? ($data->usuarios->firstWhere('id', $id) ? 'selected' : '') : ' ')}}
+                    >
+                        {{$nombre}} 
+                    </option>
+                    @endforeach
+                </select>
+            </div>
         </div>
     </div>
 </div>

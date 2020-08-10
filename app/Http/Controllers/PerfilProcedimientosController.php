@@ -32,7 +32,7 @@ class PerfilProcedimientosController extends Controller
     {
         $rol = 2;   //Hacer la consulta para encontrar el rol
 
-        $formulario = Formularios::findOrFail(6);
+        $formulario = Formularios::findOrFail(7);
 
         $evento = $formulario->eventos()->create([
             'usuario_id' => auth()->id(),
